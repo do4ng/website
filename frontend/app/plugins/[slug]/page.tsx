@@ -31,14 +31,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
     raw = readFileSync(
       join(
         process.cwd(),
-        'docs',
+        'plugins',
         (targetcategory || '').toLowerCase(),
         `${Object.keys(target as any)[0]}.mdx`,
       ),
     ).toString();
   } else {
     const res = await fetch(
-      `https://raw.githubusercontent.com/zely-js/website/main/frontend/docs/${(
+      `https://raw.githubusercontent.com/zely-js/website/main/frontend/plugins/${(
         targetcategory || ''
       ).toLowerCase()}/${Object.keys(target as any)[0]}.mdx`,
       { cache: 'force-cache' },
