@@ -1,8 +1,10 @@
 /* eslint-disable no-use-before-define */
-import { readFileSync } from 'fs';
-import { join } from 'path';
+
 import React from 'react';
 import Link from 'next/link';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
 import config from '@/docs/config';
 import { compileMdx } from '@/mdx/compile';
 import { Content } from '@/mdx/content';
@@ -25,6 +27,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
     });
   });
 
+  let raw: string = '';
+
+  /*
   const raw = readFileSync(
     join(
       process.cwd(),
@@ -33,8 +38,28 @@ export default async function Page({ params }: { params: { slug: string } }) {
       `${Object.keys(target as any)[0]}.mdx`,
     ),
   );
+  */
 
-  const compiled = await compileMdx(raw.toString());
+  if (process.env.NODE_ENV === 'development') {
+    raw = readFileSync(
+      join(
+        process.cwd(),
+        'docs',
+        (targetcategory || '').toLowerCase(),
+        `${Object.keys(target as any)[0]}.mdx`,
+      ),
+    ).toString();
+  } else {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/zely-js/website/main/frontend/docs/${(
+        targetcategory || ''
+      ).toLowerCase()}/${Object.keys(target as any)[0]}.mdx`,
+      { cache: 'force-cache' },
+    );
+    raw = await res.text();
+  }
+
+  const compiled = await compileMdx(raw);
 
   const postIndex = posts.findIndex((v) => Object.keys(v)[0] === params.slug);
 
