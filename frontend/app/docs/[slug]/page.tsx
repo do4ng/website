@@ -10,6 +10,18 @@ import { compileMdx } from '@/mdx/compile';
 import { Content } from '@/mdx/content';
 import { TableOfContents } from './tableofcontents';
 
+export async function generateStaticParams() {
+  const pages = [];
+
+  for (const category of config) {
+    for (const post of category.posts) {
+      pages.push({ slug: Object.keys(post)[0] });
+    }
+  }
+
+  return pages;
+}
+
 export default async function Page({ params }: { params: { slug: string } }) {
   console.log(params.slug);
   let target = null;
