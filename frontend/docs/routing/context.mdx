@@ -1,0 +1,52 @@
+Starting from v2, the parameter `context` is provided instead of `req` and `res` in handlers exported by default.
+
+> Note: The context function is only supported in `export default`.
+>
+> Just `export` will no longer be updated and only `export default` will be updated intensively.
+
+```ts
+export default [(ctx) => {}];
+```
+
+## `context.`
+
+- `context.status` - `res.status`
+- `context.headers` - set headers
+- `context.body` - `res.body`
+- `context.params` - `res.params`
+- `context.query` - `res.query`
+- `context.props` - `res.props` - static props
+
+- `context.send()`
+- `context.header()`
+- `context.html()`
+- `context.json()`
+- `context.text()`
+
+## Request and response
+
+```ts
+export default [
+  (ctx) => {
+    ctx.request; // request
+    ctx.response; // response
+  },
+];
+```
+
+## Migration
+
+```diff
+export default [
+-  (req, res) => {
++  (ctx) => {
+-    res.end("Hello World!");
++    ctx.send("Hello World!");
+  },
+];
+```
+
+## Reference
+
+> Reference: [/server/context.ts](https://github.com/zely-js/zely/blob/main/packages/zely/src/server/context.ts)  
+> Reference: [/types/core.d.ts](https://github.com/zely-js/zely/blob/main/packages/zely/types/core.d.ts#L51)
