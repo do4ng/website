@@ -18,7 +18,7 @@ export default function Page() {
         <Link href="/docs/getting-started">
           <button className="btn text">Getting Started</button>
         </Link>
-        <Link href="/docs/installation">
+        <Link href="/docs/why-zely">
           <button className="btn text">Why zely?</button>
         </Link>
       </div>
