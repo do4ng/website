@@ -1,1 +1,27 @@
 > warning: `@zely/builder` is a experimental package.
+
+## When should I use it?
+
+Apps compiled with @zely/builder only work in esm environment (`{"type": "module"}`).  
+On the other hand, apps built with zely only work in commonjs environment.
+
+To run it in a cjs environment, use zely, and to run it in an esm environment, use @zely/builder. (but @zely/builder recommended)
+
+## Usage
+
+```js
+const builder = require('@zely/builder');
+const build = new builder.Builder({
+  esbuild: {}, // esbuild options
+  zely: {}, // zely options
+  output: 'dist', // output directory
+});
+
+build.process(); // build app
+```
+
+Just run the code above and run `dist/main.js`.
+
+```bash
+node dist/main.js
+```
