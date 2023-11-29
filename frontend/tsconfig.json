@@ -4,6 +4,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
   }
 }
