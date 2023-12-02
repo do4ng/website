@@ -14,7 +14,7 @@ export function Header() {
       <header className="header-container text">
         <div className="header">
           <Link className="item-1 logo" href="/">
-            Zely
+            zely
           </Link>
 
           <div className="item-2">

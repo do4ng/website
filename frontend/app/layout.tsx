@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import NextTopLoader from 'nextjs-toploader';
 
 import '@/styles/global.scss';
 import config from '@/docs/config';
@@ -29,6 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <NextTopLoader showSpinner={false} height={2} color="#347deb" />
         <script src="/theme.js" async></script>
         <div className="app">
           <Header></Header>

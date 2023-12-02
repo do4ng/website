@@ -5,6 +5,10 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ['shiki'],
   },
+  /**
+   * @type {import("sass").Options<"sync">}
+   */
+  sassOptions: {},
 };
 
 module.exports = nextConfig;

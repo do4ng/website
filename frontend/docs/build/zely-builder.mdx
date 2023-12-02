@@ -1,5 +1,7 @@
 > warning: `@zely/builder` is a experimental package.
 
+[source code](https://github.com/zely-js/zely/tree/main/packages/zely-builder)
+
 ## When should I use it?
 
 Apps compiled with @zely/builder only work in esm environment (`{"type": "module"}`).  
@@ -9,7 +11,7 @@ To run it in a cjs environment, use zely, and to run it in an esm environment, u
 
 ## Usage
 
-```js
+```js [title="Javascript (cjs)"]
 const builder = require('@zely/builder');
 const build = new builder.Builder({
   esbuild: {}, // esbuild options

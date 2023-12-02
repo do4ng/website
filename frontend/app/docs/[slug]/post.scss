@@ -37,8 +37,11 @@ div[data-rehype-pretty-code-title] {
   border-bottom: 1px solid #383d52;
 
   i {
+    vertical-align: top;
+
+    font-size: 14px;
     color: #7d7f8f !important;
-    margin-right: 5px;
+    margin-right: 8px;
   }
 
   button {

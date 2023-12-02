@@ -20,16 +20,10 @@ export function Popover({ children, text }: { children: React.ReactNode; text: s
       popperEl?.removeAttribute('data-show');
     };
 
-    function clickOutside(event: any) {
-      if (!popperEl?.contains(event.target) && !referenceEl?.contains(event.target)) {
-        hidePopover();
-      }
-    }
-
-    document.addEventListener('mousedown', clickOutside);
+    document.addEventListener('mousedown', hidePopover);
 
     return () => {
-      document.removeEventListener('mousedown', clickOutside);
+      document.removeEventListener('mousedown', hidePopover);
     };
   }, [popperEl, referenceEl]);
 
