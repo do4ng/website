@@ -84,7 +84,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
           <div className="prenext">
             {previousPage.title ? (
-              <Link className="no-a" href={`/docs/${previousPage.url}`}>
+              <Link className="no-a" href={`/plugins/${previousPage.url}`}>
                 <h4>Previous Page</h4>
 
                 <p>{previousPage.title as any}</p>
@@ -93,7 +93,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               <div></div>
             )}
             {nextPage.title ? (
-              <Link className="no-a" href={`/docs/${nextPage.url}`}>
+              <Link className="no-a" href={`/plugins/${nextPage.url}`}>
                 <h4>Next Page</h4>
                 <p>{nextPage.title as any}</p>
               </Link>

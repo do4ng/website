@@ -3,7 +3,7 @@ import { Category } from '@/docs/config';
 export default [
   {
     name: 'Overview',
-    posts: [{ plugins: 'Plugins' }, { installation: 'Installation' }],
+    posts: [{ overview: 'Overview' }, { installation: 'Installation' }],
   },
   {
     name: 'Plugins',

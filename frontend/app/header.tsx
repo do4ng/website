@@ -43,7 +43,7 @@ export function Header() {
               </div>
             </Popover>
 
-            <Link href="/plugins/plugins" className="btn focuser">
+            <Link href="/plugins/overview" className="btn focuser">
               Plugins
             </Link>
 

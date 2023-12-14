@@ -30,16 +30,27 @@
     .category {
       margin-bottom: 10px;
 
-      button.no-btn {
+      button.no-btn:first-child {
         width: 100%;
         text-align: left;
       }
 
       h4 {
-        color: var(--text-200);
+        margin-top: 8px;
+        margin-bottom: 4px;
         font-size: 13px;
-        margin: 5px;
         width: 100%;
+        color: var(--text-200);
+        display: flex;
+
+        button {
+          transition: all 0.3s ease 0s;
+          font-weight: 600;
+        }
+
+        button.active {
+          color: #1ea8fdd0;
+        }
 
         i {
           color: inherit;
@@ -54,6 +65,7 @@
         div {
           width: 100%;
           border-left: 1px solid var(--bg-300);
+          transition: all 0.3s ease 0s;
           padding: 2px 5px;
         }
 

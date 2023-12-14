@@ -8,7 +8,11 @@ export interface Category {
 export default [
   {
     name: 'Overview',
-    posts: [{ 'why-zely': 'Why Zely' }, { 'getting-started': 'Getting Started' }],
+    posts: [
+      { overview: 'Overview' },
+      { 'why-zely': 'Why Zely' },
+      { 'getting-started': 'Getting Started' },
+    ],
   },
   {
     name: 'Routing',
@@ -27,14 +31,22 @@ export default [
   },
   {
     name: 'Middleware',
-    posts: [{ middleware: 'Middleware' }],
+    posts: [{ middleware: 'Middleware' }, { auto: 'Auto Mode' }],
   },
   {
     name: 'Build',
-    posts: [{ build: 'Build' }, { 'zely-builder': '@zely/builder' }],
+    posts: [
+      { build: 'Build' },
+      { 'zely-build': 'zely/build' },
+      { 'zely-builder': '@zely/builder' },
+    ],
   },
   {
     name: 'Community',
-    posts: [{ contributing: 'Contributing' }, { playground: 'Playground' }],
+    posts: [
+      { community: 'Community' },
+      { contributing: 'Contributing' },
+      { playground: 'Playground' },
+    ],
   },
 ] satisfies Category[];

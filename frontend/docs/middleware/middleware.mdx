@@ -40,43 +40,4 @@ export default defineConfig({
 
 ## Auto Mode
 
-Auto Mode is a feature provided by Zely to automatically load and apply all middleware files in a specified directory.
-This feature is designed to save developers from the tedious task of manually adding each middleware to the configuration.
-
-To enable Auto Mode, you need to set the `allowAutoMiddlewares` configuration value to `true`.
-This tells Zely to automatically load middleware from a specified directory.
-
-```ts [title="zely.config.ts"]
-export default defineConfig({
-  allowAutoMiddlewares: true,
-  middlewareDirectory: 'middlewares',
-  // relative path to the middleware directory
-  // ...
-});
-```
-
-In this example, Zely will load all middleware from the `middlewares` directory at the root of your project.
-
-One important thing to note is that when using Auto Mode, your middleware should be exported as the default export.
-This is because Zely will use the default export from each file in the middleware directory as a middleware function.
-
-```ts [title="middlewares/message.ts"]
-import { Middleware } from 'zely';
-
-const Message: Middleware = (req, res, next) => {
-  (req as any).message = 'Hello World!';
-
-  next();
-};
-
-// export as default
-
-export default Message;
-```
-
-While Auto Mode can save time and effort,
-it's important to be aware that it may also load unnecessary files if they are placed in the middleware directory.
-This could potentially cause performance issues.
-Therefore, it's recommended to only place middleware files in the middleware directory when using Auto Mode.
-
-> Note: [`@zely/builder`](/docs/zely-builder) doesn't support auto mode.
+See [next page](/docs/auto).
