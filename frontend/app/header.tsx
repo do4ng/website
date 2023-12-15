@@ -31,7 +31,7 @@ export function Header() {
                 </Link>
               </div>
               <div className="menu-item text-inter">
-                <Link href="/docs/why-zely" className="menu-container">
+                <Link href="/docs/overview" className="menu-container">
                   <div className="menu-icon">
                     <i className="ri-book-open-line"></i>
                   </div>

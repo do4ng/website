@@ -172,8 +172,8 @@ nav {
 
   li {
     transition: all ease 0.25s 0s;
-    border-left: 1px solid var(--bg-200);
-    padding: 3px 10px;
+    border-left: 1px solid var(--bg-300);
+    padding: 3px 12px;
     font-size: 13px;
   }
 
@@ -184,7 +184,7 @@ nav {
 
   a {
     transition: all ease 0.25s 0s;
-    color: var(--text-200);
+    color: var(--text-300);
     text-decoration: none;
   }
 

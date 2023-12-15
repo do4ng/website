@@ -74,6 +74,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      <title>{`${Object.values(target as any)[0]} - zely`}</title>
       <div className="content-flex">
         <div className="post">
           <div className="intro">
