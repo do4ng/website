@@ -1,3 +1,7 @@
 # Documentation
 
-[zely2.netlify.app](https://zely2.netlify.app)
+This document template is based on nextjs.
+
+## Installation
+
+[See installation guide](https://docs-livid-sigma.vercel.app/docs/installation)
