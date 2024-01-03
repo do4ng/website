@@ -33,7 +33,13 @@ const langs = {
 
 export const components = {
   h1: (props: any) => <h1 {...props}></h1>,
-  a: (props: any) => <Link {...props} prefetch={false}></Link>,
+  a: (props: any) => {
+    if (props.href.startsWith('http')) {
+      return <Link {...props} target="_blank" passHref={true}></Link>;
+    }
+
+    return <Link {...props} prefetch={false}></Link>;
+  },
   h2: (props: any) => {
     const id = props.children.toString().replace(/ /g, '-').toLowerCase();
     return (
