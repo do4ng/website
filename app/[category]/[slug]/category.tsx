@@ -14,7 +14,7 @@ export function CategoryMenu({ category }: { category: Category }) {
 
   const target = config.find(({ title }) => title === params.category);
 
-  target.category.forEach((category) => {
+  target?.category?.forEach((category) => {
     category.posts.forEach((post) => {
       if (Object.keys(post)[0] === params?.slug) {
         targetcategory = category.name;
