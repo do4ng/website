@@ -20,6 +20,18 @@ export function toggleTheme(to: 'dark' | 'white' = 'dark') {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  if (typeof window !== 'undefined') {
+    if (
+      window.location.origin.startsWith('http') &&
+      window.location.origin.startsWith('https://zely2.netlify.app')
+    ) {
+      window.location.href = window.location.href.replace(
+        'https://zely2.netlify.app',
+        'https://zely.vercel.app',
+      );
+    }
+  }
+
   const path = usePathname().split('/')[1];
   const isDocs = path === 'docs' || path === 'plugins';
 
