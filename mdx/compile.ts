@@ -23,6 +23,24 @@ const touchShikiPath = (): void => {
   touched.current = true;
 };
 
+export async function highlighter() {
+  touchShikiPath();
+  const highlighter = await getHighlighter({
+    paths: {
+      themes:
+        typeof window !== 'undefined'
+          ? 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/'
+          : join(process.cwd(), 'shiki/themes'),
+      languages:
+        typeof window !== 'undefined'
+          ? 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/'
+          : join(process.cwd(), 'shiki/languages'),
+    },
+  });
+
+  return highlighter;
+}
+
 export const compileMdx = async (content: string): Promise<string> => {
   if (typeof window !== 'undefined') throw Error('compileMdx should run on server only');
 
