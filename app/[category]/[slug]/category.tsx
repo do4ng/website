@@ -39,7 +39,7 @@ export function CategoryMenu({ category }: { category: Category }) {
               ).length !== 0
             ) {
               setHide(false);
-              router.push(`/docs/${CategoryName}`);
+              router.push(`/${params.category}/${CategoryName}`);
             } else {
               setHide(!hide);
             }
@@ -67,7 +67,7 @@ export function CategoryMenu({ category }: { category: Category }) {
               <></>
             ) : (
               <Link
-                href={`/docs/${Object.keys(post)[0]}`}
+                href={`/${params.category}/${Object.keys(post)[0]}`}
                 className={`btn ${params?.slug === Object.keys(post)[0] ? 'active' : ''}`}
               >
                 {Object.values(post)[0]}

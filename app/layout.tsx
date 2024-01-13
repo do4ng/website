@@ -20,6 +20,7 @@ export function toggleTheme(to: 'dark' | 'white' = 'dark') {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  /*
   if (typeof window !== 'undefined') {
     if (
       window.location.origin.startsWith('http') &&
@@ -31,6 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       );
     }
   }
+  */
 
   const path = usePathname().split('/')[1];
   const isDocs = path === 'docs' || path === 'plugins';
