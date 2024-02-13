@@ -1,0 +1,29 @@
+This chapter introduces how to go from an old version to a new version.
+
+## From 2.x
+
+[Migration from 2.x](/docs/migration-2x).
+
+## From 1.x
+
+`export default` handler no longer provide req and res as parameters. Use [`ctx`](/docs/context) instead.
+
+```ts [title="after"]
+import type { PageHandler } from 'zely';
+
+export default [
+  GET((ctx) => {
+    ctx.send('Hello World!');
+  }),
+] satisfies PageHandler[];
+```
+
+```ts [title="before"]
+import type { PageHandler } from 'zely';
+
+export default [
+  GET((req, res) => {
+    res.send('Hello World!');
+  }),
+] satisfies PageHandler[];
+```

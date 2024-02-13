@@ -1,45 +1,43 @@
-You can fetch data from other pages using `snatcher()`.
+<Box type="error">
+  [`snatcher`](https://zely2.netlify.app/docs/data-fetching) has been deprecated since
+  `3.0`.
+</Box>
 
-## `snatcher()`
+Since node version `v17.5.0` you can use `fetch()` without any installation. If node version is below `v17.5.0`, install libraries such
+as `node-fetch`.
 
-'snatch' does not fetch data through http, but directly accesses the file and fetch data.
+```ts [title="middlewares/fetch.ts"]
+import { Middleware, ZelyRequest } from 'zely';
+
+// If you are using typescript, you have to extend `zely.ZelyRequest`.
+
+declare module 'zely' {
+  interface ZelyRequest {
+    fetch(url: string, options?: any): Promise<Response>;
+  }
+}
+
+export const Fetch: Middleware = (req, res, next) => {
+  // @ts-expect-error
+  req.fetch = (url: string, options: any) => {
+    return fetch(new URL(url, `http://${req.headers.host as string}`), options);
+  };
+  next();
+};
+```
+
+Then register middleware in the config file.
+
+Now you can fetch data!
 
 ```ts
-import { snatcher } from 'zely';
+import type { PageHandler } from 'zely';
 
-export async function get(req, res) {
-  const snatch = snatcher(req, res);
-  const { body } = await snatch(/*PATH*/, /*METHOD*/);
-}
+export default [
+  GET((ctx) => {
+    const res = await ctx.request.fetch('/api/hello/');
+    const data = await res.text();
+    // ...
+  }),
+] satisfies PageHandler[];
 ```
-
-You can also use it directly through `req.snatch` without calling snatcher.
-
-```ts
-export async function get(req, res) {
-  const { body } = await req.snatch('/user');
-
-  res.send(`users: ${body}`);
-}
-```
-
-## Example
-
-```ts [title="pages/index.ts"]
-import { snatcher } from 'zely';
-
-export async function get(req, res) {
-  const snatch = snatcher(req, res);
-  const { body } = await snatch('/user');
-
-  res.send(`users: ${body}`);
-}
-```
-
-```ts [title="pages/users.ts"]
-export function get(req, res) {
-  res.json({ cat: '🐱' });
-}
-```
-
-:::

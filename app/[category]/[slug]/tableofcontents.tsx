@@ -111,6 +111,21 @@ export const TableOfContents = () => {
         On this page
       </a>
       <Headings headings={nestedHeadings} activeId={activeId} />
+      <div className="table-actions">
+        <div>
+          <i className="ri-github-fill"></i>
+
+          <a
+            className="no-a"
+            href="https://github.com/zely-js/zely"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Github"
+          >
+            Feedback on Github
+          </a>
+        </div>
+      </div>
     </nav>
   );
 };

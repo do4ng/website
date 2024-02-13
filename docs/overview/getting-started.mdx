@@ -1,42 +1,27 @@
 In this chapter, we will introduce how to create your first zely app.
 
-> [Try in codesandbox](https://codesandbox.io/p/github/zely-js/zely-next-starter)
-
 ## Using tool
 
 You can create zely application easily with [create-zely](https://npmjs.com/package/create-zely).
 
 ---
 
-1. Download the template using the `create-zely` tool:
+1. Download the template using the `zely-cli` tool:
 
 ```bash
-$ npx create-zely
-
-? Project name: my-app
-? Directory: my-app
-? Use Typescript: Yes
-? Use Export Default: Yes
-
-Cloning Templates...
-
-  $ cd my-app
-  $ npm i
-  $ npm run dev
-
-Happy Hacking!
+npx zely-cli init --dir my-app --template=typescript
 ```
 
 2. Install Dependencies:
 
 ```bash
-$ npm install
+npm install
 ```
 
 3. Run the app:
 
 ```bash
-$ npm dev # start app
+npm dev # start app
 ```
 
 ## Manual Installation
@@ -46,17 +31,15 @@ You can also add zely to a project that already exists.
 Enter the command below:
 
 ```bash [title="npm"]
-$ npm install --save-dev zely
+npm install --save-dev zely
 ```
 
 Add the configuration file (`zely.config.ts`).
 
 ```ts [title="zely.config.ts"]
-import { defineConfig } from 'zely/config';
+import { defineConfig } from 'zely';
 
 export default defineConfig({
   // options
 });
 ```
-
-> reference: [config references](/apis/config)

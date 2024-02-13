@@ -1,0 +1,57 @@
+v2 features may not work in v3. In order to upgrade an existing server to v3, you must apply the changes in v3.
+
+## Packages
+
+All actions were performed in the `zely` module,
+but the method has changed to the `@zely-js/~` module sharing the responsibility for actions.
+
+| **package**               | **description**                              |
+| ------------------------- | -------------------------------------------- |
+| `zely`                    | re-exports of `@zely-js/zely` and `zely-cli` |
+| `zely-cli`                | zely cli                                     |
+| `@zely-js/zely`           | core module of zely                          |
+| `@zely-js/core`           | zely server                                  |
+| `@zely-js/loader`         | javascript loader manager                    |
+| `@zely-js/loader-esbuild` | esbuild loader (to load typescript)          |
+
+To use zely and cli together, install `zely`.
+If you only want to use zely API, install `@zely-js/zely`.
+
+## File Structure
+
+`$routing` is deprecated.
+
+| before          | after             |
+| --------------- | ----------------- |
+| `/index.ts`     | `/index.ts`       |
+| `/a/b.ts`       | `/a/b.ts`         |
+| `/book/$id.ts`  | `/book/[id].ts`   |
+| `/$id/about.ts` | `/[id]/about.ts`  |
+| ~               | `/[...params].ts` |
+
+<Box type="info">See [routing documentation](/docs/routing).</Box>
+
+## Migration
+
+1. change `(req, res) => ...` to `(ctx) => ...` in handlers.
+
+The `export` handler can also use `context`.
+
+<Box type="info">Check the [context document](/docs/context)</Box>
+
+```ts
+// export function get(req, res) {}
+export function get(ctx) {
+  const req = ctx.request;
+  const res = ctx.response;
+  // ...
+}
+```
+
+2. remove [`snatcher`](https://zely2.netlify.app/docs/data-fetching).
+
+`snatcher` has been deprecated. Use `fetch` instead.
+
+3. remove [`$page.path`](https://zely2.netlify.app/docs/page-data)
+
+`$page.path` is not supported in 3.0.

@@ -101,7 +101,7 @@ div[data-rehype-pretty-code-title] {
   margin: 2px;
   padding: 2.5px 5px;
   color: var(--text-200);
-  background-color: var(--bg-200);
+  background-color: var(--bg-200-light);
   letter-spacing: normal;
 }
 
@@ -168,6 +168,9 @@ nav {
     padding-left: 0px;
     list-style-type: none;
     margin-top: 5px;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--bg-300);
   }
 
   li {
@@ -200,15 +203,28 @@ nav {
   li > a:hover {
     color: var(--text-100);
   }
+
+  .table-actions {
+    a {
+      i {
+        font-size: 16px;
+        padding-right: 5px;
+      }
+      font-size: 0.875rem;
+    }
+  }
 }
 
 .post {
   margin-bottom: 50px;
   a {
     color: var(--primary-100);
+    transition: all 0.1s ease 0s;
   }
   a:hover {
     text-decoration: underline;
+
+    color: var(--primary-100-dark);
   }
 
   h2 {
@@ -246,5 +262,13 @@ ol {
 
   li::marker {
     color: var(--text-300) !important;
+  }
+}
+
+a {
+  code:not([data-language]) {
+    color: var(--primary-100);
+    text-decoration: underline;
+    background-color: inherit !important;
   }
 }

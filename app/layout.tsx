@@ -59,6 +59,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {target ? (
                       target.category.map((category) => (
                         <CategoryMenu
+                          hidden={category.hidden || false}
                           category={category as any}
                           key={category.name}
                         ></CategoryMenu>

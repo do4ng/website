@@ -3,6 +3,7 @@ export type Post = Record<string, string>;
 export interface Category {
   name: string;
   posts: Post[];
+  hidden?: boolean;
 }
 
 export interface Config {
@@ -21,6 +22,7 @@ export default [
           { overview: 'Overview' },
           { 'why-zely': 'Why Zely' },
           { 'getting-started': 'Getting Started' },
+          { v3: 'v3.0' },
         ],
       },
       {
@@ -43,12 +45,8 @@ export default [
         posts: [{ middleware: 'Middleware' }, { auto: 'Auto Mode' }],
       },
       {
-        name: 'Build',
-        posts: [
-          { build: 'Build' },
-          { 'zely-build': 'zely/build' },
-          { 'zely-builder': '@zely/builder' },
-        ],
+        name: 'Migration',
+        posts: [{ migration: 'Migration' }, { 'migration-2x': 'Migration from 2.x' }],
       },
       {
         name: 'Community',
@@ -56,6 +54,16 @@ export default [
           { community: 'Community' },
           { contributing: 'Contributing' },
           { playground: 'Playground' },
+        ],
+      },
+
+      {
+        name: 'Build',
+        hidden: true,
+        posts: [
+          { build: 'Build' },
+          { 'zely-build': 'zely/build' },
+          { 'zely-builder': '@zely/builder' },
         ],
       },
     ],

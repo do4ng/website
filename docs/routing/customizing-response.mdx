@@ -1,6 +1,6 @@
 `prewrite` helps you customize `res.send`.
 
-> res.end doesn't support `usePrewrite`. Use res.send instead.
+<Box type="warning">res.end doesn't support `usePrewrite`. Use res.send instead.</Box>
 
 ## Examples
 
@@ -9,8 +9,8 @@ It can be used directly in page files, and can also be used in middleware and pl
 ```ts
 import { usePrewrite } from 'zely';
 
-export function get(req, res) {
-  usePrewrite(res, (data) => {
+export function get(ctx) {
+  usePrewrite(ctx.response, (data) => {
     return `I love ${data}`;
   });
   res.send('cat'); // I love cat

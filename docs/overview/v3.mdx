@@ -1,0 +1,88 @@
+<Box type="tip">
+  To migrate to v3, please refer to the [migration guide](/docs/migration-2x).
+</Box>
+
+> zely@3 has had its code rewritten to make the server faster and more workable.
+
+The usage of zely@2 and zely@3 is very different.
+
+To use zely@3, it is recommended to use `@zely-js/zely` instead of `zely`. (if not using cli)  
+If you use cli, install `zely`.
+
+The `zely` package is a re-export of `@zely-js/zely` and `zely-cli`.
+Whether you import `zely` or `@zely-js/zely`, the result is the same.
+
+<Box type="info">
+
+To use v2, you can install @2 with the following command.
+
+```bash
+npm i --save-dev zely@2
+```
+
+And also you can see [v2 documentation](https://zely2.netlify.app)
+
+</Box>
+
+## Installation
+
+1. Install packages
+
+```bash
+# npm i --save-dev zely
+npm i --save-dev @zely-js/zely zely-cli
+```
+
+2. edit `package.json`
+
+```json [title="package.json"] {3}
+{
+  "scripts": {
+    "dev": "zely-cli dev"
+  }
+}
+```
+
+## Changes
+
+### Server
+
+For optimization purposes,
+we improved performance by building only the files that are loaded instead of building all files when starting the server.
+
+## To be added
+
+1. `static props`
+2. [`zely/build`](/docs/zely-build)
+3. [`@zely/builder`](/docs/zely-builder)
+
+## Deprecated
+
+Features that are not needed or reduce performance have been deleted.
+
+### Core
+
+1. `snatcher`
+
+### CLI
+
+1. `add`
+
+<Box type="warning">
+  [`@zely/plugin-cors`](https://www.npmjs.com/package/@zely/plugin-cors) is no longer updated. (It may not work in the future)
+
+Instead, add cors manually to the middleware.
+
+```ts
+export default defineConfig({
+  middlewares: [
+    require('cors')({
+      /*options*/
+    }),
+  ],
+});
+```
+
+</Box>
+
+2. `analyze`

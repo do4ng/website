@@ -16,11 +16,11 @@ export const Message: Middleware = (req, res, next) => {
 ```
 
 ```ts [title="pages/index.ts"]
-import { ZelyRequest, ZelyResponse } from 'zely';
-
-export function get(req: ZelyRequest, res: ZelyResponse) {
-  res.end((req as any).message);
-}
+export default [
+  GET((ctx) => {
+    ctx.send(ctx.request.message);
+  }),
+];
 ```
 
 This middleware function, named Message, adds a property message to the request object and assigns it the value 'Hello World!'. The next() function call is used to pass control to the next middleware function.

@@ -141,4 +141,16 @@ export const components = {
       </div>
     </>
   ),
+
+  Box: (props: any) => {
+    console.log(props.children);
+
+    return (
+      <div className={`box box-${props.type || 'info'}`}>
+        <p className="box-title">{(props.type || 'info').toUpperCase()}</p>
+
+        {props.children}
+      </div>
+    );
+  },
 };

@@ -7,7 +7,13 @@ import Link from 'next/link';
 import { useState } from 'react';
 import config, { Category } from '@/config';
 
-export function CategoryMenu({ category }: { category: Category }) {
+export function CategoryMenu({
+  category,
+  hidden,
+}: {
+  category: Category;
+  hidden: boolean;
+}) {
   const params = useParams();
 
   let targetcategory: string | null = null;
@@ -22,7 +28,7 @@ export function CategoryMenu({ category }: { category: Category }) {
     });
   });
 
-  const [hide, setHide] = useState(false);
+  const [hide, setHide] = useState(hidden);
 
   const router = useRouter();
 

@@ -28,8 +28,8 @@ a.btn:hover {
   }
 }
 
-a.btn:focus,
-button.btn:focus {
+a.popover.btn:focus,
+button.popover.btn:focus {
   background-color: var(--primary-100-50) !important;
   color: var(--primary-100);
 
@@ -102,4 +102,110 @@ button.btn:focus {
 .popover-menu[data-show='true'] {
   visibility: visible;
   opacity: 1;
+}
+
+.box {
+  padding: 7px 20px 14px 20px;
+  border-radius: 8px;
+
+  font-size: 1.05rem;
+  margin: 30px 0;
+
+  p {
+    margin: 0;
+    color: var(--text-100);
+  }
+
+  div[data-rehype-pretty-code-fragment] {
+    margin: 5px 0;
+
+    div[data-rehype-pretty-code-title] {
+      display: none;
+    }
+    .code-block {
+      border-radius: 6px;
+    }
+  }
+
+  p.box-title {
+    font-size: 0.975rem;
+    font-weight: bold;
+  }
+
+  code:has(data-language) {
+    background-color: var(--bg-200) !important;
+  }
+
+  code:not([data-language]) {
+    background-color: inherit !important;
+    border-radius: 4px;
+  }
+}
+
+.dark {
+  .box-info {
+    background-color: #4e4e4e42;
+
+    code:not([data-language]) {
+      background-color: #4e4e4e42 !important;
+      border-radius: 4px;
+    }
+  }
+  .box-warning {
+    background-color: #7a77464b;
+
+    code:not([data-language]) {
+      background-color: #7a77464b !important;
+      border-radius: 4px;
+    }
+  }
+  .box-error {
+    background-color: #8a424242;
+
+    code:not([data-language]) {
+      background-color: #8a424242 !important;
+      border-radius: 4px;
+    }
+  }
+  .box-tip {
+    background-color: #4d5d924b;
+
+    code:not([data-language]) {
+      background-color: #4d5d924b !important;
+      border-radius: 4px;
+    }
+  }
+}
+
+.box-info {
+  background-color: #4e4e4e18;
+
+  code:not([data-language]) {
+    background-color: #4e4e4e18 !important;
+    border-radius: 4px;
+  }
+}
+.box-warning {
+  background-color: #ada72c25;
+
+  code:not([data-language]) {
+    background-color: #ada72c25 !important;
+    border-radius: 4px;
+  }
+}
+.box-error {
+  background-color: #bd2e2e21;
+
+  code:not([data-language]) {
+    background-color: #bd2e2e21 !important;
+    border-radius: 4px;
+  }
+}
+.box-tip {
+  background-color: #1d4f9b21;
+
+  code:not([data-language]) {
+    background-color: #1d4f9b21 !important;
+    border-radius: 4px;
+  }
 }

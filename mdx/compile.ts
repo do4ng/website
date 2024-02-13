@@ -1,13 +1,12 @@
 import { compile, CompileOptions } from '@mdx-js/mdx';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
-import raw from 'rehype-raw';
 
 import fs from 'fs';
 import { join } from 'path';
 import { getHighlighter } from 'shiki';
 
-import Theme from 'shiki/themes/github-dark.json';
+import Theme from 'shiki/themes/material-theme-palenight.json';
 
 // import { plugin } from './plugins/anchor';
 
@@ -45,7 +44,7 @@ export const compileMdx = async (content: string): Promise<string> => {
   if (typeof window !== 'undefined') throw Error('compileMdx should run on server only');
 
   const options: CompileOptions = {
-    format: 'md',
+    format: 'mdx',
     outputFormat: 'function-body',
     remarkPlugins: [remarkGfm],
     development: false,
@@ -77,7 +76,7 @@ export const compileMdx = async (content: string): Promise<string> => {
           },
         },
       ],
-      raw,
+      // raw,
     ],
   };
 

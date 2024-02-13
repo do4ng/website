@@ -23,7 +23,7 @@ Just exporting default with nothing responds to all methods. However, if you wan
 If you want some functions to only respond to `GET` and other functions to only respond to `POST`, you can put them in an array.
 
 ```ts
-import { GET, POST } from 'zely/methods';
+import { GET, POST } from 'zely';
 
 export default [
   GET({
@@ -37,19 +37,43 @@ export default [
 ];
 ```
 
-Since `v1.0.2`, it is automatically imported without importing `GET` or `POST` functions.
+## Global import
+
+If importing handlers per page feels complicated, enable the `options.globalImport` option.
+
+```ts [title="zely.config.ts"]
+export default {
+  globalImport: true,
+};
+```
+
+Then, you can use `GET`, `POST` without importing handlers.
 
 ```ts
-// import { GET } from 'zely/methods';
-export default GET({});
+export default [GET(/* ... */)];
 ```
+
+<Box type="tip">
+  If you are using typescript, create `env.d.ts` and add the following code.
+ ```ts 
+ import "zely/env";
+ ```
+
+```json
+// tsconfig.json
+{
+  "include": ["./env.d.ts"]
+}
+```
+
+  </Box>
 
 ## Access to `req`, `res`
 
 Functions can be used as the body.
 
 ```ts
-import { POST } from 'zely/methods';
+import { POST } from 'zely';
 
 export default [POST((ctx) => {
   ctx.send(req.body)
