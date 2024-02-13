@@ -1,4 +1,4 @@
-# [zely.vercel.app](zely.vercel.app)
+# [zely.vercel.app](https://zely.vercel.app)
 
 documentation for zely3
 
