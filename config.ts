@@ -46,6 +46,7 @@ export default [
       },
       {
         name: 'Migration',
+        hidden: true,
         posts: [{ migration: 'Migration' }, { 'migration-2x': 'Migration from 2.x' }],
       },
       {

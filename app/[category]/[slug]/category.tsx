@@ -31,8 +31,9 @@ export function CategoryMenu({
   const [hide, setHide] = useState(hidden);
 
   const router = useRouter();
-
   const CategoryName = category.name.toLowerCase().replace(/ /g, '-');
+
+  router.prefetch(`/${params.category}/${CategoryName}`);
 
   return (
     <div className={`category ${hide ? 'hide' : ''}`} key={category.name}>

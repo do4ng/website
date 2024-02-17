@@ -21,7 +21,7 @@ If you only want to use zely API, install `@zely-js/zely`.
 
 `$routing` is deprecated.
 
-| before          | after             |
+| **before**      | **after**         |
 | --------------- | ----------------- |
 | `/index.ts`     | `/index.ts`       |
 | `/a/b.ts`       | `/a/b.ts`         |
@@ -55,3 +55,10 @@ export function get(ctx) {
 3. remove [`$page.path`](https://zely2.netlify.app/docs/page-data)
 
 `$page.path` is not supported in 3.0.
+
+4. replace `zely/~` with `zely`.
+
+| **before**     | **after** |
+| -------------- | --------- |
+| `zely/config`  | `zely`    |
+| `zely/methods` | `zely`    |
