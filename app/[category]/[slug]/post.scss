@@ -93,7 +93,12 @@ div[data-rehype-pretty-code-title] {
     width: 1rem;
     margin-right: 1.25rem;
     text-align: right;
-    color: gray;
+    color: #525d7e;
+  }
+
+  code[data-language='bash'] > [data-line]::before,
+  code[data-language='sh'] > [data-line]::before {
+    content: '$';
   }
 }
 

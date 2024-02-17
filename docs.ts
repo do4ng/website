@@ -79,9 +79,16 @@ export default {
       ],
     },
     {
-      title: 'v2',
+      title: 'v3',
       type: 'popover',
       children: [
+        {
+          title: 'v2',
+          href: 'https://zely2.netlify.app/',
+          description: 'zely v2 documentation.',
+          // https://remixicon.com/icon/book-open-line
+          icon: 'ri-sticky-note-line',
+        },
         {
           title: 'v1',
           href: 'https://zely.netlify.app/',
@@ -91,8 +98,8 @@ export default {
         },
         {
           title: 'Changelog',
-          href: 'https://github.com/zely-js/zely/blob/main/packages/zely/CHANGELOG.md',
-          description: 'Changelog of zely v2.',
+          href: 'https://github.com/zely-js/zely/blob/zely3/packages/zely/CHANGELOG.md',
+          description: 'Changelog of zely v3.',
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-book-open-line',
         },
