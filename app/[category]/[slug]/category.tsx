@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import config, { Category } from '@/config';
 
 export function CategoryMenu({
@@ -33,9 +33,9 @@ export function CategoryMenu({
   const router = useRouter();
   const CategoryName = category.name.toLowerCase().replace(/ /g, '-');
 
-  if (typeof window !== 'undefined') {
+  useEffect(() => {
     router.prefetch(`/${params.category}/${CategoryName}`);
-  }
+  }, [router, params, CategoryName]);
 
   return (
     <div className={`category ${hide ? 'hide' : ''}`} key={category.name}>
