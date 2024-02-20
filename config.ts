@@ -82,7 +82,10 @@ export default [
       },
       {
         name: 'Custom',
-        posts: [{ 'create-plugin': 'Create Plugin' }],
+        posts: [
+          { 'create-plugin': 'Create Plugin' },
+          { 'create-loader': 'Create Loader' },
+        ],
       },
     ],
   },

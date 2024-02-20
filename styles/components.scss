@@ -209,3 +209,23 @@ button.popover.btn:focus {
     border-radius: 4px;
   }
 }
+
+pre::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #525a7ebe;
+
+  border-radius: 10px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: inherit;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

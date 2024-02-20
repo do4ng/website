@@ -1,0 +1,59 @@
+The loader function allows you to load files that zely cannot compile by default.
+
+## Example
+
+The following is an abbreviated version of the [`@zely-js/loader-esbuild`](https://github.com/zely-js/zely/tree/zely3/packages/zely-js-loader-esbuild) code.
+
+```ts
+import esbuild from 'esbuild';
+import { join } from 'node:path';
+
+export function esbuildLoader(options: UserConfig): Loader<esbuild.BuildOptions> {
+  return {
+    name: '@zely-js/loader-esbuild',
+
+    async transform(id, source, buildoptions) {
+      // only transform javascript / typescript file.
+      if (!id.endsWith('.ts') && !id.endsWith('.js')) {
+        return;
+      }
+
+      // compile typescript/javascript to bundled javascript
+      const out = await esbuild.build({
+        entryPoints: [id],
+        outdir: join(options.cwd || process.cwd(), options.dist || '.zely'),
+        bundle: true,
+        write: false,
+        platform: 'node',
+      });
+
+      // return compiled file path and map file
+      return {
+        map: null, // optional
+        filename: out.outFiles[0].path, // required
+      };
+    },
+  };
+}
+```
+
+- `id`: target file path
+- `source`: source of the file
+- `buildOptions`: build options providing type and custom options.
+
+---
+
+- `return.map`: sourcemap path (`optional`)
+- `return.filename`: built file path (`required`)
+
+<Box type="info">
+`BuildOptions` type declaration:
+
+```ts
+export interface TransformOptions<T = any> {
+  type: 'page' | 'middleware' | 'configuration' | 'cache';
+  buildOptions: T;
+}
+```
+
+</Box>

@@ -1,16 +1,19 @@
-In this chapter, we will create a simple plugin.
+In zely, you can expand the server through plugins.
 
-## Middleware Plugin
+## Basic Plugin
 
-You can apply middlewares or custom handlers using `plugin.server`.
+There is a simple plugin that prints the URL from request.
 
-```ts
+```ts {3-12}
 export function myPlugin() {
   return {
     name: 'my-plugin',
 
+    // You can access the server
+    // by adding middleware to the zely server through server().
     server(server) {
       server.use((req, res, next) => {
+        console.log(req.url);
         next();
       });
     },
@@ -18,66 +21,50 @@ export function myPlugin() {
 }
 ```
 
-## Transform
+And regist the plugin to configure file.
 
-You can transform files using `plugin.transform`.
+```ts [title="zely.config.ts"]
+import { myPlugin } from './myplugin';
 
-> info: Files that are converted by default (such as typescript, javascript) will not be called.
+export default defineConfig({
+  plugins: [myPlugin()],
+});
+```
 
-`plugin.transform` will return `routes`.
+Now, when you start the app,
+the URL from request will be displayed for each request!
 
-### Concept of Routes
+## Plugin Options
 
-- `file`: path (such as `/`, `/about`, `/foo/bar`)
+### `plugin.name`
 
-- `m`: module
+This is the name of the plugin. This is useful for debugging.
+
+### `plugin.config`
+
+You can change the settings.  
+This value will be executed before the server starts.
+
+### `plugin.server`
+
+You can expand your server by receiving a server instance.
 
 ```ts
 return {
-  m: {
-    get(req, res) {
-      res.end('get');
-    },
-    post(req, res) {
-      res.end('post');
-    },
+  name: 'simple-plugin',
+  server(server) {
+    server.use((req, res, next) => next());
   },
 };
 ```
 
-- `modulePath`: built file directory
+<Box type="info">
 
-Provides the module path for reference when building.
+zely executes middleware in the following order before showing the page:
 
-[build](/docs/build) feature requires `modulePath`.  
-If you don't want to support build feature, you don't have to provide this value.
+1. `plugin.server`
+2. [middleware extending `req`, `res`](https://github.com/zely-js/zely/blob/zely3/packages/zely-js-core/src/middlewares/support.ts)
+3. `config.middlewares` or [middleware in a specific directory](/docs/auto)
+4. [pages middleware (core middleware showing the pages)](https://github.com/zely-js/zely/blob/zely3/packages/zely-js-core/src/controller/index.ts#L237)
 
-- `type`: `module` or `html`
-
-module: javascript  
-html: html code
-
-### Transform Example
-
-```ts
-import { parse } from 'path';
-
-export function myPlugin() {
-  return {
-    name: 'my-plugin',
-
-    transform(id, code) {
-      return {
-        file: parse(id).name,
-        m: {
-          get(req, res) {
-            res.end('Hello World!');
-          },
-        },
-        modulePath: '',
-        type: 'module', // html or module
-      };
-    },
-  };
-}
-```
+</Box>

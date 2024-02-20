@@ -58,6 +58,28 @@ export default {
         },
       ],
     },
+
+    {
+      title: 'Plugins',
+      type: 'popover',
+      children: [
+        {
+          title: 'Plugin',
+          href: '/plugins/overview',
+          description: 'Learn about plugins.',
+          // https://remixicon.com/icon/book-open-line
+          icon: 'ri-puzzle-line',
+        },
+        {
+          title: 'Loader',
+          href: '/plugins/create-loader',
+          description: 'Learn how to create a loader.',
+          // https://remixicon.com/icon/book-open-line
+          icon: 'ri-loader-2-line',
+        },
+      ],
+    },
+
     {
       title: 'Community',
       type: 'popover',
