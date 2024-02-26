@@ -1,3 +1,5 @@
+import config from './blog';
+
 export interface Docs {
   name: string;
   description: string;
@@ -56,6 +58,13 @@ export default {
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-book-open-line',
         },
+        {
+          title: 'Apis',
+          href: '/apis/javascript-api',
+          description: 'Learn all of information of package.',
+          // https://remixicon.com/icon/book-open-line
+          icon: 'ri-book-open-line',
+        },
       ],
     },
 
@@ -93,7 +102,7 @@ export default {
         },
         {
           title: 'Blog',
-          href: '/blog',
+          href: `/blog/${config[0].date}`,
           description: 'Our development blog',
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-book-open-line',

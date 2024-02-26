@@ -22,6 +22,7 @@ export default [
           { overview: 'Overview' },
           { 'why-zely': 'Why Zely' },
           { 'getting-started': 'Getting Started' },
+          { config: 'Config References' },
           { v3: 'v3.0' },
         ],
       },
@@ -42,8 +43,9 @@ export default [
       },
       {
         name: 'Middleware',
-        posts: [{ middleware: 'Middleware' }, { auto: 'Auto Mode' }],
+        posts: [{ middleware: 'Middleware' }, { auto: 'Auto Importing' }],
       },
+
       {
         name: 'Migration',
         hidden: true,
@@ -57,18 +59,28 @@ export default [
           { playground: 'Playground' },
         ],
       },
+    ],
+  },
+
+  {
+    title: 'apis',
+    category: [
+      {
+        name: 'CLI',
+        posts: [{ cli: 'cli' }, { init: 'init' }, { start: 'start' }, { dev: 'dev' }],
+      },
 
       {
-        name: 'Build',
-        hidden: true,
+        name: 'Javascript API',
         posts: [
-          { build: 'Build' },
-          { 'zely-build': 'zely/build' },
-          { 'zely-builder': '@zely/builder' },
+          { 'javascript-api': 'Javascript API' },
+          { config: 'Config' },
+          { 'create-server': 'Create Server' },
         ],
       },
     ],
   },
+
   {
     title: 'plugins',
     category: [

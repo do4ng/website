@@ -1,0 +1,48 @@
+## @zely-js/zely
+
+```ts
+import { zely } from '@zely-js/zely';
+
+const app = zely({
+  /* options */
+});
+
+app.listen(8080);
+```
+
+zely uses `@zept/http` as the default server.
+
+Looking at the [@zept/http](https://zely.netlify.app/packages/zept-http) document will be helpful in building a server.
+
+## @zely-js/core
+
+<Box type="warning">
+  `@zely-js/zely` adds features such as plugins and `prewrite` to `@zely-js/core`.
+  `@zely-js/core` doesn't support plugins and `prewrite`.
+</Box>
+
+```ts
+import { createZelyServer } from '@zely-js/core';
+
+async function main() {
+  const { server, applyZelyMiddlewares } = createZelyServer({
+    /* options */
+  });
+
+  // apply core middlewares to the server
+  await applyZelyMiddlewares(server);
+  server.listen(8080);
+}
+
+main();
+```
+
+## Production Mode
+
+Set `env.NODE_ENV` to production.
+
+```ts
+process.env.NODE_ENV = 'production';
+```
+
+Enabling production mode builds all pages before starting the server.

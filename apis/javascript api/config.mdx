@@ -1,0 +1,65 @@
+```js [title="zely.config.js"]
+module.exports = require('@zely-js/zely').defineConfig({
+  /* options */
+});
+```
+
+## Server Options
+
+- `server.port`: `number` - Server port to use.
+- `server.options`: [`zept.ServerOptions`](https://github.com/zely-js/zept/blob/main/packages/http/types/index.d.ts#L33) - HTTP server options.
+- `server.zept`: `zept.ZeptServer` - Server instance.
+
+## Zely Options
+
+- `cwd`: `string` - Base directory.
+- `middlewares`: `Middleware[]` - [Middlewares](/docs/middleware).
+- `allowAutoMiddlewares`: `boolean` - Allow [to import middlewares automatically](/docs/auto).
+- `middlewareDirectory`: `string` - Directory including middlewares. [[related](/docs/auto)]
+
+---
+
+- `loaders`: `Loader[]` - List of [loaders](/plugins/create-loader).
+- `globalImport`: `boolean` - Whether to import [methods](/docs/methods) automatically.
+- `onError`: `Function` - Callback to be called when an error is encountered.
+- `enableReporter`: `boolean` - Whether to enable the reporter for debugging. (reporter reports errors exactly through `.js.map`)
+- `keepDist`: `boolean` - Whether to keep the dist directory when server starts.
+
+<Box type="info">
+Type Declartion
+
+```ts
+import { ServerOptions, ZeptServer } from '@zept/http';
+import { Loader } from '@zely-js/loader';
+import { Plugin, Middleware } from '@zely-js/zely';
+
+export interface Config extends UserConfig {
+  plugins?: Plugin[];
+}
+
+export interface UserConfig {
+  server?: {
+    port?: number;
+    options?: ServerOptions;
+    zept?: ZeptServer;
+  };
+
+  cwd?: string;
+
+  middlewares?: Middleware[];
+  allowAutoMiddlewares?: boolean;
+  middlewareDirectory?: string;
+
+  loaders?: Loader[];
+
+  globalImport?: boolean;
+
+  onError?: (err: Error) => void | Promise<void>;
+
+  enableReporter?: boolean;
+
+  keepDist?: boolean;
+}
+```
+
+</Box>

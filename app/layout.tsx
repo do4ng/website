@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   */
 
   const path = usePathname().split('/')[1];
-  const isDocs = path === 'docs' || path === 'plugins';
+  const isDocs = path === 'docs' || path === 'plugins' || path === 'apis';
 
   if (typeof window !== 'undefined') {
     toggleTheme((localStorage.getItem('theme') as any) || 'dark');
