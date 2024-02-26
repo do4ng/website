@@ -31,6 +31,9 @@ export default [
         posts: [
           { routing: 'Routing' },
           { methods: 'Methods' },
+          {
+            'send-data': 'Sending Data',
+          },
           { context: 'Context' },
           { 'page-data': 'Page Data' },
           {
@@ -76,6 +79,20 @@ export default [
           { 'javascript-api': 'Javascript API' },
           { config: 'Config' },
           { 'create-server': 'Create Server' },
+          { 'virtual-page': 'Virtual Pages' },
+        ],
+      },
+      {
+        name: 'Packages',
+        posts: [
+          { packages: 'Packages' },
+          { 'zely-js-cli': 'zely-cli' },
+          { 'zely-js': '@zely-js/zely' },
+          { 'zely-js-core': '@zely-js/core' },
+          { 'zely-js-loader': '@zely-js/loader' },
+          { 'zely-js-reporter': '@zely-js/reporter' },
+          { 'zely-js-logger': '@zely-js/logger' },
+          { 'zely-js-watch': '@zely-js/watch' },
         ],
       },
     ],

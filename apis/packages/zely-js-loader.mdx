@@ -1,0 +1,17 @@
+Module loader for zely-js
+
+[source](https://github.com/zely-js/zely/tree/zely3/packages/zely-js-loader), [npm](https://www.npmjs.com/package/@zely-js/loader)
+
+## Usage
+
+```ts
+import { createLoader } from '@zely-js/loader';
+
+const loader = await createLoader({
+  // custom loaders
+  loaders: [],
+});
+const page = await loader('./index.ts');
+```
+
+<Box type="tip">See [custom loader guide](/plugins/create-loader)</Box>

@@ -1,0 +1,81 @@
+## Data types
+
+- Available types: `string`, `number`, `object(JSON)`, `boolean`, `bigint`
+
+- Unavailable types: `undefined`, `function`, `class`, etc...
+
+## res.send()
+
+This is the most basic sending method.  
+It can be used as `ctx.send` or `ctx.response.send`.
+
+```ts
+export default [
+  GET((ctx) => {
+    ctx.send({});
+  }),
+];
+```
+
+<Box type="error">
+`ctx.response.end` and `ctx.response.send` are completely different.
+
+`ctx.response.end` is a function sending data provided by default in nodejs.
+
+</Box>
+
+## return
+
+Another way to send data is return. Just return the data you want to send!
+
+The `return` values will be sent through [`res.send`](<#res.send()>).
+
+```ts
+export default [
+  GET(() => {
+    return { msg: '👋' };
+  }),
+];
+```
+
+## response()
+
+You can set more values ​​(like headers) in the response by creating a response instance.
+
+```ts
+import { response } from 'zely';
+
+export default [
+  GET(() => {
+    return response(
+      {
+        /* data */
+      },
+      {
+        /* headers */
+      },
+    );
+  }),
+];
+```
+
+<Box type="tip">
+  Example:
+  ```ts
+  import { response } from 'zely';
+  export default [
+    GET(() => {
+      const res = response(
+        { msg: '👋' },
+        {
+          /*headers*/
+        },
+      );
+      res.body = { msg: '🎉' };
+      res.headers = {};
+      res.status = 500;
+      return res;
+    }),
+  ];
+  ```
+</Box>

@@ -1,0 +1,56 @@
+If you want to use virtual pages without adding files directly to create the page,
+add the `__virtuals__` option to the config file.
+
+```ts [title="zely.config.ts"]
+import { defineConfig, createVirtualPage, GET } from '@zely-js/zely';
+
+export default defineConfig({
+  __virtuals__: [
+    createVirtualPage('main.ts', [
+      GET(() => {
+        return 'Hello Main Page!';
+      }),
+    ]),
+  ],
+});
+```
+
+## createVirtualPage()
+
+`createVirtualPage()` creates a virtual page.
+
+```ts
+const filename = '/users/[user].ts';
+const page = [
+  GET(() => {
+    /* ... */
+  }),
+];
+
+createVirtualPage(filename, page);
+```
+
+Write a virtual filename in the first argument.  
+This file name is used to create a routing path or for debugging.
+
+And write the page in the second argument.
+
+```ts
+console.log(createVirtualPage('main.ts', [GET(() => {})]));
+```
+
+```json
+{
+  "filename": "main.ts",
+  "id": -1,
+  "path": "main",
+  "regex": "/^/main/?$/i",
+  "params": [],
+  "module": {
+    "__isVirtual__": true,
+    "isLoaded": true,
+    "type": "export-default",
+    "data": "[Array]"
+  }
+}
+```

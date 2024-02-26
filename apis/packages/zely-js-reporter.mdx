@@ -1,0 +1,13 @@
+Reporter for zely-js
+
+[source](https://github.com/zely-js/zely/tree/zely3/packages/zely-js-reporter), [npm](https://www.npmjs.com/package/@zely-js/reporter)
+
+## Usage
+
+If the map file `[filename].map` file exists, it references it and emits an error.
+
+```ts
+import reporter from '@zely-js/reporter';
+
+reporter(new Error('Hello World!'));
+```
