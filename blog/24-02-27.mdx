@@ -1,0 +1,37 @@
+zely 3.0 is currently under development.  
+There is still a long way to go, but I will record the development status.
+
+If you want to check your contribution or development status, check out [Github](https://github.com/zely-js/zely)
+
+## Getting Started
+
+See [Getting-Started Guide](/docs/getting-started).
+
+## Code Rewrite
+
+The zely code has been rewritten from scratch.  
+As it was rewritten, many features were added and improved,
+but some features were deprecated due to optimization or other reasons.
+
+## Features
+
+Here are the major changes:
+
+### Context
+
+Now both the `export-default` and `export` handlers receive [context](/docs/context) as an argument instead of `req` and `res`.
+
+### Loader
+
+You can now configure the loader yourself.
+
+In the existing v2, files other than `.js` and `.ts` could be compiled with the plugin,
+but by setting the loader, all files including `.ts` and `.js` can be compiled with the desired loader.
+
+### Virtual Page
+
+See [virtual page documentation](/apis/virtual-page).
+
+## Status
+
+[Checkout our development status](https://github.com/orgs/zely-js/projects/3)

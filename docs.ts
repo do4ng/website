@@ -1,5 +1,3 @@
-import config from './blog';
-
 export interface Docs {
   name: string;
   description: string;
@@ -102,7 +100,7 @@ export default {
         },
         {
           title: 'Blog',
-          href: `/blog/${config[0].date}`,
+          href: '/blog/',
           description: 'Our development blog',
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-book-open-line',
@@ -129,7 +127,7 @@ export default {
         },
         {
           title: 'Changelog',
-          href: 'https://github.com/zely-js/zely/blob/zely3/packages/zely/CHANGELOG.md',
+          href: 'https://github.com/zely-js/zely/blob/zely3/CHANGELOG.md',
           description: 'Changelog of zely v3.',
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-book-open-line',
