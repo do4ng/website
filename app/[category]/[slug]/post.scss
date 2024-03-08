@@ -236,10 +236,10 @@ nav {
   }
 
   h2 {
-    margin: 40px 0 16px;
+    margin: 5px 0 16px;
     letter-spacing: -0.02em;
     padding-top: 24px;
-    border-top: 1px solid var(--bg-400);
+    //  border-top: 1px solid var(--bg-400);
   }
 
   ul {
@@ -255,13 +255,13 @@ nav {
   }
 
   hr {
-    background: var(--bg-400);
+    background: var(--bg-300);
     height: 1px;
     border: 0;
   }
 
   li::marker {
-    color: var(--bg-400);
+    color: var(--bg-300);
   }
 }
 

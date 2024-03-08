@@ -29,22 +29,25 @@
 
   .item-1 {
     font-size: 18px;
+    padding-top: 3px;
   }
 
   .item-2 {
-    margin-left: 50px;
-
+    margin: 0 auto;
     display: flex;
 
     a,
     button {
+      font-size: 14px;
       margin-right: 10px;
+
+      i {
+        font-size: 15px;
+      }
     }
   }
 
   .item-3 {
-    margin-left: auto;
-
     a {
       padding-top: 3px;
       display: inline-block;
@@ -102,5 +105,78 @@ i {
 
   i {
     padding-right: 5px;
+  }
+}
+
+.docs-icon {
+  font-size: 0.95rem;
+  background-color: var(--primary-100-50);
+  color: var(--primary-100-dark);
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-left: 2px;
+}
+
+.title-example {
+  margin-top: 150px;
+  margin-right: 50px;
+  .code-block-example {
+    padding: 10px;
+    border-radius: 5px;
+    width: 390px;
+    text-align: center;
+
+    background-color: #292d3e;
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px 6px 29px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    p,
+    a {
+      font-size: 13px;
+      padding: 3px 5px;
+      margin: 0;
+      color: rgb(186, 190, 216);
+    }
+
+    p.code-line:hover {
+      background-color: #1d202c;
+      a {
+        background-color: #1d202c;
+      }
+    }
+
+    .code-line-highlight {
+      color: #e7cd76;
+    }
+    .code-line-dark {
+      color: rgb(130, 134, 163);
+    }
+
+    a {
+      color: rgb(122, 132, 201);
+      text-decoration: underline 1px solid;
+    }
+  }
+}
+
+.code-block-example {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.875em;
+  border-radius: 2px;
+}
+
+.product-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-image: url('/bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .title {
+    width: 500px;
+    margin: 0;
   }
 }

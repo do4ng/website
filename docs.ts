@@ -25,7 +25,7 @@ export interface Docs {
 }
 
 export default {
-  name: 'zelyjs',
+  name: 'Zely',
   description: 'Build Productive,<br>Convenient, Fast Backend',
   index: [
     {
@@ -98,13 +98,6 @@ export default {
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-sticky-note-line',
         },
-        {
-          title: 'Blog',
-          href: '/blog/',
-          description: 'Our development blog',
-          // https://remixicon.com/icon/book-open-line
-          icon: 'ri-book-open-line',
-        },
       ],
     },
     {
@@ -133,6 +126,13 @@ export default {
           icon: 'ri-book-open-line',
         },
       ],
+    },
+    {
+      title: 'Blog',
+      href: '/blog/',
+      description: 'Our development blog',
+      // https://remixicon.com/icon/book-open-line
+      icon: 'ri-book-open-line',
     },
   ],
 } as Docs;

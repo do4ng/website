@@ -110,6 +110,7 @@ button.popover.btn:focus {
 
   font-size: 1.05rem;
   margin: 30px 0;
+  background-color: var(--bg-200);
 
   p {
     margin: 0;
@@ -144,68 +145,76 @@ button.popover.btn:focus {
 
 .dark {
   .box-info {
-    background-color: #4e4e4e42;
+    border: 1px solid #4e4e4e42;
+    background-color: #4e4e4e28;
 
     code:not([data-language]) {
-      background-color: #4e4e4e42 !important;
+      background-color: #4e4e4e27 !important;
       border-radius: 4px;
     }
   }
   .box-warning {
-    background-color: #7a77464b;
+    border: 1px solid #7a77464b;
+    background-color: #7a774623;
 
     code:not([data-language]) {
-      background-color: #7a77464b !important;
+      background-color: #7a77462a !important;
       border-radius: 4px;
     }
   }
   .box-error {
-    background-color: #8a424242;
+    border: 1px solid #8a424242;
+    background-color: #8a424221;
 
     code:not([data-language]) {
-      background-color: #8a424242 !important;
+      background-color: #8a42421c !important;
       border-radius: 4px;
     }
   }
   .box-tip {
-    background-color: #4d5d924b;
+    border: 1px solid #4d5d924b;
+    background-color: #4d5d922a;
 
     code:not([data-language]) {
-      background-color: #4d5d924b !important;
+      background-color: #4d5d9228 !important;
       border-radius: 4px;
     }
   }
 }
 
 .box-info {
-  background-color: #4e4e4e18;
+  border: 1px solid #4e4e4e18;
+  background-color: #4e4e4e0a;
 
   code:not([data-language]) {
-    background-color: #4e4e4e18 !important;
+    background-color: #4e4e4e0e !important;
     border-radius: 4px;
   }
 }
 .box-warning {
-  background-color: #ada72c25;
+  border: 1px solid #ada72c25;
+  background-color: #ada62c13;
 
   code:not([data-language]) {
-    background-color: #ada72c25 !important;
+    background-color: rgba(173, 166, 44, 0.082) !important;
     border-radius: 4px;
   }
 }
 .box-error {
-  background-color: #bd2e2e21;
+  border: 1px solid #bd2e2e21;
+  background-color: #bd2e2e13;
 
   code:not([data-language]) {
-    background-color: #bd2e2e21 !important;
+    background-color: rgba(189, 46, 46, 0.075) !important;
     border-radius: 4px;
   }
 }
 .box-tip {
-  background-color: #1d4f9b21;
+  border: 1px solid #1d4f9b21;
+  background-color: #1d4f9b13;
 
   code:not([data-language]) {
-    background-color: #1d4f9b21 !important;
+    background-color: #1d4f9b11 !important;
     border-radius: 4px;
   }
 }

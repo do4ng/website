@@ -1,27 +1,33 @@
-'use client';
+/* eslint-disable react/no-unescaped-entities */
 
 import Index from '@/components';
-import docs from '@/docs';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import './style.scss';
+import docs from '@/docs';
 
-export default function Page() {
-  useEffect(() => {
-    document.querySelector('html')?.setAttribute('class', 'dark');
-  });
-
+export default function Product() {
   return (
     <>
-      {' '}
-      <div className="title-container">
+      <div className="product-container">
         <div className="title">
           <h1 dangerouslySetInnerHTML={{ __html: docs.description }}></h1>
           <div className="actions">
-            {docs.index.map((item) => (
-              <Link href={item.href} key={item.href}>
-                <button className="btn text">{item.content}</button>
-              </Link>
-            ))}
+            <Link href="/docs/getting-started">
+              <button className="btn text">Getting Started</button>
+            </Link>
+            <Link href="/docs/why-zely">
+              <button className="btn text">Why Zely</button>
+            </Link>
+          </div>
+        </div>
+        <div className="title-example">
+          <div className="code-example">
+            <div className="code-block-example">
+              <p className="code-line">
+                <span className="code-line-highlight">npx</span> zely-cli init{' '}
+                <span className="code-line-dark">--dir=app --template=typescript</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

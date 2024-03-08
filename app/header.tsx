@@ -12,7 +12,7 @@ export function Header() {
       <header className="header-container text">
         <div className="header">
           <Link className="item-1 logo" href="/">
-            {docs.name}
+            {docs.name} <span className="docs-icon">Docs</span>
           </Link>
 
           <div className="item-2">
