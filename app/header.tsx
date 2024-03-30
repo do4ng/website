@@ -5,6 +5,7 @@ import 'remixicon/fonts/remixicon.css';
 import Link from 'next/link';
 import { Popover } from '@/components/popper';
 import docs from '@/docs';
+import { TextLabel } from '@/components/label';
 
 export function Header() {
   return (
@@ -49,13 +50,15 @@ export function Header() {
           </div>
 
           <div className="item-3">
-            <Link
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/zely-js/zely"
-            >
-              <i className="ri-github-fill"></i>
-            </Link>
+            <TextLabel text="github">
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/zely-js/zely"
+              >
+                <i className="ri-github-fill"></i>
+              </Link>
+            </TextLabel>
           </div>
         </div>
       </header>
