@@ -54,8 +54,8 @@ export const components = {
   h5: (props: any) => <h5 {...props}></h5>,
   h6: (props: any) => <h6 {...props}></h6>,
 
-  div: (props: any) => {
-    if (props['data-rehype-pretty-code-fragment'] === '') {
+  figure: (props: any) => {
+    if (props['data-rehype-pretty-code-figure'] === '') {
       if (props.children[0]?.props['data-rehype-pretty-code-title'] !== '') {
         const lang = props.children.props['data-language'];
         const [copy, setCopy] = useState('copy');
@@ -95,7 +95,10 @@ export const components = {
         );
       }
     }
+    return <div {...props}></div>;
+  },
 
+  figcaption: (props: any) => {
     if (props['data-rehype-pretty-code-title'] === '') {
       const lang = props['data-language'];
       const [copy, setCopy] = useState('copy');
