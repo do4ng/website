@@ -1,0 +1,40 @@
+## ✨ 3.0.0 is here!
+
+After two months of development, 3.0 has finally been released!
+
+<Box type="tip">
+  If you want to move from 2.0 to 3.0, please refer to the [Migration Guide](/docs/migration-2x#migration).
+
+</Box>
+
+### Start 3.0
+
+You can easily download the template by entering the command below.
+
+```bash
+npx zely-cli init --dir=app --template=typescript
+```
+
+<Box type="info">
+  `npm:zely` is a re-exported package of the `@zely-js/zely` and `zely-cli` packages.  
+  You can get the same result whether you import `zely` or `@zely-js/zely` (excluding CLI).
+
+</Box>
+
+The changes are as follows:
+
+- [context](/docs/context)
+- [loader](/plugins/create-loader)
+- `middleware()`
+
+You can add middleware that only works on that page.
+
+```ts
+export default [
+  middleware((ctx) => {
+    /**/
+  }),
+];
+```
+
+- [virtual pages](/apis/virtual-page)

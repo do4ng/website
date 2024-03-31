@@ -5,8 +5,12 @@ export interface Change {
 
 export default [
   {
-    version: '3.0.0-alpha.14',
+    version: '3.0.0',
     target: 'March 31, 2024',
+  },
+  {
+    version: '3.0.0-alpha.14',
+    target: 'March 14, 2024',
   },
   {
     version: '3.0.0-alpha.8',
