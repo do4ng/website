@@ -53,12 +53,20 @@ export function Header() {
           </div>
 
           <div className="item-3">
+            <TextLabel text="What's new?">
+              <Link href="/changelog">
+                <p>
+                  <i className="ri-receipt-line"></i>
+                </p>
+              </Link>
+            </TextLabel>
             <ThemeSelector></ThemeSelector>
             <TextLabel text="github">
               <Link
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/zely-js/zely"
+                className="big-icon"
               >
                 <i className="ri-github-fill"></i>
               </Link>

@@ -40,16 +40,16 @@
     button {
       font-size: 14px;
       margin-right: 10px;
+    }
 
-      i {
-        font-size: 15px;
-      }
+    i {
+      font-size: 15px;
     }
   }
 
   .item-3 {
     display: flex;
-    a {
+    a.big-icon {
       padding-top: 3px;
       display: inline-block;
 
@@ -63,6 +63,14 @@
       font-size: 18px;
       padding-top: 6px;
       margin-right: 15px;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 0;
+      padding-top: 6px;
+      margin-right: 15px;
+      font-size: 18px;
       cursor: pointer;
     }
   }

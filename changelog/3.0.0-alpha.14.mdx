@@ -1,0 +1,22 @@
+## Almost there: 3.0.0-alpha.14
+
+`3.0.0` is almost complete.
+
+- `middleware` handler
+
+<Box type="info">
+```ts
+import { ALL, middleware } from '@zely-js/core';
+
+export default [
+  ALL((ctx) => {
+    return ctx.params.number + 5;
+  }),
+  middleware((ctx) => {
+    ctx.params.number = 10;
+  }),
+];
+```
+</Box>
+
+- production mode
