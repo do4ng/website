@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import NextTopLoader from 'nextjs-toploader';
 
 import '@/styles/global.scss';
-import { ThemeSelector } from '@/components/theme-selector';
 import config from '@/config';
 import './style.scss';
 import './[category]/[slug]/post.scss';
@@ -46,7 +45,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <NextTopLoader showSpinner={false} height={2} color="#9934eb" />
+        <NextTopLoader showSpinner={false} height={2} color="#e25a61a0" />
         <script src="/theme.js" async></script>
         <div className="app">
           <Header></Header>
@@ -67,10 +66,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     ) : (
                       <>page not found</>
                     )}
-                  </div>
-                  <div className="menu-bottom">
-                    <i className="ri-sun-line"></i>
-                    <ThemeSelector></ThemeSelector>
                   </div>
                 </div>
                 <div className="content">{children}</div>

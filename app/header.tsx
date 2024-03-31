@@ -1,11 +1,14 @@
 'use client';
 
+/* eslint-disable import/no-cycle */
+
 import 'remixicon/fonts/remixicon.css';
 
 import Link from 'next/link';
 import { Popover } from '@/components/popper';
 import docs from '@/docs';
 import { TextLabel } from '@/components/label';
+import { ThemeSelector } from '@/components/theme-selector';
 
 export function Header() {
   return (
@@ -50,6 +53,7 @@ export function Header() {
           </div>
 
           <div className="item-3">
+            <ThemeSelector></ThemeSelector>
             <TextLabel text="github">
               <Link
                 target="_blank"

@@ -113,8 +113,9 @@ export const TableOfContents = () => {
       <Headings headings={nestedHeadings} activeId={activeId} />
       <div className="table-actions">
         <div>
-          <i className="ri-github-fill"></i>
-
+          <span>
+            <i className="ri-github-fill"></i>
+          </span>
           <a
             className="no-a"
             href="https://github.com/zely-js/zely"
