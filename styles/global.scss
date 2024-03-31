@@ -85,3 +85,14 @@ select {
   border: 1px solid var(--bg-300);
   outline: none;
 }
+
+button.a {
+  color: var(--primary-100);
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  padding-top: 10px;
+}
+button.a:hover {
+  text-decoration: underline;
+}

@@ -7,7 +7,7 @@ import '../[category]/[slug]/style.scss';
 
 import config from '@/changelog';
 import { compileMdx } from '@/mdx/compile';
-import { Content } from '@/mdx/content';
+import { ChangelogPost } from './post';
 
 export default async function Page() {
   let raw: string[] = [];
@@ -42,10 +42,7 @@ export default async function Page() {
           <>
             <div className="changelog">
               <div className="changelog-date">{config[index].target}</div>
-
-              <div className="post">
-                <Content content={changelog}></Content>
-              </div>
+              <ChangelogPost content={changelog} closed={index !== 0} />
             </div>
           </>
         ))}
