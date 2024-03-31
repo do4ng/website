@@ -61,6 +61,12 @@ button.popover.btn:focus {
     #091e421a 0px 0px 1px 1px;
 }
 
+.dark .text-label-menu {
+  box-shadow:
+    #545c6925 0px 1px 1px,
+    #5b64721a 0px 0px 1px 1px !important;
+}
+
 .text-label-menu[data-show='true'] {
   visibility: visible;
   opacity: 1;
@@ -253,9 +259,15 @@ pre::-webkit-scrollbar {
 
 pre::-webkit-scrollbar-thumb {
   height: 30%;
-  background: #525a7ebe;
+  background: #ccccccbe;
 
   border-radius: 10px;
+}
+
+.dark {
+  pre::-webkit-scrollbar-thumb {
+    background: #525a7ebe;
+  }
 }
 
 pre::-webkit-scrollbar-track {
