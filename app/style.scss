@@ -72,9 +72,35 @@
       margin-right: 15px;
       font-size: 18px;
       cursor: pointer;
+
+      animation: shake 5s;
+
+      animation-iteration-count: infinite;
+
+      i {
+        color: var(--primary-100);
+      }
     }
   }
 }
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(18deg);
+  }
+  20% {
+    transform: rotate(0eg);
+  }
+  30% {
+    transform: rotate(-18deg);
+  }
+  40% {
+    transform: rotate(0deg);
+  }
+}
+
 i {
   vertical-align: top;
 }
