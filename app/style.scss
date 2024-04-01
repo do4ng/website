@@ -73,7 +73,7 @@
       font-size: 18px;
       cursor: pointer;
 
-      animation: shake 5s;
+      animation: shake 4s;
 
       animation-iteration-count: infinite;
 
@@ -87,16 +87,16 @@
   0% {
     transform: rotate(0deg);
   }
-  10% {
+  15% {
     transform: rotate(18deg);
   }
-  20% {
+  30% {
     transform: rotate(0eg);
   }
-  30% {
+  45% {
     transform: rotate(-18deg);
   }
-  40% {
+  60% {
     transform: rotate(0deg);
   }
 }
