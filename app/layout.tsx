@@ -4,9 +4,11 @@
 
 import { usePathname } from 'next/navigation';
 import NextTopLoader from 'nextjs-toploader';
+import Link from 'next/link';
 
 import '@/styles/global.scss';
 import config from '@/config';
+import { capitalizeFirstLetter } from '@/lib/up';
 import './style.scss';
 import './[category]/[slug]/post.scss';
 import './[category]/[slug]/style.scss';
@@ -34,7 +36,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   */
 
   const path = usePathname().split('/')[1];
-  const isDocs = path === 'docs' || path === 'plugins' || path === 'apis';
+  const isDocs =
+    path === 'docs' || path === 'plugins' || path === 'apis' || path === 'guide';
 
   if (typeof window !== 'undefined') {
     toggleTheme((localStorage.getItem('theme') as any) || 'dark');
@@ -55,17 +58,40 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="documentation">
                 <div className="menu">
                   <div className="menu-layout">
-                    {target ? (
-                      target.category.map((category) => (
-                        <CategoryMenu
-                          hidden={category.hidden || false}
-                          category={category as any}
-                          key={category.name}
-                        ></CategoryMenu>
-                      ))
-                    ) : (
-                      <>page not found</>
-                    )}
+                    <div className="menu-categories">
+                      {config.map((c) => (
+                        <div
+                          key={c.title}
+                          className={`category-button ${
+                            path.toLocaleLowerCase() === c.title.toLocaleLowerCase()
+                              ? 'category-active'
+                              : ''
+                          }`}
+                        >
+                          <Link href={`/${c.title.toLocaleLowerCase()}/${c.target}`}>
+                            <div className="category-button-icon">
+                              <i className={`ri-${c.icon}`}></i>
+                            </div>
+                            <div className="category-button-text">
+                              <h4>{capitalizeFirstLetter(c.title)}</h4>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="menu-content">
+                      {target ? (
+                        target.category.map((category) => (
+                          <CategoryMenu
+                            hidden={category.hidden || false}
+                            category={category as any}
+                            key={category.name}
+                          ></CategoryMenu>
+                        ))
+                      ) : (
+                        <>page not found</>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="content">{children}</div>

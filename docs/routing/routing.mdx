@@ -9,23 +9,31 @@ zely.js automatically generates routes based on your file tree of pages.
 | `/user/[id]/about.ts` | `/user/:id/about` |
 | `/foo/[...bar]`       | `/foo/:bar*`      |
 
-## Method
+---
 
-Exports functions corresponding `get`, `post`, `delete` etc (http verbs)
+For example, if there is a `pages/hello/[id].ts` file like below:
 
-```ts
-// get
-export function get(ctx) {}
-// post
-export function post(ctx) {}
-// etc...
+```ts title="pages/hello/[id].ts"
+import { GET } from 'zely';
+
+export default [
+  GET((ctx) => {
+    ctx.send({ message: `Hello ${ctx.params.id}` });
+  }),
+];
 ```
 
-> Note: see [context guide](/docs/context)
+And then...
 
-## Export default
+<Badge type="tip">GET</Badge> `/hello/world`
 
-You can write simpler code that outputs the same result using `export default`.
+The response will be:
+
+```json
+{ "message": "Hello world" }
+```
+
+## Method
 
 If you export an array containing handlers by default,
 the page is automatically displayed according to the request method.
@@ -41,10 +49,26 @@ export default [
   POST(ctx => ({
     id: ctx.params.id;
   })),
-] satisfies PageHandler[];
+]
 ```
 
 > See [handler documentation](/docs/methods).
+
+---
+
+You can use another method:
+
+Exports functions corresponding `get`, `post`, `delete` etc (http verbs)
+
+```ts
+// get
+export function get(ctx) {}
+// post
+export function post(ctx) {}
+// etc...
+```
+
+> Note: see [context guide](/docs/context)
 
 ## Route Parameters
 

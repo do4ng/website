@@ -19,7 +19,9 @@
   display: flex;
 
   .menu {
-    width: 240px;
+    width: 260px;
+    height: 100%;
+    overflow: auto;
     border-right: 1px solid var(--bg-200-light);
 
     .menu-layout {
@@ -36,9 +38,9 @@
       }
 
       h4 {
-        margin-top: 8px;
+        margin-top: 12px;
         margin-bottom: 4px;
-        font-size: 13px;
+        font-size: 14px;
         width: 100%;
         color: var(--text-200);
         display: flex;
@@ -81,7 +83,7 @@
           font-size: 13px;
           border-radius: 3px;
           font-weight: 500;
-          color: var(--text-300);
+          color: var(--text-400);
         }
 
         a:hover {

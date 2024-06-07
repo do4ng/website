@@ -276,3 +276,15 @@ pre::-webkit-scrollbar-track {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 10px;
+  padding: 0.25rem 0.65rem;
+  margin: 0 5px;
+}

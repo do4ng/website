@@ -15,6 +15,7 @@ const langsIcons = {
   bash: 'terminal-box-line',
   sh: 'terminal-box-line',
   md: 'markdown-line',
+  json: 'braces-line',
 };
 
 const langs = {
@@ -29,6 +30,7 @@ const langs = {
   sh: 'Terminal',
   rs: 'Rust',
   md: 'Markdown',
+  json: 'JSON',
 };
 
 export const components = {
@@ -145,15 +147,17 @@ export const components = {
     </>
   ),
 
-  Box: (props: any) => {
-    console.log(props.children);
+  // custom components
 
-    return (
-      <div className={`box box-${props.type || 'info'}`}>
-        <p className="box-title">{(props.type || 'info').toUpperCase()}</p>
+  Box: (props: any) => (
+    <div className={`box box-${props.type || 'info'}`}>
+      <p className="box-title">{(props.type || 'info').toUpperCase()}</p>
 
-        {props.children}
-      </div>
-    );
-  },
+      {props.children}
+    </div>
+  ),
+
+  Badge: (props: any) => (
+    <span className={`badge box-${props.type || 'info'}`}>{props.children}</span>
+  ),
 };

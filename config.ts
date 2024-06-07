@@ -8,13 +8,17 @@ export interface Category {
 
 export interface Config {
   title: string;
+  icon?: string;
   category: Category[];
   directory?: string;
+  target: string;
 }
 
 export default [
   {
     title: 'docs',
+    icon: 'book-open-line',
+    target: 'overview',
     category: [
       {
         name: 'Overview',
@@ -25,6 +29,10 @@ export default [
           { config: 'Config References' },
           { v3: 'v3.0' },
         ],
+      },
+      {
+        name: 'Structure',
+        posts: [{ structure: 'Structure' }, { cache: 'Cache' }],
       },
       {
         name: 'Routing',
@@ -66,7 +74,27 @@ export default [
   },
 
   {
+    title: 'guide',
+    target: 'overview',
+
+    icon: 'puzzle-line',
+    category: [
+      {
+        name: 'Overview',
+        posts: [{ overview: 'Overview' }, { 'create-app': 'Create App' }],
+      },
+      {
+        name: 'Examples',
+        posts: [{ examples: 'Examples' }, { 'hello-world': 'Hello, World!' }],
+      },
+    ],
+  },
+
+  {
     title: 'apis',
+    target: 'javascript-api',
+
+    icon: 'route-line',
     category: [
       {
         name: 'CLI',
@@ -100,6 +128,9 @@ export default [
 
   {
     title: 'plugins',
+    target: 'overview',
+
+    icon: 'puzzle-line',
     category: [
       {
         name: 'Overview',
