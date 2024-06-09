@@ -77,7 +77,7 @@ export default [
     title: 'guide',
     target: 'overview',
 
-    icon: 'puzzle-line',
+    icon: 'folder-line',
     category: [
       {
         name: 'Overview',

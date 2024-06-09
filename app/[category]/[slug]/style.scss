@@ -17,6 +17,23 @@
 .documentation {
   height: calc(100% - 92px);
   display: flex;
+  --dot-bg: var(--bg-100);
+  --dot-color: var(--bg-200-light);
+  --dot-size: 2px;
+  --dot-space: 22px;
+  background:
+    linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
 
   .menu {
     width: 260px;
@@ -59,6 +76,8 @@
 
         button.active {
           color: var(--primary-100);
+          background-color: var(--primary-100-50) !important;
+          font-weight: 700;
         }
 
         i {
@@ -93,6 +112,8 @@
 
         a.active {
           color: var(--primary-100);
+          background-color: var(--primary-100-50) !important;
+          font-weight: 600;
         }
         div:has(.active) {
           border-left: 1px solid var(--primary-100);
