@@ -5,6 +5,10 @@ export interface Post {
 
 export default [
   {
+    title: 'Future of zely',
+    date: '24-06-13',
+  },
+  {
     title: 'Introducing 3.0!',
     date: '24-02-27',
   },
