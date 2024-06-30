@@ -26,7 +26,7 @@ export interface Docs {
 
 export default {
   name: 'Zely',
-  description: 'Build Productive,<br>Convenient, Fast Backend',
+  description: 'Build <span class="gra">Productive,<br>Convenient, Fast</span> Backend',
   index: [
     {
       content: 'Getting Started',

@@ -1,7 +1,10 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable react-hooks/rules-of-hooks */
+
 'use client';
 
 import Link from 'next/link';
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useRef } from 'react';
 
 const langsIcons = {
@@ -159,5 +162,40 @@ export const components = {
 
   Badge: (props: any) => (
     <span className={`badge box-${props.type || 'info'}`}>{props.children}</span>
+  ),
+
+  Tabs: (props: any) => {
+    props = { ...props };
+    const tabs = props.children?.map((child) => child?.props?.id);
+
+    const [active, setActive] = useState(tabs[0]);
+
+    return (
+      <>
+        <div className="tabs">
+          <div className="tab-id">
+            {tabs?.map((tab) => (
+              <button
+                key={tab}
+                className={`tab-item text-inter ${active === tab ? 'active' : ''}`}
+                onClick={() => setActive(tab)}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          <div className="tab-contents">
+            {props.children?.map((child) =>
+              child?.props?.id === active ? child.props?.children : null,
+            )}
+          </div>
+        </div>
+      </>
+    );
+  },
+  TabItem: (props: any) => (
+    <>
+      <div className="tab-content" {...props}></div>
+    </>
   ),
 };

@@ -32,6 +32,9 @@ div[data-rehype-pretty-code-title] {
   border-radius: 8px 8px 0 0;
   background-color: #f8f8f8;
   color: #424242;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.875em;
 
   font-size: 11px;
   padding: 7px 20px 5px 20px;
@@ -51,25 +54,23 @@ div[data-rehype-pretty-code-title] {
     background-color: inherit;
     border: none;
     color: #7d7f8f;
+    transition: all 0.2s ease 0s;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+      'Liberation Mono', 'Courier New', monospace;
 
     i {
       font-size: 1rem;
     }
   }
   button:hover {
-    border-radius: 5px;
-    background-color: #dfdfdf;
+    cursor: pointer;
   }
 }
 
 .dark div[data-rehype-pretty-code-title] {
-  background-color: #272d41;
+  background-color: var(--bg-200);
   color: #7d7f8f;
   border-bottom: 1px solid #383d52;
-
-  button:hover {
-    background-color: #252938;
-  }
 }
 
 .code-block {
@@ -80,8 +81,6 @@ div[data-rehype-pretty-code-title] {
   line-height: 1.15rem;
 
   pre {
-    background-color: #f8f8f8;
-
     margin: 0;
     padding: 0.85em 1.05rem;
     overflow: auto;
@@ -91,9 +90,6 @@ div[data-rehype-pretty-code-title] {
   code {
     counter-reset: line;
     line-height: 1.5;
-    span[data-highlighted-line] {
-      background-color: #e6e5e5a9;
-    }
   }
 
   code > [data-line]::before {
@@ -114,14 +110,14 @@ div[data-rehype-pretty-code-title] {
   }
 }
 
-.dark .code-block {
+.code-block {
   pre {
-    background-color: #292d3e;
+    background-color: var(--bg-200);
   }
 
   code {
     span[data-highlighted-line] {
-      background-color: #202431;
+      background-color: var(--bg-100);
     }
   }
 }

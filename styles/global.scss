@@ -96,3 +96,10 @@ button.a {
 button.a:hover {
   text-decoration: underline;
 }
+.gra {
+  background: -webkit-linear-gradient(315deg, #427cd3 25%, #b964ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}

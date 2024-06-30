@@ -7,8 +7,14 @@ import { scrollTop } from './scrolltop';
 
 export default function scrollToTop() {
   useEffect(() => {
-    console.log('scroll top');
-    scrollTop();
+    if (window.location.hash !== '') {
+      document
+        .querySelector('.content')
+        .querySelector(`[id="${window.location.hash.slice(1)}"]`)
+        ?.scrollIntoView();
+    } else {
+      scrollTop();
+    }
   }, []);
   return null;
 }

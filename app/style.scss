@@ -280,3 +280,29 @@ i {
     background-color: var(--bg-200);
   }
 }
+
+.info-v3 {
+  --dot-bg: var(--bg-100);
+  --dot-color: var(--bg-200);
+  --dot-size: 3px;
+  --dot-space: 22px;
+  background:
+    linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+
+  .info-v3-content {
+    width: 55%;
+    margin: 50px auto;
+    padding-bottom: 50px;
+  }
+}

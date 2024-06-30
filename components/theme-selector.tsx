@@ -10,8 +10,10 @@ export function ThemeSelector() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      console.log(localStorage.getItem('theme') as any);
-      setDefaultValue((localStorage.getItem('theme') as any) || 'dark');
+      const theme = (localStorage.getItem('theme') as any) || 'dark';
+      setDefaultValue(theme);
+
+      console.log(`[app] theme selected: ${theme}`);
     }
   }, []);
 
@@ -20,7 +22,6 @@ export function ThemeSelector() {
       <TextLabel text="Toggle Theme">
         <button
           onClick={() => {
-            console.log(defaultValue);
             if (defaultValue === 'dark') {
               toggleTheme('white');
               localStorage.setItem('theme', 'white');

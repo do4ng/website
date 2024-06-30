@@ -288,3 +288,40 @@ pre::-webkit-scrollbar-track {
   padding: 0.25rem 0.65rem;
   margin: 0 5px;
 }
+.tabs {
+  .tab-id {
+    display: flex;
+    background-color: var(--bg-200);
+    padding: 0px 10px;
+    border-radius: 8px 8px 0 0;
+
+    button {
+      display: flex;
+      border: none;
+      outline: none;
+      background: none;
+      cursor: pointer;
+      padding: 10px 15px;
+
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-100);
+      transition: all 0.2s ease 0s;
+      border-bottom: 1px solid var(--bg-200);
+    }
+
+    button.active {
+      border-bottom: 1px solid var(--primary-100-dark);
+      color: var(--primary-100-dark);
+    }
+  }
+
+  .tab-contents {
+    div[data-rehype-pretty-code-fragment] {
+      margin-top: 0px;
+    }
+    div[data-rehype-pretty-code-title] {
+      display: none;
+    }
+  }
+}
