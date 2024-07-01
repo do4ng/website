@@ -1,0 +1,13 @@
+## 3.0.1
+
+- [zely-dev](/docs/devtools)
+- prewrite headers
+
+```ts
+usePrewrite(ctx.response, (data) => {
+  return {
+    headers: {},
+    content: `Hello, ${data}!`,
+  };
+});
+```

@@ -31,10 +31,6 @@ export default [
         ],
       },
       {
-        name: 'Structure',
-        posts: [{ structure: 'Structure' }, { cache: 'Cache' }],
-      },
-      {
         name: 'Routing',
         posts: [
           { routing: 'Routing' },
@@ -57,6 +53,10 @@ export default [
         posts: [{ middleware: 'Middleware' }, { auto: 'Auto Importing' }],
       },
 
+      {
+        name: 'Devtools',
+        posts: [{ devtools: 'Devtools' }, { 'setup-devtools': 'Setup Devtools' }],
+      },
       {
         name: 'Migration',
         hidden: true,
@@ -109,6 +109,10 @@ export default [
           { 'create-server': 'Create Server' },
           { 'virtual-page': 'Virtual Pages' },
         ],
+      },
+      {
+        name: 'Structure',
+        posts: [{ structure: 'Structure' }, { cache: 'Cache' }],
       },
       {
         name: 'Packages',

@@ -1,0 +1,33 @@
+You can use the devtool right away by installing the `zely-dev` package and registering the plugin in `zely.config.ts`.
+
+<Box type="warning">
+  When devtool is enabled, data from the server cannot be properly fetched using normal
+  `fetch`.
+</Box>
+
+<Tabs>
+<TabItem id="zely.config.ts">
+
+```ts
+import { defineConfig } from '@zely-js/zely';
+import { devtool } from 'zely-dev';
+
+export default defineConfig({
+  plugins: [devtool()],
+});
+```
+
+</TabItem>
+<TabItem id="zely.config.js">
+
+```js
+const { defineConfig } = require('zely');
+const { devtool } = require('zely-dev');
+
+module.exports = defineConfig({
+  plugins: [devtool()],
+});
+```
+
+</TabItem>
+</Tabs>
