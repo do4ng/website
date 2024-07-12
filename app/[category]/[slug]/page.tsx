@@ -98,12 +98,38 @@ export default async function Page({
     title: Object.values(posts[postIndex + 1] || {})[0],
   };
 
+  const postName: string = Object.values(target as any)[0] as any;
+
+  const directory = [params.category, (targetcategory || '').toLowerCase()];
+
+  if (directory[1] !== postName.toLowerCase()) {
+    directory.push(postName);
+  }
+
   return (
     <>
       <ScrollTop></ScrollTop>
       <title>{`${Object.values(target as any)[0]} - zely`}</title>
       <div className="content-flex">
         <div className="post">
+          <div className="directory">
+            {directory
+              .map((dir) => (
+                <>
+                  <div className="directory-path">{dir}</div>
+                </>
+              ))
+              .reduce(
+                (prev, curr) =>
+                  [
+                    prev,
+                    <>
+                      <i className="ri-arrow-right-s-line"></i>
+                    </>,
+                    curr,
+                  ] as any,
+              )}
+          </div>
           <div className="intro">
             <h1>{Object.values(target as any)[0] as string}</h1>
           </div>

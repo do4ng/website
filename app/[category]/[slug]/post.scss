@@ -325,3 +325,23 @@ code[data-theme*=' '] span {
     color: var(--shiki-dark);
   }
 }
+
+.directory {
+  display: flex;
+
+  i {
+    color: var(--text-400);
+    font-size: 0.95rem;
+    padding-top: 3px;
+  }
+  .directory-path {
+    color: var(--text-300);
+    font-size: 1.05rem;
+    padding: 0px 2px;
+  }
+
+  .directory-path:last-child {
+    font-weight: bold;
+    color: var(--text-100);
+  }
+}

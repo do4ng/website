@@ -107,12 +107,11 @@
 
         a:hover {
           color: var(--primary-100);
-          background-color: var(--primary-100-50) !important;
+          background-color: inherit !important;
         }
 
         a.active {
           color: var(--primary-100);
-          background-color: var(--primary-100-50) !important;
           font-weight: 600;
         }
         div:has(.active) {
