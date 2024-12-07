@@ -14,7 +14,7 @@
 
 .header-container {
   width: 100%;
-  height: 62px;
+  height: 52px;
   align-items: center;
   border-bottom: 1px solid var(--bg-300);
 
@@ -23,7 +23,7 @@
     height: 30px;
 
     margin: 0 auto;
-    padding-top: 15px;
+    padding-top: 11px;
     display: flex;
   }
 
@@ -33,7 +33,8 @@
   }
 
   .item-2 {
-    margin-left: 35px;
+    margin-left: 40px;
+
     display: flex;
 
     a,
@@ -118,15 +119,24 @@ i {
   padding: 100px 0;
   margin: 0 auto;
 
-  h1 {
-    font-size: 35px;
+  text-align: center;
 
-    .grad {
-      background: -webkit-linear-gradient(315deg, #427cd3 25%, #b964ff);
+  h1 {
+    font-size: 38px;
+    font-weight: 700;
+
+    .gra {
+      background: -webkit-linear-gradient(
+        315deg,
+        #427cd3 25%,
+        #256ca7 50%,
+        #b964ff 74%,
+        #ec63af
+      );
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 700;
+      font-weight: 800;
     }
   }
 }
@@ -136,6 +146,10 @@ i {
     background-color: var(--bg-200) !important;
     padding: 10px 20px !important;
     margin-right: 10px;
+
+    box-shadow:
+      var(--bg-300) 0px 1px 3px 0px,
+      var(--bg-300) 0px 1px 2px 0px;
   }
 }
 
@@ -161,12 +175,16 @@ i {
   margin-left: 2px;
 }
 
+.code-example {
+  width: 390px;
+  margin: 25px auto;
+  margin-bottom: 50px;
+}
 .title-example {
-  margin-top: 150px;
-  margin-right: 50px;
+  margin: 0 auto;
   .code-block-example {
-    padding: 10px;
     border-radius: 5px;
+    padding: 10px;
     width: 390px;
     text-align: center;
 
@@ -212,7 +230,6 @@ i {
 }
 
 .product-container {
-  display: flex;
   justify-content: center;
   width: 100%;
   background-image: url('/bg.svg');
@@ -220,8 +237,7 @@ i {
   background-size: cover;
 
   .title {
-    width: 500px;
-    margin: 0;
+    margin: 0 auto;
   }
 }
 
@@ -302,7 +318,13 @@ i {
 
   .info-v3-content {
     width: 55%;
+    max-width: 910px;
     margin: 50px auto;
     padding-bottom: 50px;
+
+    .post {
+      width: 100% !important;
+      max-width: none;
+    }
   }
 }

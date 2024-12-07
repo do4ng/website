@@ -1,0 +1,64 @@
+4.0 is **100% compatible** with 3.0!
+
+Just edit a few things for magic.
+
+## ctx.send
+
+<Tabs>
+  <TabItem id="After (4.0)">
+    
+    ```ts
+    export default "Hello World!"; // or
+    export default [ALL("Hello World!")];
+    ```
+
+  </TabItem>
+  <TabItem id="Before (3.0)">
+    
+    ```ts
+    export default [ALL((ctx) => ctx.send('Hello World!'))];
+    ```
+
+  </TabItem>
+</Tabs>
+
+A method to improve readability has been added.
+
+Now, instead of `ctx.send`,
+just enter the value you want to send.
+
+## HTML
+
+No more `ctx.html` like this:
+
+```ts
+export default [ALL((ctx) => ctx.html('<h1>Hello World!</h1>'))];
+```
+
+Just enable `experimental.useHTML`,
+
+```ts {4-6}
+import { defineConfig } from 'zely';
+
+export default defineConfig({
+  experimental: {
+    useHTML: true,
+  },
+});
+```
+
+<Box type="warning">This `useHTML` is an experimental feature.</Box>
+
+and write `.html` file.
+
+```html
+<h1>Hello World!</h1>
+```
+
+### State
+
+You can also create cool counters that are not possible in plain HTML, as shown below:
+
+```html
+
+```

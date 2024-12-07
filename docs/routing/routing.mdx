@@ -9,72 +9,28 @@ zely.js automatically generates routes based on your file tree of pages.
 | `/user/[id]/about.ts` | `/user/:id/about` |
 | `/foo/[...bar]`       | `/foo/:bar*`      |
 
----
-
-For example, if there is a `pages/hello/[id].ts` file like below:
-
-```ts title="pages/hello/[id].ts"
-import { GET } from 'zely';
-
-export default [
-  GET((ctx) => {
-    ctx.send({ message: `Hello ${ctx.params.id}` });
-  }),
-];
-```
-
-And then...
-
-<Badge type="tip">GET</Badge> `/hello/world`
-
-The response will be:
-
-```json
-{ "message": "Hello world" }
-```
-
-## Method
-
-If you export an array containing handlers by default,
-the page is automatically displayed according to the request method.
-
-```ts [title="export default"]
-import { GET, POST } from 'zely';
-import type { PageHandler } from 'zely';
-
-export default [
-  // simple usage
-  GET({ foo: 'bar' }),
-  // access to req and res
-  POST(ctx => ({
-    id: ctx.params.id;
-  })),
-]
-```
-
-> See [handler documentation](/docs/methods).
-
----
-
-You can use another method:
-
-Exports functions corresponding `get`, `post`, `delete` etc (http verbs)
-
-```ts
-// get
-export function get(ctx) {}
-// post
-export function post(ctx) {}
-// etc...
-```
-
-> Note: see [context guide](/docs/context)
-
 ## Route Parameters
 
 You can access the current page parameters by `ctx.params`.
 
-```ts [title="pages/user/[id].ts"]
+<Tabs>
+<TabItem id="/user/[id].ts">
+
+```ts
+// pages/user/[id].ts
+import type { Context } from 'zely';
+
+export function get(ctx: Context) {
+  ctx.send({ id: ctx.params.id });
+}
+```
+
+</TabItem>
+ 
+ <TabItem id="/list/[...id].ts">
+
+```ts
+// pages/list/[...id].ts
 import type { Context } from 'zely';
 
 export function get(ctx: Context) {
@@ -82,24 +38,5 @@ export function get(ctx: Context) {
 }
 ```
 
-## 404 page
-
-Handle access to non-existent pages with `_404` pages.
-
-```ts [title="pages/_404.ts"]
-export default (ctx) => {
-  ctx.status(404).send({ message: 'Page Not Found!', code: 404 });
-};
-```
-
-## request and response
-
-Zely Server is based on `node:http` module.
-
-### request
-
-> reference: [http.req](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/#request-body)
-
-### response
-
-> reference: [http.res](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/#http-status-code)
+</TabItem>
+</Tabs>

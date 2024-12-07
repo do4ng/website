@@ -38,6 +38,25 @@ export default defineConfig({
 });
 ```
 
+## Page Middleware
+
+You can create middleware that only works on a specific page.
+
+<Box type="error">`next()` cannot be used in this page middleware</Box>
+
+```ts
+import { middleware } from 'zely';
+
+export default [
+  middleware((ctx) => {
+    ctx.num = 10;
+  }),
+  GET((ctx) => {
+    return { number: ctx.num };
+  }),
+];
+```
+
 ## Auto Mode
 
 See [next page](/docs/auto).

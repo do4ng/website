@@ -1,0 +1,48 @@
+I decided to develop 4.0 to reenergize zely's development.
+
+zely(v3) has focused too much on the backend, but it failed to achieve the goal of creating the fastest backend framework.  
+So after 3.0 was completed, Zely was left for a few months.
+
+Now, I'm going to develop 4.0 to rekindle my interest in developing as a side project
+
+## Plan
+
+> see also [https://github.com/zely-js/zely/issues/405](https://github.com/zely-js/zely/issues/405)
+
+### improve export-default
+
+```ts
+export default { message: 'Hello' };
+```
+
+As above, there is a code that exports data by default without setting a handler
+
+This code will work just like the code below.
+
+```ts
+export default [ALL((ctx) => ctx.send({ message: 'Hello' }))];
+```
+
+At first glance, the code has improved readability, and it's much simpler
+
+### improve performance
+
+The goal of creating the fastest backend framework has not been abandoned yet.  
+I will continue to improve the performance of zely.
+
+### support .html
+
+Not long ago, I made [a package](https://segify.vercel.app) as a side project.  
+I will utilize this project and update zely to make it easier to create a frontend page using the `.html` extension
+
+> Note: This will only work if you enable the option separately. Normally, it will just send html through `sendFile`.
+
+### integrating multiple packages
+
+Currently, Zely is divided into several packages. Questions arise as to whether this division is necessary
+
+> when zely app created via `npx zely-cli init` and packages downloaded
+
+### createFrontendPage
+
+`createFrontendPage` is a function that will be used for all the functions related to the frontend mentioned earlier

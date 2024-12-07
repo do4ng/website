@@ -60,9 +60,7 @@ export function CategoryMenu({
         <button
           className="no-btn"
           onClick={() => {
-            if (targetcategory !== category.name) {
-              setHide(!hide);
-            }
+            setHide(!hide);
           }}
         >
           <i className="ri-arrow-down-s-line"></i>

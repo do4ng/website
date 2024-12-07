@@ -50,11 +50,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <title>{`${target.title} - zely`}</title>
 
       <div className="blog">
-        <div className="intro">
-          <h1>{target.title}</h1>
-          <span>do4ng - {target.date}</span>
-        </div>
         <div className="content-container post">
+          <div className="intro">
+            <h1>{target.title}</h1>
+            <span>do4ng - {target.date}</span>
+          </div>
           <Content content={compiled}></Content>
         </div>
       </div>

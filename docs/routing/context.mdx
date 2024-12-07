@@ -10,18 +10,20 @@ export default [(ctx) => {}];
 
 ## `context.`
 
-- `context.status` - `res.status`
-- `context.headers` - set headers
-- `context.body` - `res.body`
-- `context.params` - `res.params`
-- `context.query` - `res.query`
-- `context.props` - `res.props` - static props
-
-- `context.send()`
-- `context.header()`
-- `context.html()`
-- `context.json()`
-- `context.text()`
+| Property/Method    | Description                | Same              |
+| ------------------ | -------------------------- | ----------------- |
+| `context.status`   | Set HTTP status code       | `res.status`      |
+| `context.headers`  | Set HTTP headers           | `res.headers`     |
+| `context.body`     | Access response body       | `res.body`        |
+| `context.params`   | Route parameters           | `res.params`      |
+| `context.query`    | Query string parameters    | `res.query`       |
+| `context.props`    | Static props for rendering | `res.props`       |
+| **Methods**        |                            |                   |
+| `context.send()`   | Send a response            | `res.end()`       |
+| `context.header()` | Set a specific header      | `res.setHeader()` |
+| `context.html()`   | Send an HTML response      | Custom logic      |
+| `context.json()`   | Send a JSON response       | `res.json()`      |
+| `context.text()`   | Send a plain text response | `res.text()`      |
 
 ## Request and response
 

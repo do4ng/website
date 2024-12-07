@@ -1,0 +1,43 @@
+Zely provides two ways to define route handlers:
+
+1. [**Array Handlers**](#array-handlers) _(recommended)_
+2. [**Named Handlers**](#named-handlers)
+
+Each has its unique strengths and use cases, allowing for flexible configuration.
+
+## Array Handlers
+
+Array Handlers group multiple HTTP method handlers together in an array.  
+This makes them ideal for managing routes with multiple methods in a centralized and clear manner.
+
+```ts
+import { GET, POST } from 'zely';
+
+export default [
+  GET({
+    type: 'cat',
+    emoji: '🐱',
+  }),
+  POST({
+    type: 'dog',
+    emoji: '🐶',
+  }),
+];
+```
+
+## Named Handlers
+
+Object Handlers define methods directly as named exports, such as `export function get()`.  
+This method is straightforward for single-method routes or when you want to keep routes modular.
+
+```ts
+import { Context } from 'zely';
+
+export function get(ctx: Context) {
+  return { type: 'cat', emoji: '🐱' };
+}
+
+export function post(ctx: Context) {
+  return { type: 'dog', emoji: '🐶' };
+}
+```

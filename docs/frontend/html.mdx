@@ -1,0 +1,33 @@
+It is HTML loader, but **enhanced** HTML loader to be precise.
+
+To use HTML loader, enable `experimental.useHTML`.
+
+```ts [title="zely.config.ts"]
+import { defineConfig } from 'zely';
+
+export default defineConfig({
+  experimental: {
+    useHTML: true,
+  },
+});
+```
+
+It uses own compiler(named [segify](https://github.com/do4ng/segify)),
+so if you want to learn more about this feature it will be helpful to read [documentation](https://segify.vercel.app).
+
+## Simple Counter
+
+```html [title="pages/[params]/index.html"]
+<script>
+  $.count = 0;
+
+  function increment() {
+    $.count += 1;
+  }
+</script>
+
+<div>
+  <h1>Count: {{ $.count }}</h1>
+  <button $onclick="increment">Add</button>
+</div>
+```

@@ -13,10 +13,28 @@ export const $page = {};
 A function that is run before/after processing request.
 
 ```ts
+import { Context } from 'zely';
+
+export function get(ctx: Context) {
+  console.log('Doing something');
+
+  return {};
+}
+
 export const $page = {
   before(ctx) {
-  }
+    console.log('Hello');
+  },
   after(ctx) {
-  }
-}
+    console.log('Bye');
+  },
+};
+```
+
+Console will print:
+
+```txt
+Hello
+Doing something
+Bye
 ```

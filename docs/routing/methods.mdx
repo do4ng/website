@@ -1,26 +1,13 @@
-Creating a page that prints `hello world` requires us to write more code than expected.
+## HTTP Methods
 
-```ts
-export function get(req, res) {
-  res.end('Hello, World!');
-}
-```
+By default, exporting a handler without specifying an HTTP method allows it to respond to all methods. However, to handle specific methods like GET, you can define them explicitly.
 
-In these situations, `methods` can be used to write more concise code.
+## Multiple Handler
 
-```ts
-export default 'Hello, World!';
-```
+You can define separate handlers for different HTTP methods by organizing them into an array or exporting function.
 
-Not only that, `methods` can be used flexibly in many situations.
-
-## `all`, `get`, `post`...
-
-Just exporting default with nothing responds to all methods. However, if you want to respond only when method is `GET`, you can write the following code.
-
-## Multiple Handlers
-
-If you want some functions to only respond to `GET` and other functions to only respond to `POST`, you can put them in an array.
+<Tabs>
+<TabItem id="Array Handler">
 
 ```ts
 import { GET, POST } from 'zely';
@@ -37,47 +24,70 @@ export default [
 ];
 ```
 
-## Global import
-
-If importing handlers per page feels complicated, enable the `options.globalImport` option.
-
-```ts [title="zely.config.ts"]
-export default {
-  globalImport: true,
-};
-```
-
-Then, you can use `GET`, `POST` without importing handlers.
+</TabItem>
+<TabItem id="Named Handler">
 
 ```ts
-export default [GET(/* ... */)];
+import { Context } from 'zely';
+
+export function get(ctx: Context) {
+  return { type: 'cat', emoji: '🐱' };
+}
+
+export function post(ctx: Context) {
+  return { type: 'dog', emoji: '🐶' };
+}
 ```
 
-<Box type="tip">
-  If you are using typescript, create `env.d.ts` and add the following code.
- ```ts 
- import "zely/env";
- ```
+</TabItem>
+</Tabs>
 
-```json
-// tsconfig.json
+## Global Import
+
+To omit handler imports, enable the `globalImport` option in your configuration file:
+
+```ts [title="zely.config.ts"]
+import { defineConfig } from 'zely';
+
+export default defineConfig({
+  globalImport: true,
+});
+```
+
+Then, `GET`, `POST`, and other handlers can be used directly without importing them.
+
+### TypeScript Support
+
+If you're using TypeScript, configure your environment to support global imports.
+
+1. Create an `env.d.ts` file.
+
+```ts [title="env.d.ts"]
+import 'zely/env';
+```
+
+2. Update your `tsconfig.json` to include the `env.d.ts` file.
+
+```json [title="tsconfig.json"]
 {
   "include": ["./env.d.ts"]
 }
 ```
 
-  </Box>
+## Access req and res
 
-## Access to `req`, `res`
-
-Functions can be used as the body.
+Access the `req` and `res` objects through the context (ctx):
 
 ```ts
 import { POST } from 'zely';
 
-export default [POST((ctx) => {
-  ctx.send(req.body)
-}];
+export default [
+  POST((ctx) => {
+    ctx.send(ctx.req.body);
+  }),
+];
 ```
 
-> See [context documentation](/docs/context).
+<Box type="tip">
+  For more details, refer to the [context documentation](/docs/context).
+</Box>

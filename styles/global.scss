@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
@@ -60,6 +60,8 @@ body {
   max-height: 100vh;
   overflow-x: hidden;
 
+  transition: background-color 0.15s ease-in-out;
+
   margin: 0;
 }
 
@@ -95,11 +97,4 @@ button.a {
 }
 button.a:hover {
   text-decoration: underline;
-}
-.gra {
-  background: -webkit-linear-gradient(315deg, #427cd3 25%, #b964ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
 }

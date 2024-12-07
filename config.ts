@@ -27,13 +27,13 @@ export default [
           { 'why-zely': 'Why Zely' },
           { 'getting-started': 'Getting Started' },
           { config: 'Config References' },
-          { v3: 'v3.0' },
         ],
       },
       {
         name: 'Routing',
         posts: [
           { routing: 'Routing' },
+          { handler: 'Handler' },
           { methods: 'Methods' },
           {
             'send-data': 'Sending Data',
@@ -54,16 +54,27 @@ export default [
       },
 
       {
+        hidden: true,
+        name: 'Frontend',
+        posts: [{ frontend: 'Frontend' }, { html: 'HTML' }],
+      },
+      {
+        hidden: true,
         name: 'Devtools',
         posts: [{ devtools: 'Devtools' }, { 'setup-devtools': 'Setup Devtools' }],
       },
       {
         name: 'Migration',
         hidden: true,
-        posts: [{ migration: 'Migration' }, { 'migration-2x': 'Migration from 2.x' }],
+        posts: [
+          { migration: 'Migration' },
+          { 'migration-3x': 'Migration from 3.x' },
+          { 'migration-2x': 'Migration from 2.x' },
+        ],
       },
       {
         name: 'Community',
+        hidden: true,
         posts: [
           { community: 'Community' },
           { contributing: 'Contributing' },
@@ -118,6 +129,7 @@ export default [
         name: 'Packages',
         posts: [
           { packages: 'Packages' },
+          { senta: 'Senta' },
           { 'zely-js-cli': 'zely-cli' },
           { 'zely-js': '@zely-js/zely' },
           { 'zely-js-core': '@zely-js/core' },

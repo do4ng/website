@@ -1,32 +1,56 @@
-🛰️ Zely is a backend framework for Node.js.
+Zely is a lightweight backend framework for Node.js that prioritizes speed, simplicity, and modern development practices.
 
 ## Features
 
-- **File-based routing.** zely creates routes automatically with filenames.
-- **Server Reload.** You don't have to restart server to apply changes.
-- **Typescript Supported.**
-- **Lightning fast.** zely uses [esbuild](https://esbuild.github.io/) as javascript loader.
+1. **File based Routing**
+
+Automatically generate routes based on file structure.
+
+2. **Server Restarting**
+
+No need to restart your server to apply changes.
+
+3. **TypeScript Supported**
+
+Fully supports TypeScript.
+
+4. **Blazing Fast**
+
+Built on [esbuild](https://esbuild.github.io) for unparalleled speed and efficiency.
 
 ## Introduction
 
-Zely is a node.js backend framework inspired by [next](https://nextjs.org/). This project aims to be the lightest Nodejs backend framework.
+Zely is a minimalist Node.js backend framework influenced by Next.js.
+It aims to streamline backend development while being the fastest and lightest solution available.
 
-Zely is running on [zept](https://npmjs.com/package/zept) which was made for speed and weight. It also uses [esbuild](https://esbuild.github.io/) to reduce compile time.
+Under the hood, Zely uses [own engine](https://github.com/zely-js/senta) for its lightweight and high-performance server capabilities,
+and [esbuild](https://esbuild.github.io) to optimize compile times and runtime efficiency.
 
-## Why you made it?
+## Why Zely?
 
-The current nodejs backend library/framework has the problems:
+### Challenges
 
-### Too slow
+1. **Development Bottlenecks**
 
-For example, if you simply want to create an express server which outputs Hello World using typescript. Then you have to install some dependencies, write the code, and use tsc to convert the `.ts` file to the `.js` file and run it.
+Setting up a simple server in TypeScript involves multiple steps:  
+installing dependencies, writing code, compiling `.ts` files to `.js`, and then running the server.
 
-This process is really complicated compared to the results. Also, compiling with js takes a lot of time. (Although using a quick bundleer such as esbuild will solve it)
+This process is time-consuming and inefficient.
 
-### Annoying to set routing
+2. **Cumbersome Routing**
 
-Taking express as an example again, I want to create an sns backend system, but the more requests are received through routes such as `/post/*` and `/user/*`, the more cumbersome it is to set up routing.
+Managing routes in traditional frameworks becomes increasingly complex as the number of endpoints grows (e.g., `/post/*`, `/user/*`).
 
 ### Solution
 
-Zely solves these problems. It has many features such as file based routing, fastest server, etc.
+1. **Simplified Workflow**
+
+Zely removes the hassle of manual setup by integrating everything into a single framework.
+
+2. **Optimized Routing**
+
+With file-based routing, Zely minimizes the need for explicit configuration.
+
+3. **Unpredicable Speed**
+
+Zely ensures your development experience is fast.

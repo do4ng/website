@@ -10,7 +10,22 @@ export default function Product() {
     <>
       <div className="product-container">
         <div className="title">
+          <Link className="update" href="/blog/24-12-01">
+            <span className="circle"></span>
+            <span className="update-content">4.0 is coming!</span>
+          </Link>
           <h1 dangerouslySetInnerHTML={{ __html: docs.description }}></h1>
+
+          <div className="title-example">
+            <div className="code-example">
+              <div className="code-block-example">
+                <p className="code-line">
+                  <span className="code-line-highlight">npx</span> zely-cli init{' '}
+                  <span className="code-line-dark">--dir=app --template=typescript</span>
+                </p>
+              </div>
+            </div>
+          </div>
           <div className="actions">
             <Link href="/docs/getting-started">
               <button className="btn text">Getting Started</button>
@@ -18,16 +33,6 @@ export default function Product() {
             <Link href="/docs/why-zely">
               <button className="btn text">Why Zely</button>
             </Link>
-          </div>
-        </div>
-        <div className="title-example">
-          <div className="code-example">
-            <div className="code-block-example">
-              <p className="code-line">
-                <span className="code-line-highlight">npx</span> zely-cli init{' '}
-                <span className="code-line-dark">--dir=app --template=typescript</span>
-              </p>
-            </div>
           </div>
         </div>
       </div>

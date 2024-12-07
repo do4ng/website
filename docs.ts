@@ -26,7 +26,7 @@ export interface Docs {
 
 export default {
   name: 'Zely',
-  description: 'Build <span class="gra">Productive,<br>Convenient, Fast</span> Backend',
+  description: 'Build <span class="gra ">Productive,<br>Convenient, Fast</span> Backend',
   index: [
     {
       content: 'Getting Started',
@@ -101,9 +101,16 @@ export default {
       ],
     },
     {
-      title: 'v3',
+      title: 'v4.beta',
       type: 'popover',
       children: [
+        {
+          title: 'v3',
+          href: 'https://github.com/zely-js/zely/tree/zely3',
+          description: 'v3 documentation is deprecated.',
+          // https://remixicon.com/icon/book-open-line
+          icon: 'ri-sticky-note-line',
+        },
         {
           title: 'v2',
           href: 'https://zely2.netlify.app/',
@@ -121,7 +128,7 @@ export default {
         {
           title: 'Changelog',
           href: 'https://github.com/zely-js/zely/blob/zely3/CHANGELOG.md',
-          description: 'Changelog of zely v3.',
+          description: 'Changelog of zely v4.',
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-book-open-line',
         },

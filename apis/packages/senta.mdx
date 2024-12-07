@@ -1,0 +1,39 @@
+senta is an http server engine introduced in zely3.1.
+
+## Usage
+
+```ts
+import { App, SentaResponse as res } from 'senta';
+
+const app = new App({
+  /* options */
+});
+
+app.use((ctx) => {
+  const response = new res({
+    type: 'json',
+    body: {
+      foo: 'bar',
+    },
+  });
+
+  return response;
+});
+
+app.listen(3000);
+```
+
+## Type-Safety
+
+`SentaResponse` specifies the type of body according to `response.type`.
+
+```ts
+server.use(
+  () =>
+    new SentaResponse({
+      type: 'json',
+      body: 'Hello World',
+      // typescript error: Type 'string' is not assignable to type 'JsonType'.ts(2345)
+    }),
+);
+```

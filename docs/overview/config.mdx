@@ -1,9 +1,26 @@
 To apply the config, create `zely.config.js` (or `zely.config.ts`) and then enter the code below to apply it.
 
-```ts [title="zely.config.js"]
-module.exports = require('@zely-js/zely').defineConfig({
+<Tabs>
+<TabItem id="Typescript">
+
+```ts
+import { defineConfig } from 'zely';
+
+export default defineConfig({
   /* options */
 });
 ```
+
+</TabItem>
+<TabItem id="Javascript">
+
+```js
+module.exports = require('zely').defineConfig({
+  /* options */
+});
+```
+
+</TabItem>
+</Tabs>
 
 <Box type="tip">See [Config References](/apis/config)</Box>

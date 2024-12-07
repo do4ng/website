@@ -9,6 +9,7 @@ import { join } from 'path';
 import { Category, default as parents } from '@/config';
 import { compileMdx } from '@/mdx/compile';
 import ScrollTop from '@/lib/scrolltotop';
+import { capitalizeFirstLetter } from '@/lib/up';
 import { Content } from '@/mdx/content';
 import { TableOfContents } from './tableofcontents';
 
@@ -116,7 +117,7 @@ export default async function Page({
             {directory
               .map((dir) => (
                 <>
-                  <div className="directory-path">{dir}</div>
+                  <div className="directory-path">{capitalizeFirstLetter(dir)}</div>
                 </>
               ))
               .reduce(
