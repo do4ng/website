@@ -1,65 +1,126 @@
-```js [title="zely.config.js"]
-module.exports = require('@zely-js/zely').defineConfig({
-  /* options */
-});
+## server
+
+Defines the server-related settings for your application.
+
+- **`port`**  
+  The port your server will use.  
+  **Type**: `number`  
+  **Default**: `3000`
+
+- **`options`**  
+  HTTP server options (from `import("senta").Config`).  
+  **Type**: `ServerOptions`
+
+```ts
+import { createServer } from 'http';
+export interface Config {
+  server?: {
+    port?: number;
+  };
+  createServer?: typeof createServer;
+  fetch?: typeof fetch;
+}
 ```
-
-## Server Options
-
-- `server.port`: `number` - Server port to use.
-- `server.options`: [`zept.ServerOptions`](https://github.com/zely-js/zept/blob/main/packages/http/types/index.d.ts#L33) - HTTP server options.
-- `server.zept`: `zept.ZeptServer` - Server instance.
-
-## Zely Options
-
-- `cwd`: `string` - Base directory.
-- `middlewares`: `Middleware[]` - [Middlewares](/docs/middleware).
-- `allowAutoMiddlewares`: `boolean` - Allow [to import middlewares automatically](/docs/auto).
-- `middlewareDirectory`: `string` - Directory including middlewares. [[related](/docs/auto)]
 
 ---
 
-- `loaders`: `Loader[]` - List of [loaders](/plugins/create-loader).
-- `globalImport`: `boolean` - Whether to import [methods](/docs/methods) automatically.
-- `onError`: `Function` - Callback to be called when an error is encountered.
-- `enableReporter`: `boolean` - Whether to enable the reporter for debugging. (reporter reports errors exactly through `.js.map`)
-- `keepDist`: `boolean` - Whether to keep the dist directory when server starts.
+## cwd
 
-<Box type="info">
-Type Declartion
+Specifies the base directory for your application.  
+**Type**: `string`  
+**Default**: Current working directory.
 
-```ts
-import { ServerOptions, ZeptServer } from '@zept/http';
-import { Loader } from '@zely-js/loader';
-import { Plugin, Middleware } from '@zely-js/zely';
+---
 
-export interface Config extends UserConfig {
-  plugins?: Plugin[];
-}
+## middlewares
 
-export interface UserConfig {
-  server?: {
-    port?: number;
-    options?: ServerOptions;
-    zept?: ZeptServer;
-  };
+Defines an array of middleware functions for the application.  
+**Type**: `Middleware[]`  
+[Learn more](https://zely.vercel.app/docs/middleware)
 
-  cwd?: string;
+---
 
-  middlewares?: Middleware[];
-  allowAutoMiddlewares?: boolean;
-  middlewareDirectory?: string;
+## allowAutoMiddlewares
 
-  loaders?: Loader[];
+Allows automatic importing of middleware from a specified directory.  
+**Type**: `boolean`  
+**Default**: `false`  
+[Learn more](https://zely.vercel.app/docs/auto)
 
-  globalImport?: boolean;
+---
 
-  onError?: (err: Error) => void | Promise<void>;
+## middlewareDirectory
 
-  enableReporter?: boolean;
+Specifies the directory containing middleware files.  
+**Type**: `string`  
+**Default**: `"middlewares"`  
+[Learn more](https://zely.vercel.app/docs/auto)
 
-  keepDist?: boolean;
-}
-```
+---
 
-</Box>
+## loaders
+
+Specifies custom loaders for TypeScript or JavaScript files.  
+**Type**: `Loader[]`
+
+---
+
+## dist
+
+Defines the output directory for build artifacts.  
+**Type**: `string`  
+**Default**: `.zely`
+
+---
+
+## globalImport
+
+Enables automatic importing of methods like `GET`, `POST`, etc.  
+**Type**: `boolean`  
+**Default**: `false`
+
+---
+
+## onError
+
+A callback function to handle errors.  
+**Type**: `(err: Error) => void | Promise<void>`
+
+---
+
+## enableReporter
+
+Enables logging of error messages.  
+**Type**: `boolean`  
+**Default**: `true`
+
+---
+
+## keepDist
+
+Keeps the `.zely` directory for debugging purposes, including source maps for error reporting.  
+**Type**: `boolean`  
+**Default**: `false`
+
+---
+
+## \_\_virtuals\_\_
+
+Defines virtual pages for dynamic routing.  
+**Type**: `any[]`  
+[Learn more](https://zely.vercel.app/apis/virtual-page)
+
+---
+
+## experimental
+
+Enables experimental features.  
+**Type**: `ExperimentalFeatures`
+
+### **Experimental Features**
+
+- **`useHTML`**  
+  Enables an enhanced HTML renderer. Requires the `segify` package.  
+  **Type**: `boolean`  
+  **Default**: `false`  
+  [Learn more](https://segify.vercel.app/)
