@@ -27,14 +27,15 @@ export function get(ctx: Context) {
 
 </TabItem>
  
- <TabItem id="/list/[...id].ts">
+ <TabItem id="/list/[...].ts">
 
 ```ts
 // pages/list/[...id].ts
 import type { Context } from 'zely';
 
 export function get(ctx: Context) {
-  ctx.send({ hello: ctx.params.id });
+  // ctx.params["*"] === "a/b/c"
+  ctx.send({ path: ctx.params['*'].split('/') });
 }
 ```
 
