@@ -36,6 +36,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   */
 
   const path = usePathname().split('/')[1];
+  console.log(path);
   const isDocs =
     path === 'docs' || path === 'plugins' || path === 'apis' || path === 'guide';
 
@@ -48,10 +49,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <NextTopLoader showSpinner={false} height={2} color="#e25a61a0" />
+        <NextTopLoader showSpinner={false} height={2} color="#ca4f559f" />
         <script src="/theme.js" async></script>
         <div className="app">
-          <Header></Header>
+          <Header isDocs={isDocs}></Header>
 
           {isDocs ? (
             <>

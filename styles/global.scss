@@ -58,11 +58,15 @@ body {
 
   max-width: 100vw;
   max-height: 100vh;
-  overflow-x: hidden;
+  overflow: auto;
 
   transition: background-color 0.15s ease-in-out;
 
   margin: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
 }
 
 .app {
