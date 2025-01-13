@@ -1,0 +1,136 @@
+## Compile
+
+Compile a TypeScript or Javascript file in a executable code.
+
+```ts
+declare function compile(
+  entry: string,
+  compilerOptions?: CompilerOptions,
+): Promise<{
+  code: string;
+  map: string;
+}>;
+```
+
+### Options
+
+| Option            | Description                    | Default  |
+| ----------------- | ------------------------------ | -------- |
+| `parserOptions`   | Acorn parse options            | `{}`     |
+| `globals`         | Global variable settings (swc) |          |
+| `resolverOptions` | oxc-resolver options           | `{}`     |
+| `type`            | Type (`script` \| `module`)    | `module` |
+| `banner`          | banner                         | `""`     |
+| `footer`          | footer                         | `""`     |
+
+<Box type="warning">🚧 The sourcemap generation is still under development.</Box>
+
+### Example
+
+There is a simple addition program as shown below
+
+<Tabs>
+<TabItem id="src/index.ts">
+
+```ts
+import { sum } from '../lib/sum';
+
+console.log(sum(1, 2));
+```
+
+</TabItem>
+<TabItem id="lib/sum.ts">
+
+```ts
+export function sum(a: number, b: number): number {
+  return a + b;
+}
+```
+
+</TabItem>
+</Tabs>
+
+```js [title="scripts/build.js"]
+import { join } from 'path';
+import { compile } from 'serpack';
+
+compile(join(process.cwd(), 'src/index.ts')).then(({ code }) => {
+  console.log(code);
+});
+```
+
+<Box>
+Output will be:
+
+```js
+(function (modules) {
+  var __serpack_module_cache__ = {};
+  function __serpack_require__(id) {
+    if (!id.startsWith('sp:')) return require(id);
+    if (__serpack_module_cache__[id.slice(3)])
+      return __serpack_module_cache__[id.slice(3)];
+    const module = { exports: {} };
+    modules[id.slice(3)].call(
+      module.exports,
+      __serpack_require__,
+      require,
+      module,
+      module.exports,
+    );
+    __serpack_module_cache__[id.slice(3)] = module.exports;
+    return module.exports;
+  }
+  module.exports = __serpack_require__('sp:0');
+})({
+  /*[0]src\index.ts*/ 0: (
+    __serpack_require__,
+    __non_serpack_require__,
+    module,
+    exports,
+  ) => {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: !0 }),
+      console.log((0, __serpack_require__('sp:1').sum)(1, 2));
+  },
+  /*[1]lib\sum.ts*/ 1: (
+    __serpack_require__,
+    __non_serpack_require__,
+    module,
+    exports,
+  ) => {
+    'use strict';
+    function e(e, t) {
+      return e + t;
+    }
+    Object.defineProperty(exports, '__esModule', { value: !0 }),
+      Object.defineProperty(exports, 'sum', {
+        enumerable: !0,
+        get: function () {
+          return e;
+        },
+      });
+  },
+});
+```
+
+</Box>
+
+## importToRequire
+
+Convert `ImportStatement` to require.
+
+```ts
+const requireNode = importToRequire(node);
+```
+
+## Supported Extensions
+
+- **JavaScript**: `js`, `cjs`,`mjs`, `jsx`
+- **TypeScript**: `ts`, `cts`, `mts`, `tsx`
+- **JSON**: `json`
+
+<Box type="info">
+  TIP: If you want to load the file regardless of whether its extension is supported, set
+  `options.type`to `script`. In `module` mode, extension support is checked strictly, but
+  in `script` mode, it is loaded **unconditionally**.
+</Box>

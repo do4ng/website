@@ -111,7 +111,6 @@ export default [
         name: 'CLI',
         posts: [{ cli: 'cli' }, { init: 'init' }, { start: 'start' }, { dev: 'dev' }],
       },
-
       {
         name: 'Javascript API',
         posts: [
@@ -121,6 +120,12 @@ export default [
           { 'virtual-page': 'Virtual Pages' },
         ],
       },
+
+      {
+        name: 'Serpack',
+        posts: [{ serpack: 'Serpack' }, { apis: 'APIs' }, { cli: 'CLI' }],
+      },
+
       {
         name: 'Structure',
         posts: [{ structure: 'Structure' }, { cache: 'Cache' }],
