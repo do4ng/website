@@ -1,3 +1,5 @@
+<Box type="warning">🚧 The sourcemap generation is still under development.</Box>
+
 ## Compile
 
 Compile a TypeScript or Javascript file in a executable code.
@@ -11,19 +13,6 @@ declare function compile(
   map: string;
 }>;
 ```
-
-### Options
-
-| Option            | Description                    | Default  |
-| ----------------- | ------------------------------ | -------- |
-| `parserOptions`   | Acorn parse options            | `{}`     |
-| `globals`         | Global variable settings (swc) |          |
-| `resolverOptions` | oxc-resolver options           | `{}`     |
-| `type`            | Type (`script` \| `module`)    | `module` |
-| `banner`          | banner                         | `""`     |
-| `footer`          | footer                         | `""`     |
-
-<Box type="warning">🚧 The sourcemap generation is still under development.</Box>
 
 ### Example
 
@@ -122,6 +111,17 @@ Convert `ImportStatement` to require.
 ```ts
 const requireNode = importToRequire(node);
 ```
+
+## CompilerOptions
+
+| Option            | Description                    | Default  |
+| ----------------- | ------------------------------ | -------- |
+| `parserOptions`   | Acorn parse options            | `{}`     |
+| `globals`         | Global variable settings (swc) |          |
+| `resolverOptions` | oxc-resolver options           | `{}`     |
+| `type`            | Type (`script` \| `module`)    | `module` |
+| `banner`          | banner                         | `""`     |
+| `footer`          | footer                         | `""`     |
 
 ## Supported Extensions
 
