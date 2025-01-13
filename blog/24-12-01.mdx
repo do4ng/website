@@ -1,9 +1,6 @@
-I decided to develop 4.0 to reenergize zely's development.
+zely3 rewrote the code to increase development efficiency. The code actually has improved a bit, but the performance became ridiculously bad.
 
-zely(v3) has focused too much on the backend, but it failed to achieve the goal of creating the fastest backend framework.  
-So after 3.0 was completed, Zely was left for a few months.
-
-Now, I'm going to develop 4.0 to rekindle my interest in developing as a side project
+In zely4, we will focus on performance and add back features that were lost while rewriting the code.
 
 ## Plan
 
@@ -30,6 +27,11 @@ At first glance, the code has improved readability, and it's much simpler
 The goal of creating the fastest backend framework has not been abandoned yet.  
 I will continue to improve the performance of zely.
 
+<Box type="tip">
+  zely4 can handle about **2.68x more requests** and is **11x faster** than zely3 -
+  [version benchmark](https://github.com/zely-js/benchmark-history)
+</Box>
+
 ### support .html
 
 Not long ago, I made [a package](https://segify.vercel.app) as a side project.  
@@ -40,8 +42,6 @@ I will utilize this project and update zely to make it easier to create a fronte
 ### integrating multiple packages
 
 Currently, Zely is divided into several packages. Questions arise as to whether this division is necessary
-
-> when zely app created via `npx zely-cli init` and packages downloaded
 
 ### createFrontendPage
 

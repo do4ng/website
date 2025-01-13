@@ -5,6 +5,10 @@ export interface Post {
 
 export default [
   {
+    title: 'New Compiler',
+    date: '25-01-13',
+  },
+  {
     title: 'Breaking Change: zely@4!',
     date: '24-12-01',
   },

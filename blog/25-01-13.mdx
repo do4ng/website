@@ -1,0 +1,75 @@
+> Introducing the New Compiler - [serpack](https://github.com/do4ng/serpack)
+
+## Motivation
+
+Currently, loaders using esbuild are very difficult to scale as I want.
+Although it can be implemented by putting the desired function into the code output by esbuild, there are minor problems such as low efficiency.
+
+That's why I developed a compiler to replace the existing loader with [serpack](https://github.com/do4ng/serpack) loader. New compiler is easy to scale and can be changed to my taste.
+
+## Comparison
+
+Below is a comparison between the serpack loader and the esbuild loader.
+
+### Performance
+
+compile performance - https://github.com/zely-js/zely/blob/zely4/playground/typescript/pages/index.ts
+
+- esbuild-loader: `7.24ms`
+- serpack-loader: `6.19ms`
+
+serpack loader is approximately 10% faster than esbuild loader.
+
+```bash
+ yarn workspace @playground/typescript dev --loader-performance
+```
+
+<Box>
+  serpack uses [swc](https://swc.rs/) instead of [esbuild](https://esbuild.github.io/)
+</Box>
+
+### Error tracking
+
+The serpack loader does not yet support error tracking.
+
+### Stability
+
+Serpack is not finished yet and there are many bugs.
+
+## Getting Started
+
+<Tabs>
+<TabItem id="zely.config.ts">
+
+```ts
+import { defineConfig } from 'zely';
+
+export default defineConfig({
+  experimental: {
+    useSerpack: true,
+  },
+});
+```
+
+</TabItem>
+<TabItem id="zely.config.js">
+
+```js
+const { defineConfig } = require('zely');
+
+module.exports = defineConfig({
+  experimental: {
+    useSerpack: true,
+  },
+});
+```
+
+</TabItem>
+</Tabs>
+
+Just enable `experimental.useSerpack`!
+
+## Conclusion
+
+The serpack is **not ready to be used as a production** yet.  
+However, some of the features will be developed based on the serverpack, and the end goal is to replace the esbuild loader
