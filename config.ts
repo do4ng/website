@@ -122,11 +122,6 @@ export default [
       },
 
       {
-        name: 'Serpack',
-        posts: [{ serpack: 'Serpack' }, { apis: 'APIs' }, { cli: 'CLI' }],
-      },
-
-      {
         name: 'Structure',
         posts: [{ structure: 'Structure' }, { cache: 'Cache' }],
       },
@@ -167,6 +162,22 @@ export default [
           { 'create-plugin': 'Create Plugin' },
           { 'create-loader': 'Create Loader' },
         ],
+      },
+    ],
+  },
+
+  {
+    title: 'serpack',
+    target: 'introduction',
+    icon: 'route-line',
+    category: [
+      {
+        name: 'Overview',
+        posts: [{ introduction: 'Introduction' }, { comparison: 'Comparison' }],
+      },
+      {
+        name: 'APIs',
+        posts: [{ compile: 'Compile' }, { options: 'Compiler Options' }],
       },
     ],
   },

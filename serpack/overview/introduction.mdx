@@ -1,0 +1,71 @@
+> [Introduction of serpack](/blog/25-01-13)
+
+_Serpack is a TypeScript/JavaScript compiler for application development._
+
+This compiler is optimized for high-speed bundling and execution of TypeScript files, leveraging [swc](https://swc.rs/) as a transformer and [oxc](https://oxc.rs/) as a resolver for enhanced performance.
+
+By default, serpack is built to run Javascript/Typescript, but it also supports module bundling.
+
+```bash
+npx serpack ./src/awesome-app.ts # run script
+```
+
+<Box type="error">It's not ready to be used for production yet</Box>
+
+## Getting Started
+
+---
+
+1. try serpack on zely
+
+<Tabs>
+<TabItem id="CLI">
+```bash
+npx zely dev --serpack # or npx zely-cli dev --serpack
+```
+
+> Enable `--serpack` flag
+
+</TabItem>
+<TabItem id="zely.config.ts">
+
+```ts
+import { defineConfig } from 'zely';
+
+export default defineConfig({
+  experimental: {
+    useSerpack: true,
+  },
+});
+```
+
+> Enable `experimental.useSerpack` option
+
+</TabItem>
+<TabItem id="zely.config.js">
+
+```js
+const { defineConfig } = require('zely');
+
+module.exports = defineConfig({
+  experimental: {
+    useSerpack: true,
+  },
+});
+```
+
+> Enable `experimental.useSerpack` option
+
+</TabItem>
+
+</Tabs>
+
+---
+
+2. try serpack on your project
+
+```bash
+npm i --save-dev serpack
+```
+
+<Box>See [Javascript APIs](/serpack/compile)</Box>

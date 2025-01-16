@@ -1,0 +1,40 @@
+## Compare with esbuild
+
+|                 | Serpack | Esbuild | note                                                                            |
+| --------------- | ------- | ------- | ------------------------------------------------------------------------------- |
+| **Performance** | -       | -       | Not measured - typically esbuild's compilation time is 50% to 130% of serpack's |
+| **Sourcemap**   | x       | o       | Sourcemap generation is under development.                                      |
+| **TypeScript**  | o       | o       | `(.ts, .tsx)`, serpack uses swc as transformer                                  |
+| **Stable**      | x       | o       | serpack is still under active development                                       |
+
+## Performance
+
+- `command`: `yarn workspace @playground/typescript dev`
+- `workspace`: `@playground/typescript`
+
+<Tabs>
+  <TabItem id="Serpack">
+
+```txt
+$ --loader-performance --serpack
+
+[@zely-js/core:serpack-loader] compiled zely.config.ts in 19.46ms
+[12:50:58 AM] info use serpack (experimental-0.1.4)
+[@zely-js/core:serpack-loader] compiled middlewares\index.ts in 4.55ms
+[@zely-js/core:serpack-loader] compiled pages\index.ts in 6.35ms
+```
+
+</TabItem>
+  <TabItem id="Esbuild">
+
+```txt
+$ --loader-performance
+
+[@zely-js/loader-esbuild] compiled zely.config.ts in 29.23ms
+[@zely-js/loader-esbuild] compiled middlewares\index.ts in 6.66ms
+[@zely-js/loader-esbuild] compiled pages\index.ts in 6.78ms
+```
+
+  </TabItem>  </Tabs>
+
+For simple files, serpack is faster, but as files get larger, esbuild is up to **2x faster**.

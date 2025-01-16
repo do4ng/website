@@ -38,7 +38,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const path = usePathname().split('/')[1];
   console.log(path);
   const isDocs =
-    path === 'docs' || path === 'plugins' || path === 'apis' || path === 'guide';
+    path === 'docs' ||
+    path === 'plugins' ||
+    path === 'apis' ||
+    path === 'guide' ||
+    path === 'serpack';
 
   if (typeof window !== 'undefined') {
     toggleTheme((localStorage.getItem('theme') as any) || 'dark');
@@ -60,25 +64,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="menu">
                   <div className="menu-layout">
                     <div className="menu-categories">
-                      {config.map((c) => (
-                        <div
-                          key={c.title}
-                          className={`category-button ${
-                            path.toLocaleLowerCase() === c.title.toLocaleLowerCase()
-                              ? 'category-active'
-                              : ''
-                          }`}
-                        >
-                          <Link href={`/${c.title.toLocaleLowerCase()}/${c.target}`}>
-                            <div className="category-button-icon">
-                              <i className={`ri-${c.icon}`}></i>
-                            </div>
-                            <div className="category-button-text">
-                              <h4>{capitalizeFirstLetter(c.title)}</h4>
-                            </div>
-                          </Link>
-                        </div>
-                      ))}
+                      {config
+                        .filter(({ title }) => title.toLowerCase() !== 'serpack')
+                        .map((c) => (
+                          <div
+                            key={c.title}
+                            className={`category-button ${
+                              path.toLocaleLowerCase() === c.title.toLocaleLowerCase()
+                                ? 'category-active'
+                                : ''
+                            }`}
+                          >
+                            <Link href={`/${c.title.toLocaleLowerCase()}/${c.target}`}>
+                              <div className="category-button-icon">
+                                <i className={`ri-${c.icon}`}></i>
+                              </div>
+                              <div className="category-button-text">
+                                <h4>{capitalizeFirstLetter(c.title)}</h4>
+                              </div>
+                            </Link>
+                          </div>
+                        ))}
                     </div>
                     <div className="menu-content">
                       {target ? (

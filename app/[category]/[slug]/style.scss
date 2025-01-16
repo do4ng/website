@@ -56,7 +56,7 @@
       h4 {
         margin-top: 12px;
         margin-bottom: 4px;
-        font-size: 16px;
+
         width: 100%;
         color: var(--text-200);
         display: flex;
@@ -64,9 +64,8 @@
         button.text-inter {
           transition: all 0.3s ease 0s;
           font-weight: 600;
-          font-size: 0.975rem;
-          padding: 4px 8px;
-          border-radius: 7px;
+          padding: 5px 12px;
+          border-radius: 4px;
         }
         button.text-inter:hover {
           color: var(--primary-100);
@@ -74,7 +73,6 @@
 
         button.active {
           color: var(--primary-100);
-          font-weight: 700;
         }
 
         i {
@@ -91,7 +89,7 @@
           width: 100%;
           border-left: 1px solid var(--bg-300);
           transition: all 0.3s ease 0s;
-          padding: 2px 5px;
+          padding: 2px 7px;
         }
 
         a {
@@ -99,17 +97,17 @@
           font-size: 13px;
           border-radius: 3px;
           font-weight: 500;
+          width: 80%;
           color: var(--text-400);
         }
 
         a:hover {
-          color: var(--primary-100);
-          background-color: inherit !important;
+          color: var(--text-100);
         }
 
         a.active {
           color: var(--primary-100);
-          font-weight: 600;
+          background-color: var(--primary-100-50) !important;
         }
         div:has(.active) {
           border-left: 1px solid var(--primary-100);

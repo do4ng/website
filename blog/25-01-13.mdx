@@ -13,15 +13,8 @@ Below is a comparison between the serpack loader and the esbuild loader.
 
 ### Performance
 
-compile performance - https://github.com/zely-js/zely/blob/zely4/playground/typescript/pages/index.ts
-
-- esbuild-loader: `7.24ms`
-- serpack-loader: `6.19ms`
-
-serpack loader is approximately 10% faster than esbuild loader.
-
 ```bash
- yarn workspace @playground/typescript dev --loader-performance
+yarn workspace @playground/typescript dev --loader-performance --serpack
 ```
 
 <Box>
@@ -39,6 +32,13 @@ Serpack is not finished yet and there are many bugs.
 ## Getting Started
 
 <Tabs>
+<TabItem id="CLI">
+
+```bash
+npx zely dev --serpack # or npx zely-cli dev --serpack
+```
+
+</TabItem>
 <TabItem id="zely.config.ts">
 
 ```ts
@@ -65,6 +65,7 @@ module.exports = defineConfig({
 ```
 
 </TabItem>
+
 </Tabs>
 
 Just enable `experimental.useSerpack`!

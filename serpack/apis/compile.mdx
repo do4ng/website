@@ -111,26 +111,3 @@ Convert `ImportStatement` to require.
 ```ts
 const requireNode = importToRequire(node);
 ```
-
-## CompilerOptions
-
-| Option            | Description                    | Default  |
-| ----------------- | ------------------------------ | -------- |
-| `parserOptions`   | Acorn parse options            | `{}`     |
-| `globals`         | Global variable settings (swc) |          |
-| `resolverOptions` | oxc-resolver options           | `{}`     |
-| `type`            | Type (`script` \| `module`)    | `module` |
-| `banner`          | banner                         | `""`     |
-| `footer`          | footer                         | `""`     |
-
-## Supported Extensions
-
-- **JavaScript**: `js`, `cjs`,`mjs`, `jsx`
-- **TypeScript**: `ts`, `cts`, `mts`, `tsx`
-- **JSON**: `json`
-
-<Box type="info">
-  TIP: If you want to load the file regardless of whether its extension is supported, set
-  `options.type`to `script`. In `module` mode, extension support is checked strictly, but
-  in `script` mode, it is loaded **unconditionally**.
-</Box>

@@ -43,13 +43,6 @@ export default {
       type: 'popover',
       children: [
         {
-          title: 'Installation',
-          href: '/docs/getting-started',
-          description: 'Start your fist app.',
-          // https://remixicon.com/icon/book-open-line
-          icon: 'ri-guide-line',
-        },
-        {
           title: 'Docs',
           href: '/docs/overview',
           description: 'Learn all of information of package.',
@@ -62,6 +55,14 @@ export default {
           description: 'Learn all of information of package.',
           // https://remixicon.com/icon/book-open-line
           icon: 'ri-book-open-line',
+        },
+
+        {
+          title: 'Contribute',
+          href: '/docs/contributing',
+          description: 'thank you for your contribution.',
+          // https://remixicon.com/icon/book-open-line
+          icon: 'ri-sticky-note-line',
         },
       ],
     },
@@ -88,20 +89,27 @@ export default {
     },
 
     {
-      title: 'Community',
+      title: 'Ecosystem',
       type: 'popover',
       children: [
         {
-          title: 'Contribute',
-          href: '/docs/contributing',
-          description: 'thank you for your contribution.',
+          title: 'Serpack',
+          href: '/serpack/introduction',
+          description: 'TypeScript/JavaScript Compiler',
           // https://remixicon.com/icon/book-open-line
-          icon: 'ri-sticky-note-line',
+          icon: 'ri-instance-line',
+        },
+        {
+          title: 'Senta',
+          href: 'https://github.com/zely-js/senta',
+          description: 'HTTP server engine',
+          // https://remixicon.com/icon/book-open-line
+          icon: 'ri-instance-line',
         },
       ],
     },
     {
-      title: 'v4.beta',
+      title: 'v4.0.0',
       type: 'popover',
       children: [
         {
