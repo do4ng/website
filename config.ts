@@ -83,7 +83,7 @@ export default [
       },
     ],
   },
-
+  /*
   {
     title: 'guide',
     target: 'overview',
@@ -100,7 +100,7 @@ export default [
       },
     ],
   },
-
+ */
   {
     title: 'apis',
     target: 'javascript-api',
@@ -177,7 +177,12 @@ export default [
       },
       {
         name: 'APIs',
-        posts: [{ compile: 'Compile' }, { options: 'Compiler Options' }],
+        posts: [
+          { compile: 'Compile' },
+          { options: 'Compiler Options' },
+          { runtime: 'serpack/runtime' },
+          { extension: 'Supported Extensions' },
+        ],
       },
     ],
   },
