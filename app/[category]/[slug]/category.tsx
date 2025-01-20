@@ -16,6 +16,7 @@ export function CategoryMenu({
 }) {
   const params = useParams();
 
+  // eslint-disable-next-line no-unused-vars
   let targetcategory: string | null = null;
 
   const target = config.find(({ title }) => title === params.category);

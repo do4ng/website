@@ -54,7 +54,15 @@ export const components = {
       </h2>
     );
   },
-  h3: (props: any) => <h3 {...props}></h3>,
+  h3: (props: any) => {
+    const id = props.children.toString().replace(/ /g, '-').toLowerCase();
+    return (
+      <h3 id={id} {...props.children.props}>
+        <a href={`#${id}`}>#</a>
+        {props.children}
+      </h3>
+    );
+  },
   h4: (props: any) => <h4 {...props}></h4>,
   h5: (props: any) => <h5 {...props}></h5>,
   h6: (props: any) => <h6 {...props}></h6>,

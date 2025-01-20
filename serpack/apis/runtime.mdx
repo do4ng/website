@@ -27,104 +27,41 @@ npx zely dev --serpack --serpack-runtime
 </TabItem>
 </Tabs>
 
-## Output
+## APIs
 
-- target: [Example code in `/serpack/compile`](/serpack/compile)
+### env()
 
-<Tabs>
-<TabItem id="Enable runtime">
-```ts
-(function (modules) {
-  const __serpack_require__ = require("serpack/runtime").createRequire(modules);
-  module.exports = __serpack_require__("sp:0");
-})({
-  /*[0]src\index.ts*/ 0: (
-    __serpack_require__,
-    __non_serpack_require__,
-    module,
-    exports
-  ) => {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: !0 }),
-      console.log((0, __serpack_require__("sp:1").sum)(1, 2));
-  },
-  /*[1]lib\sum.ts*/ 1: (
-    __serpack_require__,
-    __non_serpack_require__,
-    module,
-    exports
-  ) => {
-    "use strict";
-    function e(e, t) {
-      return e + t;
-    }
-    Object.defineProperty(exports, "__esModule", { value: !0 }),
-      Object.defineProperty(exports, "sum", {
-        enumerable: !0,
-        get: function () {
-          return e;
-        },
-      });
-  },
-});
-```
-
-</TabItem>
-<TabItem id="Disable runtime">
+Load runtime environment variables.
 
 ```ts
-(function (modules) {
-  var __serpack_module_cache__ = {};
-  function __serpack_require__(id) {
-    if (!id.startsWith('sp:')) return require(id);
-    if (__serpack_module_cache__[id.slice(3)])
-      return __serpack_module_cache__[id.slice(3)];
-    const module = { exports: {} };
-    modules[id.slice(3)].call(
-      module.exports,
-      __serpack_require__,
-      require,
-      module,
-      module.exports,
-    );
-    __serpack_module_cache__[id.slice(3)] = module.exports;
-    return module.exports;
-  }
-  module.exports = __serpack_require__('sp:0');
-})({
-  /*[0]src\index.ts*/ 0: (
-    __serpack_require__,
-    __non_serpack_require__,
-    module,
-    exports,
-  ) => {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: !0 }),
-      console.log((0, __serpack_require__('sp:1').sum)(1, 2));
-  },
-  /*[1]lib\sum.ts*/ 1: (
-    __serpack_require__,
-    __non_serpack_require__,
-    module,
-    exports,
-  ) => {
-    'use strict';
-    function e(e, t) {
-      return e + t;
-    }
-    Object.defineProperty(exports, '__esModule', { value: !0 }),
-      Object.defineProperty(exports, 'sum', {
-        enumerable: !0,
-        get: function () {
-          return e;
-        },
-      });
-  },
-});
+import { env } from 'serpack/runtime';
+
+console.log(env().target === 'node'); // type target = "browser" | "node"
 ```
 
-</TabItem>
-</Tabs>
+### createRequire() <Badge type="tip">--runtime</Badge> <Badge type="warning">node-only</Badge>
+
+Receive a virtual module and create a requirement.
+
+```ts
+import { createRequire } from 'serpack/runtime';
+
+// createRequire is node-only feature
+process.env.__RUNTIME__ = JSON.stringify({ target: 'node' });
+
+const $require = createRequire({
+  1: (__serpack_require__, require, module, exports) => {
+    module.exports = 'Hello World';
+  },
+});
+
+console.log($require('sp:1')); // Hello World
+```
+
+<Box type="info">
+  The prefix `sp:` is used to distinguish whether it is a virtual module or a module that
+  is excluded from a bundle, such as `node_modules` and `node:` modules
+</Box>
 
 ## Size Reduction
 
@@ -148,6 +85,8 @@ npx zely dev --serpack --serpack-runtime
 
 Size reduced by **60%**.
 
+---
+
 ## Troubleshooting
 
 ### Error: Cannot find module '@swc/helpers'
@@ -157,3 +96,17 @@ This error occurs because the `@swc/helpers` package is damaged or missing.
 ```bash
 npm i --save-dev @swc/helpers
 ```
+
+### TypeError: \_\_serpack_require\_\_ is not a function
+
+An error occurred because the target is not set to `node`.
+This can occur when you create a require using `createRequire()`.
+
+```ts
+process.env.__RUNTIME__ = JSON.stringify({ target: 'node' });
+// or window.__RUNTIME__ = JSON.stringify({ target: 'node' });
+```
+
+Change runtime environment to `node`.
+
+<Box type="tip">`createRequire()` returns `null` when not in a node environment</Box>

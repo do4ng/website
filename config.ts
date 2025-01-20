@@ -83,6 +83,7 @@ export default [
       },
     ],
   },
+
   /*
   {
     title: 'guide',
@@ -181,6 +182,8 @@ export default [
           { compile: 'Compile' },
           { options: 'Compiler Options' },
           { runtime: 'serpack/runtime' },
+          { sourcemap: 'Sourcemap' },
+          { externals: 'Exclude node_modules' },
           { extension: 'Supported Extensions' },
         ],
       },

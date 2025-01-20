@@ -5,6 +5,10 @@ export interface Change {
 
 export default [
   {
+    version: '4.0.0-next.9',
+    target: 'January 20, 2025',
+  },
+  {
     version: '3.0.1',
     target: 'July 1, 2024',
   },

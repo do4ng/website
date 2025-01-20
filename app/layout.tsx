@@ -56,7 +56,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <NextTopLoader showSpinner={false} height={2} color="#ca4f559f" />
         <script src="/theme.js" async></script>
         <div className="app">
-          <Header isDocs={isDocs}></Header>
+          <Header></Header>
 
           {isDocs ? (
             <>

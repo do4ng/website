@@ -1,0 +1,26 @@
+<Box type="warning">🚧 The sourcemap generation is still under development.</Box>
+
+```ts
+compile('src/index.ts', {
+  sourcemap: true,
+  sourcemapOptions: {
+    sourcemapRoot: process.cwd(),
+  },
+});
+```
+
+Set `sourcemap` to `true` to enable source map generation.
+
+Sourcemap generator converts the paths in the source map from absolute to relative based on `sourcemapOptions.sourcemapRoot` (default: `process.cwd()`).
+
+## CLI
+
+```bash
+npx serpack ./index.ts --sourcemap=true
+```
+
+Or, if you want to specify the sourcemap path directly:
+
+```bash
+npx serpack ./index.ts --sourcemap=index.js.map
+```

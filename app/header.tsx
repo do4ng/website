@@ -12,15 +12,23 @@ import { ThemeSelector } from '@/components/theme-selector';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-export function Header({ isDocs }: { isDocs: boolean }) {
-  const path = usePathname().split('/')[1];
+export function Header() {
+  const pathname = usePathname().split('/');
+  const path = pathname[1];
 
   const [isScrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    document.body.addEventListener('scroll', () => {
-      const { scrollTop } = document.body;
+
+    let target = document.body;
+
+    if (path === 'blog' && pathname.length > 2) {
+      target = document?.getElementsByClassName('blog').item(0) as any;
+    }
+
+    target?.addEventListener('scroll', () => {
+      const { scrollTop } = target;
 
       if (scrollTop > 10) {
         setScrolled(true);
@@ -28,13 +36,16 @@ export function Header({ isDocs }: { isDocs: boolean }) {
         setScrolled(false);
       }
     });
-  }, []);
+  }, [pathname, path]);
 
+  console.log(pathname);
   return (
     <>
       <header
         className={`header-container text ${
-          path.trim() !== '' ? '' : 'transparent-header'
+          path.trim() !== '' && path.trim() !== 'changelog' && path.trim() !== 'blog'
+            ? ''
+            : 'transparent-header'
         } ${isScrolled ? 'scrolled' : ''}`}
       >
         <div className="header">

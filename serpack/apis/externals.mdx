@@ -1,0 +1,48 @@
+Including dependencies in a bundle not only increases capacity, but also increases compilation time.  
+Serpack provides `'external'` option that excludes `node_modules` from bundle results to resolve this issue.
+
+## In CLI
+
+```bash
+npx serpack ./index.ts --external
+```
+
+Enable `--external` flag to exclude node_modules from bundle.
+
+## In JavaScript
+
+### Exclude specific dependencies
+
+```ts
+compile('src/index.ts', {
+  externals: ['lodash', 'axios'],
+});
+```
+
+### Exclude ALL node_modules
+
+```ts
+compile('src/index.ts', {
+  nodeExternal: true, // default: false
+});
+```
+
+### Force External
+
+The [`externals`](#exclude-specific-dependencies) works by finding the dependency's `package.json` through the resolver and excluding it if it matches the `name` field of `package.json`.
+
+To skip this process and directly compare the path in `import` or `require` statements (e.g., `require("my-pkg") => my-pkg`) without using the resolver,
+use the force external option.
+
+```ts
+compile('src/index.ts', {
+  forceExternal: ['my-workspace'],
+});
+```
+
+This can contribute to a slight performance improvement.
+
+<Box type="error">
+  This option is no longer supported. After **v0.1.10**, its functionality is no longer
+  guaranteed.
+</Box>

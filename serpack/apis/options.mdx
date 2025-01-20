@@ -1,8 +1,44 @@
-| Option            | Description                    | Default  |
-| ----------------- | ------------------------------ | -------- |
-| `parserOptions`   | Acorn parse options            | `{}`     |
-| `globals`         | Global variable settings (swc) |          |
-| `resolverOptions` | oxc-resolver options           | `{}`     |
-| `type`            | Type (`script` \| `module`)    | `module` |
-| `banner`          | banner                         | `""`     |
-| `footer`          | footer                         | `""`     |
+## nodeExternal
+
+- **Description**: Excludes `node_modules` from the output.
+- **Default**: `false`
+
+## externals
+
+- **Description**: Specifies modules to exclude from the output.
+- **Default**: `[]`
+
+## runtime
+
+- **Description**: Enables runtime functionality, which reduces output size.
+- **Default**: `[]`
+
+## parserOptions
+
+- **Description**: Configuration options for the Acorn parser.
+- **Default**: `{}`
+
+## globals
+
+- **Description**: Settings for global variables - [`swc.jsc.transform.optimizer.globals`](https://swc.rs/docs/configuration/compilation#jsctransformoptimizerglobals).
+- **Default**: _(No default specified)_
+
+## resolverOptions
+
+- **Description**: Options for the `oxc-resolver`.
+- **Default**: `{}`
+
+## type
+
+- **Description**: Specifies the type of the script, either `script` or `module`.
+- **Default**: `"module"`
+
+## banner
+
+- **Description**: Adds a banner at the top of the output file.
+- **Default**: `""`
+
+## footer
+
+- **Description**: Adds a footer at the bottom of the output file.
+- **Default**: `""`

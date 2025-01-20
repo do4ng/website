@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 export function Popover({ children, text }: { children: React.ReactNode; text: string }) {
   const [referenceEl, setReferenceEl] = useState<HTMLElement | null>(null);
   const [popperEl, setPopperEl] = useState<HTMLElement | null>(null);
+  const [popperContainer, setPopperContainer] = useState<HTMLElement | null>(null);
   const { styles, attributes } = usePopper(referenceEl, popperEl, {
     placement: 'bottom-start',
   });
@@ -20,22 +21,22 @@ export function Popover({ children, text }: { children: React.ReactNode; text: s
       popperEl?.removeAttribute('data-show');
     };
 
-    document.addEventListener('mousedown', hidePopover);
+    popperContainer?.addEventListener('mouseleave', hidePopover);
 
     return () => {
-      document.removeEventListener('mousedown', hidePopover);
+      popperContainer?.removeEventListener('mouseleave', hidePopover);
     };
-  }, [popperEl, referenceEl]);
+  }, [popperEl, referenceEl, popperContainer]);
 
   return (
-    <div>
-      <button
-        className="popover btn text"
-        onClick={() => {
-          showPopover();
-        }}
-        ref={setReferenceEl}
-      >
+    <div
+      ref={setPopperContainer}
+      onMouseEnter={() => {
+        showPopover();
+      }}
+      className="popper-container"
+    >
+      <button className="popover btn text" ref={setReferenceEl}>
         {text} <i className="ri-arrow-down-s-line"></i>
       </button>
       <div
