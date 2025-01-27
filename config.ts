@@ -174,7 +174,11 @@ export default [
     category: [
       {
         name: 'Overview',
-        posts: [{ introduction: 'Introduction' }, { comparison: 'Comparison' }],
+        posts: [
+          { introduction: 'Introduction' },
+          { comparison: 'Comparison' },
+          { serpackrc: '.serpackrc.js' },
+        ],
       },
       {
         name: 'APIs',

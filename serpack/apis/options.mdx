@@ -3,15 +3,35 @@
 - **Description**: Excludes `node_modules` from the output.
 - **Default**: `false`
 
+<Box type="tip">Refer [Exclude node_modules](/serpack/externals).</Box>
 ## externals
 
 - **Description**: Specifies modules to exclude from the output.
 - **Default**: `[]`
 
+```ts [title=".serpackrc.ts"]
+export default <import('serpack').Options>{
+  compilerOptions: {
+    nodeExternal: false,
+    externals: ['serpack'],
+  },
+};
+```
+
 ## runtime
 
 - **Description**: Enables runtime functionality, which reduces output size.
-- **Default**: `[]`
+- **Default**: `false`
+
+```ts [title=".serpackrc.ts"]
+export default <import('serpack').Options>{
+  compilerOptions: {
+    runtime: true,
+  },
+};
+```
+
+<Box type="tip">Refer [serpack/runtime](/serpack/runtime).</Box>
 
 ## parserOptions
 

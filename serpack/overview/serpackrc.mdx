@@ -1,0 +1,71 @@
+You can set up the compiler using `.serpackrc`
+
+```json [title=".serpackrc"]
+{
+  "compilerOptions": {
+    "type": "module"
+  }
+}
+```
+
+- `options.compilerOptions`: [CompilerOptions](/serpack/options)
+
+## Configuration File
+
+- .serpackrc (JSON file)
+- .serpackrc.json
+- .serpackrc.js (.mjs, .cjs)
+- .serpackrc.ts (.mts, .cts)
+
+## Setup
+
+- Using `defineConfig()`
+
+<Tabs>
+<TabItem id=".serpackrc.ts">
+
+```ts
+import { defineConfig } from 'serpack';
+
+export default defineConfig({
+  compilerOptions: {},
+});
+```
+
+</TabItem>
+<TabItem id=".serpackrc.js">
+
+```ts
+const { defineConfig } = require('serpack');
+
+export default defineConfig({
+  compilerOptions: {},
+});
+```
+
+</TabItem>
+</Tabs>
+
+- Without `defineConfig()`
+
+<Tabs>
+<TabItem id=".serpackrc.ts">
+
+```ts
+export default <import('serpack').Options>{
+  compilerOptions: {},
+};
+```
+
+</TabItem>
+<TabItem id=".serpackrc.js">
+
+```ts
+module.exports = {
+  compilerOptions: {},
+};
+```
+
+</TabItem>
+</Tabs>
+
