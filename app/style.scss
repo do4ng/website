@@ -205,7 +205,6 @@ i {
 }
 
 .code-example {
-  width: 390px;
   margin: 25px auto;
   margin-bottom: 50px;
 }
@@ -214,8 +213,8 @@ i {
   .code-block-example {
     border-radius: 5px;
     padding: 10px;
-    width: 390px;
-    text-align: center;
+    width: 180px;
+    margin: 0 auto;
 
     background-color: #292d3e;
     box-shadow:

@@ -1,0 +1,35 @@
+<Box type="warning" title="Under development">
+  The middleware below is still under development. If the middleware becomes stable in the
+  future, it will be merged into the core module.
+</Box>
+
+## Usage
+
+Add the middleware to the `options.middlewares` array in the config file.
+
+## Parse Body
+
+This middleware parses the body received from the request and provides it with a context.
+
+<Tabs>
+  <TabItem id="Config">
+```ts
+import { defineConfig } from '@zely-js/zely';
+import { bodyMiddleware } from '@zely-js/zely/middlewares';
+
+export default defineConfig({
+  middlewares: [bodyMiddleware],
+});
+```
+
+ </TabItem>
+  <TabItem id="Page">
+```ts
+export default [
+  ALL((ctx) => {
+    console.log(ctx.body); 
+  }),
+]; 
+```  
+</TabItem>
+</Tabs>

@@ -20,8 +20,7 @@ export default function Product() {
             <div className="code-example">
               <div className="code-block-example">
                 <p className="code-line">
-                  <span className="code-line-highlight">npx</span> zely-cli init{' '}
-                  <span className="code-line-dark">--dir=app --template=typescript</span>
+                  <span className="code-line-highlight">npx</span> zely-cli init
                 </p>
               </div>
             </div>

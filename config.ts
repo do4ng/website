@@ -50,7 +50,11 @@ export default [
       },
       {
         name: 'Middleware',
-        posts: [{ middleware: 'Middleware' }, { auto: 'Auto Importing' }],
+        posts: [
+          { middleware: 'Middleware' },
+          { auto: 'Auto Importing' },
+          { 'provided-middlewares': 'Provided Middlewares' },
+        ],
       },
 
       {

@@ -17,7 +17,7 @@ export const compileMdx = async (content: string): Promise<string> => {
         {
           theme: {
             dark: 'material-theme-palenight',
-            light: 'material-theme-lighter',
+            light: 'github-light',
           },
           keepBackground: false,
         } as import('rehype-pretty-code').Options,

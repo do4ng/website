@@ -12,10 +12,12 @@ export default defineConfig({
 });
 ```
 
-It uses own compiler(named [segify](https://github.com/do4ng/segify)),
+It uses own compiler,
 so if you want to learn more about this feature it will be helpful to read [documentation](https://segify.vercel.app).
 
-## Simple Counter
+## Examples
+
+### Simple Counter
 
 ```html [title="pages/[params]/index.html"]
 <script>
@@ -30,4 +32,10 @@ so if you want to learn more about this feature it will be helpful to read [docu
   <h1>Count: {{ $.count }}</h1>
   <button $onclick="increment">Add</button>
 </div>
+```
+
+### Params
+
+```html
+{{$.params.params}}
 ```

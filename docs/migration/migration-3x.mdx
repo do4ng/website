@@ -2,31 +2,32 @@
 
 Just edit a few things for magic.
 
-## ctx.send
+## Summary
 
-<Tabs>
-  <TabItem id="After (4.0)">
-    
-    ```ts
-    export default "Hello World!"; // or
-    export default [ALL("Hello World!")];
-    ```
+1. [New loader](/serpack/introduction) has been introduced.
+2. [HTML](/docs/html) supported.
+3. 4.0 is much faster than 3.0. - [benchmark](https://github.com/zely-js/benchmark-history)
+4. [Devtools](/docs/devtools/) has been deprecated.
 
-  </TabItem>
-  <TabItem id="Before (3.0)">
-    
-    ```ts
-    export default [ALL((ctx) => ctx.send('Hello World!'))];
-    ```
+## New loader
 
-  </TabItem>
-</Tabs>
+The new loader has been introduced in zely. ([Read blog](/blog/25-01-13))
 
-A method to improve readability has been added.
+Enable `experimental.useSerpack` to use new loader.
 
-Now, instead of `ctx.send`,
-just enter the value you want to send.
+```ts
+import { defineConfig } from 'zely';
 
+export default defineConfig({
+  experimental: {
+    useSerpack: true,
+  },
+});
+```
+
+<Box type="warning" title="Under Development">
+  It's not ready to be used for production yet
+</Box>
 ## HTML
 
 No more `ctx.html` like this:
@@ -47,18 +48,8 @@ export default defineConfig({
 });
 ```
 
-<Box type="warning">This `useHTML` is an experimental feature.</Box>
-
 and write `.html` file.
 
 ```html
 <h1>Hello World!</h1>
-```
-
-### State
-
-You can also create cool counters that are not possible in plain HTML, as shown below:
-
-```html
-
 ```

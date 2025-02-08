@@ -10,20 +10,19 @@ export default [(ctx) => {}];
 
 ## `context.`
 
-| Property/Method    | Description                | Same              |
-| ------------------ | -------------------------- | ----------------- |
-| `context.status`   | Set HTTP status code       | `res.status`      |
-| `context.headers`  | Set HTTP headers           | `res.headers`     |
-| `context.body`     | Access response body       | `res.body`        |
-| `context.params`   | Route parameters           | `res.params`      |
-| `context.query`    | Query string parameters    | `res.query`       |
-| `context.props`    | Static props for rendering | `res.props`       |
-| **Methods**        |                            |                   |
-| `context.send()`   | Send a response            | `res.end()`       |
-| `context.header()` | Set a specific header      | `res.setHeader()` |
-| `context.html()`   | Send an HTML response      | Custom logic      |
-| `context.json()`   | Send a JSON response       | `res.json()`      |
-| `context.text()`   | Send a plain text response | `res.text()`      |
+| Property/Method    | Description                                                                       | Same              |
+| ------------------ | --------------------------------------------------------------------------------- | ----------------- |
+| `context.status`   | Set HTTP status code                                                              | `res.status`      |
+| `context.headers`  | Set HTTP headers                                                                  | `res.headers`     |
+| `context.body`     | [Request Body (Provided with midddleware)](/docs/provided-middlewares#parse-body) | -                 |
+| `context.params`   | Route parameters                                                                  | `res.params`      |
+| `context.query`    | Query string parameters                                                           | `res.query`       |
+| **Methods**        |                                                                                   |                   |
+| `context.send()`   | Send a response                                                                   | `res.end()`       |
+| `context.header()` | Set a specific header                                                             | `res.setHeader()` |
+| `context.html()`   | Send an HTML response                                                             | -                 |
+| `context.json()`   | Send a JSON response                                                              | `res.json()`      |
+| `context.text()`   | Send a plain text response                                                        | `res.text()`      |
 
 ## Request and response
 
