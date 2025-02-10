@@ -1,0 +1,49 @@
+You can use the plugin feature to extend the compiler.
+
+<Box type="warning" title="UNDER DEVELOPMENT">
+  Plugin feature is under development.
+</Box>
+
+## Usage
+
+```ts
+export default <import('serpack').Options>{
+  compilerOptions: {
+    plugins: [yourPlugin()],
+  },
+};
+```
+
+## Types
+
+```ts
+export interface Plugin {
+  name?: string;
+
+  onSetup?(compilerOptions: CompilerOptions): CompilerOptions | void;
+
+  onLoad?(context: PluginContext): void;
+
+  onCompile?(
+    context: PluginContextOnCompile,
+  ): CompilerOutput<{ code: string; map?: any }>;
+
+  onBundle?(): CompilerOutput<void>;
+}
+```
+
+## Plugin Example
+
+https://github.com/do4ng/serpack/tree/main/fixtures/plugin
+
+## Execution Order
+
+- 1.  setup compiler
+- 2.  run `plugin.onSetup`
+- ...
+- 3.  load module
+- 4.  run `plugin.onLoad`
+- 5.  load & compile module // ==> output
+- 6.  run `plugin.onCompile` // Loop
+- ...
+- 7.  run `plugin.onBundle`
