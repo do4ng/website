@@ -195,6 +195,13 @@ export default [
           { extension: 'Supported Extensions' },
         ],
       },
+      {
+        name: 'Plugin API',
+        posts: [
+          { 'plugin-guide': 'Plugin Guide' },
+          { 'generate-d-ts': 'Generate .d.ts' },
+        ],
+      },
     ],
   },
 ] as Config[];
