@@ -102,3 +102,7 @@ button.a {
 button.a:hover {
   text-decoration: underline;
 }
+
+::selection {
+  background-color: var(--primary-100-50);
+}
