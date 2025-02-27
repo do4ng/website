@@ -1,8 +1,8 @@
+## Prewrite
+
 `prewrite` helps you customize `res.send`.
 
 <Box type="warning">res.end doesn't support `usePrewrite`. Use res.send instead.</Box>
-
-## Examples
 
 It can be used directly in page files, and can also be used in middleware and plugins.
 
@@ -16,3 +16,28 @@ export function get(ctx) {
   res.send('cat'); // I love cat
 }
 ```
+
+## SetSender
+
+Unlike prewrite, res.send is **100%** customizable if you use `setSender`.
+
+Before sending data using `res.send`, `setSender` must be called for the new sender to be applied. So it is recommended to use it in the [config file](/docs/config).
+
+```ts
+import { defaultSender, setSender } from 'zely';
+
+setSender(async (req, res, chunk, status) => {
+  console.log(`response: ${JSON.stringify(chunk)} (request: ${req.url})`);
+  defaultSender(req, res, chunk, status);
+});
+```
+
+- output
+
+```txt {3}
+$ zely dev
+...
+response: {"id":2,"nickname":""} (request: /hello/test)
+```
+
+## prewrite vs setSender

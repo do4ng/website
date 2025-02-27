@@ -9,8 +9,8 @@ Here's an example of a middleware function:
 ```ts [title="middlewares/message.ts"]
 import { Middleware } from 'zely';
 
-export const Message: Middleware = (req, res, next) => {
-  (req as any).message = 'Hello World!';
+export const Message: Middleware = (ctx, next) => {
+  (ctx as any).message = 'Hello World!';
   next();
 };
 ```
@@ -18,7 +18,7 @@ export const Message: Middleware = (req, res, next) => {
 ```ts [title="pages/index.ts"]
 export default [
   GET((ctx) => {
-    ctx.send(ctx.request.message);
+    ctx.send(ctx.message);
   }),
 ];
 ```

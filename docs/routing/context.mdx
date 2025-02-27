@@ -1,8 +1,4 @@
-Starting from v2, the parameter `context` is provided instead of `req` and `res` in handlers exported by default.
-
-> Note: The context function is only supported in `export default`.
->
-> Just `export` will no longer be updated and only `export default` will be updated intensively.
+Starting from v2, the parameter `context` is provided instead of `req` and `res` in handlers.
 
 ```ts
 export default [(ctx) => {}];
@@ -29,25 +25,99 @@ export default [(ctx) => {}];
 ```ts
 export default [
   (ctx) => {
-    ctx.request; // request
-    ctx.response; // response
-  },
-];
-```
-
-## Migration
-
-```diff
-export default [
--  (req, res) => {
-+  (ctx) => {
--    res.end("Hello World!");
-+    ctx.send("Hello World!");
+    const req = ctx.request; // request
+    const res = ctx.response; // response
   },
 ];
 ```
 
 ## Reference
 
-> Reference: [/server/context.ts](https://github.com/zely-js/zely/blob/main/packages/zely/src/server/context.ts)  
-> Reference: [/types/core.d.ts](https://github.com/zely-js/zely/blob/main/packages/zely/types/core.d.ts#L51)
+> [server/context.ts](https://github.com/zely-js/senta/blob/main/packages/senta/src/server/context.ts)
+
+````ts
+import type { IncomingMessage, ServerResponse } from 'node:http';
+import type { ParsedUrlQuery } from 'node:querystring';
+import { URL } from 'node:url';
+import type { Nullable, JsonType } from '../types';
+import { SentaResponse } from './response';
+export interface DevelopmentEnvironment {
+  pattern: RegExp;
+  path: string;
+  params: string[];
+}
+export declare class Context {
+  /**
+   * `node:http.IncomingMessage`
+   *
+   * default nodejs request type
+   *
+   * @alias `ctx.res`
+   */
+  request: IncomingMessage;
+  /**
+   * `node:http.ServerResponse`
+   *
+   * default nodejs response type
+   *
+   * @alias `ctx.res`
+   */
+  response: ServerResponse;
+  /**
+   * query data
+   *
+   * ```txt
+   * /abc?foo=bar => {foo: "bar"}
+   * ```
+   */
+  query: ParsedUrlQuery;
+  /**
+   * ```txt
+   * /api/users.ts => GET /api/users => {}
+   * /api/user/[id]/index.ts => GET /api/user/hello => {id: "hello"}
+   * ```
+   */
+  params: Record<string, string | null>;
+  url: URL;
+  pathname: string;
+  __DEV__: Nullable<DevelopmentEnvironment>;
+  constructor(
+    req: IncomingMessage,
+    res: ServerResponse,
+    init?: {
+      path: string;
+      params: string[];
+    },
+  );
+  send(
+    chunk: string | number | JsonType | boolean | bigint | SentaResponse,
+    status?: number,
+  ): void;
+  html(body: string): void;
+  json(body: JsonType): void;
+  text(body: string): void;
+  redirect(url: string, status?: number): void;
+  /**
+   * set only one header
+   *
+   * ```ts
+   * ctx.setHeader('Content-Type', 'text/plain');
+   * ```
+   *
+   * @param field header field
+   * @param value header value
+   * @returns context
+   */
+  set(field: string, value: string): this;
+  /**
+   * set multiple headers
+   *
+   * ```ts
+   * ctx.headers({"foo": "bar"});
+   * ```
+   * @param headers Headers object
+   */
+  headers(headers: JsonType): void;
+  status(status: number): this;
+}
+````
