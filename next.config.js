@@ -8,6 +8,15 @@ const nextConfig = {
    * @type {import("sass").Options<"sync">}
    */
   sassOptions: {},
+  async redirects() {
+    return [
+      {
+        source: '/serpack',
+        destination: '/serpack/introduction',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
