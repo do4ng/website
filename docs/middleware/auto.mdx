@@ -21,8 +21,8 @@ This is because Zely will use the default export from each file in the middlewar
 ```ts [title="middlewares/message.ts"]
 import { Middleware } from 'zely';
 
-const Message: Middleware = (req, res, next) => {
-  (req as any).message = 'Hello World!';
+const Message: Middleware = (ctx, next) => {
+  (ctx as any).message = 'Hello World!';
 
   next();
 };
@@ -36,5 +36,3 @@ While Auto Mode can save time and effort,
 it's important to be aware that it may also load unnecessary files if they are placed in the middleware directory.
 This could potentially cause performance issues.
 Therefore, it's recommended to only place middleware files in the middleware directory when using Auto Mode.
-
-> Note: [`@zely/builder`](/docs/zely-builder) doesn't support auto mode.
