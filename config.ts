@@ -114,7 +114,13 @@ export default [
     category: [
       {
         name: 'CLI',
-        posts: [{ cli: 'cli' }, { init: 'init' }, { start: 'start' }, { dev: 'dev' }],
+        posts: [
+          { cli: 'cli' },
+          { dev: 'Developement Mode' },
+          { build: 'Build Server' },
+          { init: 'Init Project' },
+          { start: 'Production Mode' },
+        ],
       },
       {
         name: 'Javascript API',
@@ -122,6 +128,7 @@ export default [
           { 'javascript-api': 'Javascript API' },
           { config: 'Config' },
           { 'create-server': 'Create Server' },
+          { 'build-server': 'Build Server' },
           { 'virtual-page': 'Virtual Pages' },
         ],
       },

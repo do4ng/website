@@ -1,0 +1,46 @@
+The build function bundles multiple server components into one file.
+
+## Description
+
+_The build function_ bundles multiple scattered pages into one and
+register those pages as [virtualPage](/apis/virtual-page).
+
+<Box type="info">
+  Server builders use [serpack](/serpack) when bundling due to future compatibility
+  issues.
+</Box>
+
+## Supported Features
+
+| Feature                                                          | Support     | Note             |
+| ---------------------------------------------------------------- | ----------- | ---------------- |
+| JavaScript/TypeScript page                                       | ✅          |                  |
+| [Frontend Page](/docs/frontend)                                  | ✅          |                  |
+| Esbuild Loader                                                   | ❌          | _No plan_        |
+| **Option**                                                       | **Support** | **Note**         |
+| [config.middlewares](/apis/config#middlewares)                   | ✅          |                  |
+| [config.allowAutoMiddlewares](/apis/config#allowautomiddlewares) | ❌          | _In Development_ |
+| [config.plugins](/plugins/overview)                              | ✅          |                  |
+| [config.\_\_virtuals\_\_](/apis/virtual-page)                    | ✅          |                  |
+
+## In JavaScript
+
+> Import `build` from the `zely` module and then use it:
+
+```ts
+import { build } from 'zely';
+
+build({
+  /* options */
+  build: {
+    // output directory
+    dist: './build/',
+  },
+});
+```
+
+## In CLI
+
+```bash
+zely build
+```
