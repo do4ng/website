@@ -38,7 +38,6 @@ export function Header() {
     });
   }, [pathname, path]);
 
-  console.log(pathname);
   return (
     <>
       <header
