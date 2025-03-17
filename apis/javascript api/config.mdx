@@ -2,14 +2,21 @@
 
 Defines the server-related settings for your application.
 
-- **`port`**  
-  The port your server will use.  
-  **Type**: `number`  
-  **Default**: `3000`
+### server.port
 
-- **`options`**  
-  HTTP server options (from `import("senta").Config`).  
-  **Type**: `ServerOptions`
+The port your server will use.
+
+| Type        | `number` |
+| ----------- | -------- |
+| **Default** | 3000     |
+
+### server.options
+
+HTTP server options (from `import("senta").Config`).
+
+| Type        | `import("senta").Config` |
+| ----------- | ------------------------ |
+| **Default** | {}                       |
 
 ```ts
 import { createServer } from 'http';
@@ -22,105 +29,126 @@ export interface Config {
 }
 ```
 
----
-
 ## cwd
 
-Specifies the base directory for your application.  
-**Type**: `string`  
-**Default**: Current working directory.
+Specifies the base directory for your application.
 
----
+| Type        | `string`      |
+| ----------- | ------------- |
+| **Default** | process.cwd() |
 
 ## middlewares
 
-Defines an array of middleware functions for the application.  
-**Type**: `Middleware[]`  
-[Learn more](https://zely.vercel.app/docs/middleware)
+Defines an array of middleware functions for the application.
 
----
+| Type        | `Middleware[]` |
+| ----------- | -------------- |
+| **Default** | []             |
+
+[Learn more](https://zely.vercel.app/docs/middleware)
 
 ## allowAutoMiddlewares
 
-Allows automatic importing of middleware from a specified directory.  
-**Type**: `boolean`  
-**Default**: `false`  
-[Learn more](https://zely.vercel.app/docs/auto)
+Allows automatic importing of middleware from a specified directory.
 
----
+| Type        | `boolean` |
+| ----------- | --------- |
+| **Default** | false     |
+
+[Learn more](https://zely.vercel.app/docs/auto)
 
 ## middlewareDirectory
 
-Specifies the directory containing middleware files.  
-**Type**: `string`  
-**Default**: `"middlewares"`  
-[Learn more](https://zely.vercel.app/docs/auto)
+Specifies the directory containing middleware files.
 
----
+| Type        | `string`       |
+| ----------- | -------------- |
+| **Default** | ./middlewares/ |
+
+[Learn more](https://zely.vercel.app/docs/auto)
 
 ## loaders
 
-Specifies custom loaders for TypeScript or JavaScript files.  
-**Type**: `Loader[]`
+Specifies custom loaders for TypeScript or JavaScript files.
 
----
+| Type        | `Loader[]` |
+| ----------- | ---------- |
+| **Default** | []         |
+
+Unless otherwise specified, zely automatically uses the esbuild or serpack loader.
+
+## plugins
+
+Defines an array of plugins for the application.
+
+| Type        | `Plugin[]` |
+| ----------- | ---------- |
+| **Default** | []         |
 
 ## dist
 
-Defines the output directory for build artifacts.  
-**Type**: `string`  
-**Default**: `.zely`
+Defines the output directory for build artifacts.
 
----
+| Type        | `string` |
+| ----------- | -------- |
+| **Default** | ./.zely/ |
 
 ## globalImport
 
-Enables automatic importing of methods like `GET`, `POST`, etc.  
-**Type**: `boolean`  
-**Default**: `false`
+Enables automatic importing of methods like `GET`, `POST`, etc.
 
----
+| Type        | `boolean` |
+| ----------- | --------- |
+| **Default** | false     |
 
 ## onError
 
-A callback function to handle errors.  
-**Type**: `(err: Error) => void | Promise<void>`
+A callback function to handle errors.
 
----
-
-## enableReporter
-
-Enables logging of error messages.  
-**Type**: `boolean`  
-**Default**: `true`
-
----
+| Type        | `(err: Error) => void \| Promise<void>` |
+| ----------- | --------------------------------------- |
+| **Default** | null                                    |
 
 ## keepDist
 
-Keeps the `.zely` directory for debugging purposes, including source maps for error reporting.  
-**Type**: `boolean`  
-**Default**: `false`
+Keeps the `.zely` directory for debugging purposes, including source maps for error reporting.
 
----
+| Type        | `boolean` |
+| ----------- | --------- |
+| **Default** | false     |
 
 ## \_\_virtuals\_\_
 
-Defines virtual pages for dynamic routing.  
-**Type**: `any[]`  
+Defines virtual pages for dynamic routing.
+
+| Type        | `any[]` |
+| ----------- | ------- |
+| **Default** | []      |
+
 [Learn more](https://zely.vercel.app/apis/virtual-page)
 
 ---
 
 ## experimental
 
-Enables experimental features.  
-**Type**: `ExperimentalFeatures`
+Enables experimental features.
 
-### **Experimental Features**
+### experimental.useHTML
 
-- **`useHTML`**  
-  Enables an enhanced HTML renderer. Requires the `segify` package.  
-  **Type**: `boolean`  
-  **Default**: `false`  
-  [Learn more](https://segify.vercel.app/)
+Enables an enhanced HTML renderer. Requires the `segify` package.
+
+| Type        | `boolean` |
+| ----------- | --------- |
+| **Default** | false     |
+
+[Learn more](https://segify.vercel.app/)
+
+### experimental.useSerpack
+
+Enables an serpack loader instead of esbuild.
+
+| Type        | `boolean` |
+| ----------- | --------- |
+| **Default** | false     |
+
+[Learn more](/serpack)
