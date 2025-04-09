@@ -5,6 +5,10 @@ export interface Post {
 
 export default [
   {
+    title: 'Introducing 4.0!',
+    date: '25-03-17',
+  },
+  {
     title: 'New Compiler',
     date: '25-01-13',
   },

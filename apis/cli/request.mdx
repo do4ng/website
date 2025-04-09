@@ -1,0 +1,53 @@
+You can test simple server operation without a separate external program.
+
+<Box type="warning">Run this command with the server turned on.</Box>
+
+```ansi
+$ zely request
+
+▸ baseURL: [1m[32mhttp://localhost:3001[39m[22m
+
+[90m[12:31:35 AM][39m [1m[34minfo[39m[22m [1mchecking server... (requesting /)[22m
+
+[1m[34mGET[39m[22m> /
+[32m200[39m {"msg":"Hello","name":""}
+[1m[34mGET[39m[22m>
+```
+
+Set header or method using JavaScript code in input prompt.
+
+```ansi
+[1m[34mGET[39m[22m> config1 = { method: "POST", headers: { }, body: { name: "Cat" } }
+[1m[34mGET[39m[22m> set(config1)
+[1m[34mPOST[39m[22m[90m(config1)[39m> /greeting
+[32m200[39m Hello, Cat!
+```
+
+<Box>All commands except those starting with `/` are treated as JavaScript code.</Box>
+<Box>Declare variables without declaration statements such as `const` or `let`.</Box>
+
+## Functions
+
+The prompt has a few functions to help with the request.
+
+### set()
+
+Set request options.
+
+```js
+set({
+  method: 'METHOD',
+  headers: {
+    /* headers*/
+  },
+  body: {
+    /* body */
+  },
+});
+```
+
+## Arguments
+
+| **option** | **description** | **default** |
+| ---------- | --------------- | ----------- |
+| `base`     | Base URL        |             |
