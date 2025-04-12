@@ -120,7 +120,7 @@ export default [
           { build: 'Build Server' },
           { init: 'Init Project' },
           { start: 'Production Mode' },
-          { request: 'Fetch Pages' },
+          { request: 'Request Pages' },
         ],
       },
       {
