@@ -56,16 +56,15 @@ export default [
           { 'provided-middlewares': 'Provided Middlewares' },
         ],
       },
+      {
+        name: 'Advanced',
+        posts: [{ 'server-data': 'Server Data' }, { serpack: 'Serpack' }],
+      },
 
       {
         hidden: true,
         name: 'Frontend',
         posts: [{ frontend: 'Frontend' }, { html: 'HTML' }],
-      },
-      {
-        hidden: true,
-        name: 'Devtools',
-        posts: [{ devtools: 'Devtools' }, { 'setup-devtools': 'Setup Devtools' }],
       },
       {
         name: 'Migration',
