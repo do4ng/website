@@ -1,0 +1,74 @@
+<Box type="warning">This feature is currently under development.</Box>
+
+A feature has been added to execute functions that take a long time to compute or degrade performance only on the first request and then send stored cache data.
+
+To use this feature, you must change your function according to the following rules:
+
+1. The function must be an asynchronous function. (or return `new Promise()`)
+2. The function name must start with `$`.
+
+> Rule 2 is a temporary solution to prevent excessive caching. It can be modified to a better rule at any time.
+
+```ts
+import { GET } from '@zely-js/core';
+import { setTimeout } from 'timers/promises';
+
+async function $greeting(name: string) {
+  await setTimeout(1000);
+  return `Hello, ${name}!`;
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await $greeting(ctx.params.name);
+
+    ctx.send(message);
+  }),
+];
+```
+
+After the first request, the `$greeting` function will no longer be executed.
+
+<Box type="info">
+
+The code in line 11 will be:
+
+```js
+const t = yield $serpack_cache(
+  $greeting(e.params.params),
+  this.context,
+  '$greeting'
+);
+```
+
+</Box>
+
+Data is stored with the following IDs:
+
+```ts
+const id = `${name}-${context.__DEV__.path}-${Object.values(context.params).join('-')}`;
+```
+
+## Try this feature
+
+It is not yet complete, so it is provided in plugin.
+
+```ts
+// .serpackrc.ts
+
+// before all, install plugin:
+// npm i --save-dev @zely-js/optimizer
+import { optimizer } from '@zely-js/optimizer';
+
+export default <import('serpack').Options>{
+  compilerOptions: {
+    plugins: [optimizer()],
+  },
+};
+```
+
+To use this feature, enable the [`--serpack` flag](/serpack/introduction).
+
+```bash
+zely dev --serpack
+```
