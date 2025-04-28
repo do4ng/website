@@ -1,0 +1,101 @@
+기존 zely에서 정적 서버 데이터를 위한 기능이 따로 있지 않았습니다. 기존 zely1에서 잠깐 등장했던 [staticProps](https://zely.netlify.app/blog/2023-11-05#static-props) 기능은 잠시 모습을 보이고 2.0으로 들어가며 사라졌습니다.
+이번 static props를 캐싱하는 기능은 더욱 더 업데이트되어 돌아왔습니다.
+이젠 그냥 비동기 함수를 작성하기만 하면 바로 캐싱이 이루어져서 다음 요청부터는 캐싱된 데이터를 사용하게 됩니다!
+
+## 예시
+
+예시를 들어봅시다.
+
+```ts
+import { GET } from '@zely-js/core';
+import { setTimeout } from 'timers/promises';
+
+async function greeting(name: string) {
+  await setTimeout(1000);
+  return `Hello, ${name}!`;
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await greeting(ctx.params.name);
+
+    ctx.send(message);
+  }),
+];
+```
+
+좀 극단적인 예시긴 하지만 어떠한 데이터가 너무 방대하여 불러올려면 1초 정도의 시간이 필요하다고 생각합시다.
+이러면 해당 데이터가 정적인 데이터라서 매 요청마다 이런 데이터를 불러오면 아주 비효율적인 방법입니다.
+
+그래서 이 문제를 해결하기 위해선 변수를 생성하고 저장하는 식으로 작동시켜야 합니다.
+
+```ts
+let message;
+
+async function greeting(name: string) {
+  if (message) return message;
+
+  await setTimeout(1000);
+
+  message = `Hello, ${name}!`;
+  return message;
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await greeting(ctx.params.name);
+
+    ctx.send(message);
+  }),
+];
+```
+
+하지만... 페이지 파라미터 (/user/:id의 id처럼)가 계속 바뀌는 페이지라면 어떡하나요? 각각의 파라미터에 대한 데이터를 저장하고.. 아무튼 굉장히 복잡한 작업입니다.
+
+## 해결
+
+4.0에서는 이 문제를 간단하게 해결할 수 있습니다.
+
+그냥 아래 두 가지 규칙만 지키면 원하는 마법이 일어납니다.
+
+1. 비동기 함수일 것.
+2. 함수 이름이 $로 시작할 것.
+
+예시를 들어봅시다.
+
+위 코드를
+
+```ts
+async function $greeting(name: string) {
+  await setTimeout(1000);
+  return `Hello, ${name}!`;
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await $greeting(ctx.params.name);
+
+    ctx.send(message);
+  }),
+];
+```
+
+이렇게만 바꾸면 됩니다.
+
+이렇게 하면 serpack이 자동으로 코드를 바꾸어 각각의 파라미터의 데이터를 캐시 형태로 저장합니다. (각각의 캐시의 수명은 6분입니다. )
+
+## 시도해보기
+
+아직은 테스트할 것이 많고 모든 상황에서 이상적으로 작동하는지 모릅니다.
+그래서 플러그인 형태로 제공이 됩니다
+
+```ts
+// .serpackrc.ts
+import { optimizer } from '@zely-js/optimizer';
+
+export default <import('serpack').Options>{
+  compilerOptions: {
+    plugins: [optimizer()],
+  },
+};
+```

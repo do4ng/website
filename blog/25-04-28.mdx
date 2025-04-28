@@ -1,0 +1,109 @@
+In previous versions of Zely, there wasn't a dedicated feature for static server data.  
+The [staticProps](https://zely.netlify.app/blog/2023-11-05#static-props) feature that briefly appeared in Zely 1.0 disappeared as we moved toward Zely 2.0.  
+Now, static props caching is back — more powerful and updated than ever.
+
+Starting from this version, caching happens automatically just by writing an asynchronous function.  
+From the second request onward, the cached data will be used instead of fetching it again!
+
+## Example
+
+Let's walk through an example.
+
+```ts
+import { GET } from '@zely-js/core';
+import { setTimeout } from 'timers/promises';
+
+async function greeting(name: string) {
+  await setTimeout(1000);
+  return `Hello, ${name}!`;
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await greeting(ctx.params.name);
+    ctx.send(message);
+  }),
+];
+```
+
+In this rather extreme example, imagine that fetching some data takes about one second due to its size.  
+If this data is static, repeatedly fetching it for every request would be highly inefficient.
+
+To solve this problem, we could manually create and store a variable, like this:
+
+```ts
+let message = {};
+
+async function greeting(name: string) {
+  if (message[name]) return message[name];
+
+  await setTimeout(1000);
+
+  message[name] = `Hello, ${name}!`;
+  return message[name];
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await greeting(ctx.params.name);
+    ctx.send(message);
+  }),
+];
+```
+
+Saving and managing data for each different parameter becomes much more complicated.
+
+## The Solution
+
+In Zely 4.0, this entire process is greatly simplified.
+
+You just need to follow two rules:
+
+1. The function must be asynchronous.
+2. The function name must start with a `$`.
+
+> Rule 2 is a temporary solution to prevent excessive caching. It can be modified to a better rule at any time.
+
+Here's how the previous example can be updated:
+
+```ts
+async function $greeting(name: string) {
+  await setTimeout(1000);
+  return `Hello, ${name}!`;
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await $greeting(ctx.params.name);
+    ctx.send(message);
+  }),
+];
+```
+
+That's it.
+
+By simply renaming the function with a `$` prefix, [serpack](/serpack) will automatically transform the code to cache the result for each parameter separately.  
+Each cached entry will expire after 6 minutes.
+
+## Try It Out
+
+This feature is still under active testing, and it may not yet behave perfectly in every situation.  
+For now, it is provided as a plugin.
+
+You can enable it like this:
+
+```ts
+// .serpackrc.ts
+import { optimizer } from '@zely-js/optimizer';
+
+export default <import('serpack').Options>{
+  compilerOptions: {
+    plugins: [optimizer()],
+  },
+};
+```
+
+<Box type="info">
+  This plugin is intended exclusively for the Serpack compiler. To use this feature, make
+  sure to enable the `--serpack` flag.
+</Box>
