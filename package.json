@@ -17,6 +17,7 @@
     "@docsearch/react": "3",
     "@mdx-js/mdx": "^3.0.0",
     "@popperjs/core": "^2.11.8",
+    "@vercel/analytics": "^1.5.0",
     "algoliasearch": "^4.24.0",
     "mdast": "^3.0.0",
     "mdast-util-to-string": "^4.0.0",

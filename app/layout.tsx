@@ -5,6 +5,7 @@
 import { usePathname } from 'next/navigation';
 import NextTopLoader from 'nextjs-toploader';
 import Link from 'next/link';
+import { Analytics } from '@vercel/analytics/react';
 
 import '@/styles/global.scss';
 import config from '@/config';
@@ -53,6 +54,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Analytics />
         <NextTopLoader showSpinner={false} height={2} color="#ca4f559f" />
         <script src="/theme.js" async></script>
         <div className="app">
