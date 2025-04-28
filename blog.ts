@@ -5,6 +5,10 @@ export interface Post {
 
 export default [
   {
+    title: '@zely-js/optimizer for Static Data!',
+    date: '25-04-28',
+  },
+  {
     title: 'Introducing 4.0!',
     date: '25-03-17',
   },

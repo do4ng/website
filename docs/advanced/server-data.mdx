@@ -2,6 +2,21 @@
 
 A feature has been added to execute functions that take a long time to compute or degrade performance only on the first request and then send stored cache data.
 
+<Tabs>
+  <TabItem id="optimizer on">
+    > You can see that after the first request, all responses are printed immediately.
+
+    <video src="/assets/cmd-optimized.mp4" width="100%" height="100%" controls></video>
+
+  </TabItem>
+  <TabItem id="optimizer off">
+    > You can see that it sends a response after 1 second for every response.
+
+    <video src="/assets/cmd-dev.mp4" width="100%" height="100%" controls></video>
+
+  </TabItem>
+</Tabs>
+
 To use this feature, you must change your function according to the following rules:
 
 1. The function must be an asynchronous function. (or return `new Promise()`)
@@ -51,7 +66,7 @@ const id = `${name}-${context.__DEV__.path}-${Object.values(context.params).join
 
 ## Try this feature
 
-It is not yet complete, so it is provided in plugin.
+This feature is provided in [serpack plugin](/serpack/plugin-guide).
 
 ```ts
 // .serpackrc.ts
