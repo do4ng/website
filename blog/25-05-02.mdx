@@ -1,0 +1,192 @@
+Zely is a backend framework that routes differently by automatically generating routes from your file tree, like Next.js. If you're familiar with Express, this tutorial will outline the key differences and how to migrate your Express routes to Zely seamlessly.
+
+## Major Differences Between Express and Zely
+
+1. **Routing Based on File Tree**
+   As compared to Express, where you manually define routes within the application, Zely generates routes automatically based on your directory structure within the `pages` directory.
+
+2. **No `app.get()` or `app.post()` Needed**
+   In Express, you define routes by using functions such as `app.get()` or `app.post()`. Zely does not require any of these because it generates routes by simply exporting functions or handler arrays in their respective `.ts` files.
+
+3. **Built-in Static Props Caching**
+   Zely has automatic caching of static data without any additional manual intervention.
+
+---
+
+## 1. **Initial Setup of Your Project with Zely**
+
+To begin, you need to install Zely in your project. Here's how:
+
+```bash
+npm install zely
+```
+
+Next, you can create a `pages/` directory where your routes will live.
+
+---
+
+## 2. **Zely File-Based Routing**
+
+With Zely, your file structure defines the routes automatically.
+
+### Example with Express:
+
+```js
+app.get('/hello', (req, res) => {
+  res.send('Hello, World!');
+});
+```
+
+### Zely Equivalent:
+
+```txt
+pages/
+└── hello.ts → GET /hello
+```
+
+Simply create a file called `hello.ts` in the `pages/` directory, and Zely will do the routing for you with the `/hello` route.
+
+### Zely Route Parameters
+
+In Express, dynamic parameters in routes are defined like this:
+
+```js
+app.get('/user/:id', (req, res) => {
+  res.send(`User ID is ${req.params.id}`);
+});
+```
+
+In Zely, the same dynamic route is established by naming the file with square brackets `[id].ts`:
+
+```txt
+pages/
+└── user/[id].ts → GET /user/:id
+```
+
+### Example for Route Parameters in Zely:
+
+```ts
+// pages/user/[id].ts
+import type { Context } from 'zely';
+
+export function get(ctx: Context) {
+  ctx.send({ id: ctx.params.id });
+}
+```
+
+This code automatically manages the route `/user/:id` and sends back the `id` parameter.
+
+---
+
+## 3. **Defining Route Handlers in Zely**
+
+Zely supports two ways of defining route handlers: **Array Handlers** and **Named Handlers**. For clarity, we recommend using **Array Handlers** to handle multiple HTTP methods.
+
+### Express Example:
+
+```js
+app.get('/cat', (req, res) => {
+  res.send({ type: 'cat', emoji: '????' });
+});
+
+app.post('/cat', (req, res) => {
+  res.send({ type: 'dog', emoji: '????' });
+});
+```
+
+### Zely Equivalent with Array Handlers:
+
+```ts
+import { GET, POST } from 'zely';
+
+export default [
+  GET((ctx) => ctx.send({ type: 'cat', emoji: '' })),
+  POST((ctx) => ctx.send({ type: 'dog', emoji: '' })),
+];
+```
+
+Here, both `GET` and `POST` handlers are being grouped together into a single array to keep the code concise and readable.
+
+### Zely Named Handlers (for brevity):
+
+```ts
+import type { Context } from 'zely';
+
+export function get(ctx: Context) {
+  ctx.send({ type: 'cat', emoji: '????' });
+}
+
+export function post(ctx: Context) {
+  ctx.send({ type: 'dog', emoji: '????' });
+}
+```
+
+While named handlers are an easier solution, array handlers are preferred for improved scalability and readability when dealing with multiple methods.
+
+## 4. **Automatic Static Data Caching**
+
+Static data handling is made easier by Zely through built-in caching. For example, if a route is making a call to fetch static data, Zely caches it automatically on the first request. The cache will then be used on the next requests, keeping your server from unnecessary load.
+
+### Example:
+
+In Express, you would cache static data manually:
+
+```js
+let messageCache = {};
+
+app.get('/greeting', (req, res) => {
+  if (messageCache[req.query.name]) {
+    return res.send(messageCache[req.query.name]);
+  }
+
+  // Simulate a delay or external API call
+  setTimeout(() => {
+    const message = `Hello, ${req.query.name}!`;
+    messageCache[req.query.name] = message;
+    res.send(message);
+  }, 1000);
+});
+```
+
+In Zely, the same thing is done automatically by just declaring your async function with a `$` prefix:
+
+```ts
+async function $greeting(name: string) {
+  // Simulate a delay
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  return `Hello, ${name}!`;
+}
+
+export default [
+  GET(async (ctx) => {
+    const message = await $greeting(ctx.params.name);
+    ctx.send(message);
+  }),
+];
+```
+
+Zely also automatically caches the value of `$greeting` for 6 minutes after the initial request.
+
+## 5. **HTML and Frontend Support**
+
+Zely can also be utilized to create frontend pages with HTML files. You can enable this feature by a mere configuration change.
+
+### Example:
+
+```ts
+import { defineConfig } from 'zely';
+
+export default defineConfig({
+  experimental: {
+    useHTML: true,
+  },
+});
+```
+
+This allows you to serve static HTML pages along with your API routes.
+
+## Conclusion
+
+Migrating from Express to Zely is a smooth process, especially if you are already used to Next.js-style routing. Zely gets rid of most of the boilerplate work that you'd normally do in Express, including routing and caching static information. By embracing Zely's file-based routing and streamlined handler management, you can proceed to build features without being bottlenecked by mundane setups.
+
+If you're ready to enjoy the advantage of Zely's performance and convenience, start by organizing your routes in the `pages/` directory and define your handlers as array or named handlers. With Zely, your backend development is faster and enjoyable.
