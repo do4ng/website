@@ -1,0 +1,16 @@
+Modifier is a function that helps to easily modify low-level AST.
+
+> Currently supported types: `callee`.
+
+```ts
+export default <import('serpack').Options>{
+  compilerOptions: {
+    modifier: {
+      caller(node) {
+        // do something
+        return node;
+      },
+    },
+  },
+};
+```

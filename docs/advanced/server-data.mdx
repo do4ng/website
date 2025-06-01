@@ -3,13 +3,13 @@
 A feature has been added to execute functions that take a long time to compute or degrade performance only on the first request and then send stored cache data.
 
 <Tabs>
-  <TabItem id="optimizer on">
+  <TabItem id="With $store">
     > You can see that after the first request, all responses are printed immediately.
 
     <video src="/assets/cmd-optimized.mp4" width="100%" height="100%" controls></video>
 
   </TabItem>
-  <TabItem id="optimizer off">
+  <TabItem id="Without $store">
     > You can see that it sends a response after 1 second for every response.
 
     <video src="/assets/cmd-dev.mp4" width="100%" height="100%" controls></video>
@@ -17,30 +17,26 @@ A feature has been added to execute functions that take a long time to compute o
   </TabItem>
 </Tabs>
 
-To use this feature, you must change your function according to the following rules:
-
-1. The function must be an asynchronous function. (or return `new Promise()`)
-2. The function name must start with `$`.
-
-> Rule 2 is a temporary solution to prevent excessive caching. It can be modified to a better rule at any time.
-
 ```ts
 import { GET } from '@zely-js/core';
 import { setTimeout } from 'timers/promises';
 
-async function $greeting(name: string) {
+async function $greeting() {
   await setTimeout(1000);
-  return `Hello, ${name}!`;
+  return 'Hello, Doe!';
 }
 
 export default [
   GET(async (ctx) => {
-    const message = await $greeting(ctx.params.name);
-
-    ctx.send(message);
+    const { data } = await $store($greeting);
+    ctx.send(data);
   }),
 ];
 ```
+
+<Box type="tip">
+  You don't need to import any other modules. Just use the `$store` function directly.
+</Box>
 
 After the first request, the `$greeting` function will no longer be executed.
 
@@ -49,40 +45,30 @@ After the first request, the `$greeting` function will no longer be executed.
 The code in line 11 will be:
 
 ```js
-const t = yield $serpack_cache(
-  $greeting(e.params.params),
-  this.context,
-  '$greeting'
+let { data: r } = yield $store(
+  $greeting,
+  [],
+  'pages\\index.ts-586' // unique id
 );
+e.send(r);
 ```
 
 </Box>
 
-Data is stored with the following IDs:
+## Dependencies
+
+To handle dynamically changing dependencies, such as parameters (req.params),
+you can register dependencies with the store.
 
 ```ts
-const id = `${name}-${context.__DEV__.path}-${Object.values(context.params).join('-')}`;
+$store(fn, [someDep]);
 ```
+
+Data is separated and stored based on the registered dependency value.
 
 ## Try this feature
 
-This feature is provided in [serpack plugin](/serpack/plugin-guide).
-
-
-```ts
-// .serpackrc.ts
-
-// before all, install plugin:
-// npm i --save-dev @zely-js/optimizer
-import { optimizer } from '@zely-js/optimizer';
-
-export default <import('serpack').Options>{
-  compilerOptions: {
-    plugins: [optimizer()],
-  },
-};
-```
-
+This feature works based on [serpack](/serpack).  
 To use this feature, enable the [`--serpack` flag](/serpack/introduction).
 
 ```bash

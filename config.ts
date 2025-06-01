@@ -200,6 +200,7 @@ export default [
           { sourcemap: 'Sourcemap' },
           { externals: 'Exclude node_modules' },
           { extension: 'Supported Extensions' },
+          { modifier: 'Modifier' },
         ],
       },
       {
