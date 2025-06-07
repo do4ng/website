@@ -3,7 +3,7 @@ import { Content } from '@/mdx/content';
 
 export default async function Index() {
   const res = await fetch(
-    'https://raw.githubusercontent.com/zely-js/zely/zely3/packages/zely/README.md',
+    'https://raw.githubusercontent.com/zely-js/zely/refs/heads/main/README.md',
   );
   const raw = await res.text();
 

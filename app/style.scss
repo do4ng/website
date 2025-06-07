@@ -260,10 +260,12 @@ i {
 .product-container {
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 560px;
   background-image: url('/bg.svg');
   background-repeat: no-repeat;
   background-size: cover;
+
+  padding-top: 125px;
 
   .title {
     position: relative;

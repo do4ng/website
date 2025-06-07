@@ -1,0 +1,94 @@
+serpack has been updated to 0.1.31. This update focuses on performance.
+
+## What has changed?
+
+The main modules used by serpack have changed.
+
+- `acorn` => `oxc-parser`
+- `escodegen` => `astring`
+
+## Performance Improvement
+
+The original (0.1.30) serpack took about `140ms` to bundle the serpack main module,
+but after the update (0.1.31), it took about `95ms`, showing a speed improvement of about **30%**.
+
+### In Zely
+
+I also tried applying it to the [@playground/typescript](#) sample server in the zely main repository.
+
+| Metric                             | `serpack@0.1.30` | `serpack@0.1.31` | Improvement      |
+| ---------------------------------- | ---------------- | ---------------- | ---------------- |
+| Average Compilation Time (3 files) | `36.10 ms`       | `22.13 ms`       | **38.7% faster** |
+| Server Startup Time                | `157.1 ms`       | `114.9 ms`       | **26.9% faster** |
+
+<Box>
+
+Raw:
+
+```txt
+// serpack@0.1.30
+
+[10:08:58 PM] debug [@zely-js/core:serpack-loader] compiled zely.config.ts in 71.34ms
+[10:08:58 PM] debug [@zely-js/core:serpack-loader] compiled middlewares\index.ts in 10.30ms
+
+[10:08:58 PM] info Server is running on http://localhost:3001. (Ready in 157.1ms)
+
+[10:09:01 PM] debug [@zely-js/core:serpack-loader] compiled pages\index.ts in 26.67ms
+
+// serpack@0.1.31
+
+[10:09:48 PM] debug [@zely-js/core:serpack-loader] compiled zely.config.ts in 48.69ms
+[10:09:48 PM] debug [@zely-js/core:serpack-loader] compiled middlewares\index.ts in 8.77ms
+
+[10:09:48 PM] info Server is running on http://localhost:3001. (Ready in 114.9ms)
+
+[10:09:49 PM] debug [@zely-js/core:serpack-loader] compiled pages\index.ts in 8.92ms
+
+```
+
+</Box>
+
+## Conclusion
+
+Serpack is a library that collects modules related to various JavaScript code analysis and transformations into a single compiler.
+In fact, when we checked through performance tracking, about 4/5 of the compilation time was spent using external modules.
+
+A function related to performance tracking was added in this update.  
+You cannot check it in the production module, but you can check it by cloning the [repository](https://github.com/zely-js/serpack) and building it locally.
+
+```txt
+[DEV]: Module "D:\serpack-js\packages\serpack\src\index.ts" compiled in 7.8
+[DEV]: Module "D:\serpack-js\packages\serpack\src\index.ts" parsed in 5.6
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\index.ts" compiled in 11.8
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\index.ts" parsed in 17.4
+[DEV]: Module "D:\serpack-js\packages\serpack-logger\dist\index.mjs" compiled in 5.9
+[DEV]: Module "D:\serpack-js\packages\serpack-logger\dist\index.mjs" parsed in 1.7
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\parse.ts" compiled in 3.0
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\parse.ts" parsed in 0.9
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\functions.ts" compiled in 1.6
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\functions.ts" parsed in 0.6
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\loader.ts" compiled in 2.1
+[DEV]: Module "D:\serpack-js\packages\serpack\src\core\loader.ts" parsed in 1.4
+[DEV]: Module "D:\serpack-js\packages\serpack\src\lib\root.ts" compiled in 1.7
+[DEV]: Module "D:\serpack-js\packages\serpack\src\lib\root.ts" parsed in 0.7
+[DEV]: Module "D:\serpack-js\packages\serpack\src\config.ts" compiled in 4.3
+[DEV]: Module "D:\serpack-js\packages\serpack\src\config.ts" parsed in 3.4
+[DEV]: Module "D:\serpack-js\packages\serpack\src\compile.ts" compiled in 2.6
+[DEV]: Module "D:\serpack-js\packages\serpack\src\compile.ts" parsed in 0.8
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\index.ts" compiled in 1.5
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\index.ts" parsed in 1.2
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\require.ts" compiled in 2.9
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\require.ts" parsed in 0.8
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\env.ts" compiled in 1.8
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\env.ts" parsed in 0.6
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\runtime.ts" compiled in 2.7
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\runtime.ts" parsed in 1.0
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\resolve-esm.ts" compiled in 2.0
+[DEV]: Module "D:\serpack-js\packages\serpack\src\runtime\resolve-esm.ts" parsed in 0.4
+[DEV]: Module "D:\serpack-js\packages\serpack\src\plugin.ts" compiled in 1.2
+[DEV]: Module "D:\serpack-js\packages\serpack\src\plugin.ts" parsed in 0.3
+[DEV]: Module "D:\serpack-js\packages\serpack\src\dependencies.ts" compiled in 1.9
+[DEV]: Module "D:\serpack-js\packages\serpack\src\dependencies.ts" parsed in 1.2
+[DEV]: Module bundled in 1.3 (sum: 94.39)
+Compiled in 95.72ms
+```

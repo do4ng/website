@@ -1,0 +1,37 @@
+## Overview
+
+- Target Versions
+
+```ts
+const targets = ['4.0.0-next.22', '3.0.0', '2.0.0-next.24', '1.0.0'];
+```
+
+> To measure more versions, edit `src/index.ts`
+
+## Benchmark Result
+
+| Pkg                                                                                                    | Latency     | Requests/Sec | Bytes/Sec |
+| ------------------------------------------------------------------------------------------------------ | ----------- | ------------ | --------- |
+| [**4.0.0-next.22:serpack-on (latest)**](https://www.npmjs.com/package/zely/v/4.0.0-next.22:serpack-on) | **0.02 ms** | 19.5K        | 2.49 MB   |
+| [**4.0.0-next.22:serpack-off (latest)**](https://www.npmjs.com/package/zely/v/4.0.0-next.22)           | **0.01 ms** | 19.5K        | 2.49 MB   |
+| [**3.0.0**](https://www.npmjs.com/package/zely/v/3.0.0)                                                | 1.06 ms     | 6.5K         | 848.84 KB |
+| [**2.0.0-next.24**](https://www.npmjs.com/package/zely/v/2.0.0-next.24)                                | 0.1 ms      | 12.7K        | 1.63 MB   |
+| [**1.0.0**](https://www.npmjs.com/package/zely/v/1.0.0)                                                | 0.02 ms     | 18.7K        | 2.39 MB   |
+
+<Box type="info">
+  The reason [serpack](/serpack) is `enabled` or `disabled` in the table above is to show
+  that the performance is similar regardless of whether it is turned on or off.
+</Box>
+
+> The above results is intended to compare relative performance across versions and may vary depending on the execution environment.
+
+## Run Benchmark
+
+To see the performance of past versions of zely, clone the [benchmarking repository](https://github.com/zely-js/benchmark-history).
+
+```bash
+yarn build # build zely versions / benchmark
+yarn build --keep # keep builds / benchmark
+```
+
+After running, check the automatically created `result.md`.

@@ -27,6 +27,7 @@ export default [
           { 'why-zely': 'Why Zely' },
           { 'getting-started': 'Getting Started' },
           { config: 'Config References' },
+          { benchmark: 'Performance' },
         ],
       },
       {

@@ -5,12 +5,8 @@ export interface Post {
 
 export default [
   {
-    title: 'Migrating from Express to Zely',
-    date: '25-05-02',
-  },
-  {
-    title: '@zely-js/optimizer for Static Data!',
-    date: '25-04-28',
+    title: 'Serpack v0.1.31',
+    date: '25-06-07',
   },
   {
     title: 'Introducing 4.0!',
