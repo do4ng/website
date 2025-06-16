@@ -59,7 +59,11 @@ export default [
       },
       {
         name: 'Advanced',
-        posts: [{ 'server-data': 'Server Data' }, { serpack: 'Serpack' }],
+        posts: [
+          { 'server-data': 'Server Data' },
+          { serpack: 'Serpack' },
+          { debugging: 'Debugging' },
+        ],
       },
 
       {
@@ -210,6 +214,10 @@ export default [
           { 'plugin-guide': 'Plugin Guide' },
           { 'generate-d-ts': 'Generate .d.ts' },
         ],
+      },
+      {
+        name: 'Dev',
+        posts: [{ 'serpack-only': 'serpack-only Feature' }],
       },
     ],
   },

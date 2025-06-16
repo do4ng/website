@@ -1,0 +1,23 @@
+serpack is a compiler built specifically to enhance the developer experience of zelyjs.
+
+## What are serpack-only features?
+
+Serpack supports low-level AST (Abstract Syntax Tree) modifications, and zely actively utilizes this capability.
+This means that zely may not function correctly when using alternative loaders such as **esbuild** (which is the default loader provided by zely).
+
+To enable serpack-only features, use the `--serpack` flag or enable the serpack option in your configuration file. - [How to enable serpack](/serpack/introduction#getting-started)
+
+## Do I need to enable serpack?
+
+Not necessarily. serpack is still under development and may contain unverified or unstable bugs.
+**If you prioritize stability, you are not required to use serpack.**
+
+However, as mentioned earlier, zely is already leveraging low-level AST manipulation through serpack.
+Therefore, some features in zely that rely on serpack will not be available unless serpack is enabled.
+
+## Conclusion
+
+All advanced and upcoming features of zely are built with serpack in mind.
+While we don't recommend serpack for production use just yet, if you want to unlock the full potential of zely, we recommend enabling serpack.
+
+> You may also find it helpful to read the [serpack documentation](/serpack).
