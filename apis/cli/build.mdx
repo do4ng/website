@@ -8,7 +8,55 @@
 zely-cli build
 ```
 
+<Box type="tip">
+  If you want to check the available options and more details, please visit the [API
+  page](/apis/build-server).
+</Box>
+
+## Bundle
+
+By default, the `build` command does **not** bundle files into a single output to reduce build time.
+If you want to bundle everything into a single file, use the `--bundle` flag:
+
+```bash
+zely-cli build --bundle
+```
+
+## Check Required Modules
+
+To check which modules are required to run the built server, add the `--emit-modules` flag.
+
+<Box type="info">
+  This option is provided by the builder itself, not the CLI module. So you need to
+  provide the flag in a way that the builder can interpret it correctly. Do **not** add
+  extra options like `--emit-modules=true`. Just use the `--emit-modules` flag as is.
+</Box>
+
+---
+
+The console output will look like the following:
+
+```txt
+yarn workspace @playground/typescript build --emit-modules
+[12:39:23 AM] info Compiling pages...
+ - @zely-js/core        (in pages/index.ts) [runtime]
+ - @zely-js/core        (in pages/[params]/test.ts) [runtime]
+ - timers/promises      (in pages/[params]/test.ts)
+ - @zely-js/core        (in pages/_404.ts) [runtime]
+[12:39:23 AM] info Compiling middlewares...
+[12:39:23 AM] info Compiling server...
+ - @zely-js/core        (in zely.config.ts) [runtime]
+ - @zely-js/zely        (in zely.config.ts) [runtime]
+ - node:module          (in middlewares.mjs)
+ - node:url             (in middlewares.mjs)
+ - url                  (in middlewares.mjs)
+
+[12:39:23 AM] info Done in 0.27s
+```
+
 ## Arguments
 
-| **option** | **description** | **default** |
-| ---------- | --------------- | ----------- |
+| **option**       | **description**           | **default** |
+| ---------------- | ------------------------- | ----------- |
+| `--bundle`       | Bundle into a Single File | `false`     |
+| `--emit-modules` | Check Required modules    | `false`     |

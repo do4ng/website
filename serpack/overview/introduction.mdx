@@ -17,10 +17,10 @@ npx serpack ./src/awesome-app.ts # run script
 [esbuild](https://esbuild.github.io) is an excellent bundler, but Zely is a framework with its own unique requirements and ecosystem.  
 Therefore, developing a custom bundler, serpack, tailored specifically for Zely, offers better technical independence, optimized performance, and a more seamless developer experience
 
-### Why SWC
+## How Does It Work?
 
-SWC provides low-level access to the AST, allowing serpack to apply specific transformations directly.  
-This makes it possible to inject custom runtime code, handle special decorators, and implement framework-level optimizations in ways that general-purpose bundlers like esbuild cannot easily support.
+The core mechanism of serpack is straightforward. When serpack compiles a TypeScript or JavaScript file, it first uses [SWC](https://swc.rs) to transform all files into JavaScript. Then, it analyzes the compiled output to apply features like plugins and [modifiers](/serpack/modifier).
+Finally, it bundles multiple files into a single output using Serpack's built-in bundling system. That's all.
 
 ## Getting Started
 
