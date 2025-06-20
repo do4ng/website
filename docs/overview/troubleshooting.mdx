@@ -1,0 +1,36 @@
+## Error: listen EADDRINUSE
+
+The port is already in use. Please choose a different [port](/apis/config#server.port).
+
+## Production build is only available in production mode.
+
+This occurs when you try to run the server in production mode, but `process.env.NODE_ENV` is not `production`.
+
+## $store is not defined
+
+[$store](/docs/server-data) is a feature that uses the serpack compiler, so if you don't use the serpack compiler, this feature won't work properly.
+
+```diff {4}
+{
+  "scripts": {
+-   "dev": "zely dev",
++   "dev": "zely dev --serpack",
+  }
+}
+```
+
+## A crash occurred while applying the optimization plugin.
+
+This error occurred due to a conflict with another plugin while applying [@zely-js/core:store](https://github.com/zely-js/zely/blob/main/packages/zely-js-core/src/runtime/store/compiler.ts).
+
+Try one of the following actions:
+
+- Remove the plugin that is expected to conflict.
+- Disable the [serpack](/serpack) compiler
+  and remove the code that uses [$store](/docs/server-data).
+
+## Error occurred while compiling server-side rendered HTML.
+
+This error occurs when server-side rendering fails when compiling HTML.
+
+> You can ignore this error. Also, since `4.0.0-next.22`, no errors are output when server-side rendering fails.

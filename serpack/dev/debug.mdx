@@ -1,0 +1,34 @@
+## --compiler-debug
+
+Add the `--compiler-debug` flag to trace how modules are resolved.
+If a module is excluded from the bundle, the reason for the exclusion will be shown as well.
+
+```txt
+[DEBUG]: Resolving module: src/index.ts
+[DEBUG]: Resolving module: src/core/index.ts
+[DEBUG]: Resolving module: node_modules/@swc/core/index.js [rejected - node_modules]
+[DEBUG]: Resolving module: node_modules/oxc-parser/index.js [rejected - node_modules]
+[DEBUG]: Resolving module: node_modules/oxc-resolver/index.js [rejected - node_modules]
+[DEBUG]: Resolving module: node_modules/estree-walker/dist/esm/estree-walker.js [rejected - node_modules]
+[DEBUG]: Resolving module: node_modules/astring/dist/astring.mjs [rejected - node_modules]
+[DEBUG]: Resolving module: node_modules/source-map/source-map.js [rejected - node_modules]
+[DEBUG]: Resolving module: node_modules/deepmerge-ts/dist/index.mjs [rejected - node_modules]
+[DEBUG]: Resolving module: packages/serpack-logger/dist/index.mjs
+[DEBUG]: Resolving module: node_modules/colors/lib/index.js [rejected - node_modules]
+[DEBUG]: Resolving module: src/core/parse.ts
+[DEBUG]: Resolving module: src/core/functions.ts
+[DEBUG]: Resolving module: src/core/loader.ts
+[DEBUG]: Resolving module: node_modules/vlq/src/index.js [rejected - node_modules]
+[DEBUG]: Resolving module: src/lib/root.ts
+[DEBUG]: Resolving module: src/config.ts
+[DEBUG]: Resolving module: src/compile.ts
+[DEBUG]: Resolving module: src/runtime/index.ts
+[DEBUG]: Resolving module: src/runtime/require.ts
+[DEBUG]: Resolving module: src/runtime/env.ts
+[DEBUG]: Resolving module: src/runtime/runtime.ts
+[DEBUG]: Resolving module: src/runtime/resolve-esm.ts
+[DEBUG]: Resolving module: src/plugin.ts
+[DEBUG]: Resolving module: src/dependencies.ts
+[DEBUG]: modules: {"src/index.ts":0,"src/core/index.ts":1,"src/core/functions.ts":2,"src/core/parse.ts":3,"src/config.ts":4,"src/compile.ts":5,"src/plugin.ts":6,"src/dependencies.ts":7,"packages/serpack-logger/dist/index.mjs":8,"src/core/loader.ts":9,"src/lib/root.ts":10,"src/runtime/index.ts":11,"src/runtime/require.ts":12,"src/runtime/env.ts":13,"src/runtime/runtime.ts":14,"src/runtime/resolve-esm.ts":15}
+[DEBUG]: Compiled Successfully in 95ms
+```

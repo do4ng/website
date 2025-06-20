@@ -28,6 +28,7 @@ export default [
           { 'getting-started': 'Getting Started' },
           { config: 'Config References' },
           { benchmark: 'Performance' },
+          { troubleshooting: 'Troubleshooting' },
         ],
       },
       {
@@ -217,7 +218,11 @@ export default [
       },
       {
         name: 'Dev',
-        posts: [{ 'serpack-only': 'serpack-only Feature' }],
+        posts: [
+          { 'serpack-only': 'serpack-only Feature' },
+          { debug: 'Debugging Mode' },
+          { roadmap: 'Roadmap' },
+        ],
       },
     ],
   },
