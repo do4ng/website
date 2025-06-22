@@ -35,6 +35,14 @@ const langs = {
   md: 'Markdown',
   json: 'JSON',
 };
+function extractText(children: any): string {
+  if (typeof children === 'string') return children;
+  if (Array.isArray(children)) return children.map(extractText).join('');
+  if (typeof children === 'object' && children?.props?.children) {
+    return extractText(children.props.children);
+  }
+  return '';
+}
 
 export const components = {
   h1: (props: any) => <h1 {...props}></h1>,
@@ -46,7 +54,11 @@ export const components = {
     return <Link {...props} prefetch={false}></Link>;
   },
   h2: (props: any) => {
-    const id = props.children.toString().replace(/ /g, '-').toLowerCase();
+    const text = extractText(props.children);
+    const id = text
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]/g, '');
     return (
       <h2 id={id} {...props.children.props}>
         <a href={`#${id}`}>#</a>
