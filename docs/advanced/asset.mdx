@@ -1,0 +1,32 @@
+You can serve your asset directory by using the plugin provided by zely.
+
+## Before You Start
+
+Install the plugin:
+
+```bash
+npm i @zely-js/static
+```
+
+> Don't have a zely app yet? [Create one](/docs/getting-started)!
+
+## Usage
+
+```ts
+import { staticPlugin } from '@zely-js/static';
+
+export default defineConfig({
+  plugins: [staticPlugin('/static', './public')],
+});
+```
+
+This will serve all files inside the `./public` directory under the `/static` URL prefix.
+
+For example, if you have a file `./public/logo.png`, it will be available at:
+
+```
+http://localhost:PORT/static/logo.png
+```
+
+> Make sure to always specify a `prefix` (like `/static`) for performance reasons.
+> Directory access is blocked by default (returns 403), and missing files return 404.
