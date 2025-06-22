@@ -5,12 +5,12 @@ export interface Post {
 
 export default [
   {
-    title: 'Serpack v0.1.31',
-    date: '25-06-07',
+    title: 'Introducing 4.0!',
+    date: '25-06-22',
   },
   {
-    title: 'Introducing 4.0!',
-    date: '25-03-17',
+    title: 'Serpack v0.1.31',
+    date: '25-06-07',
   },
   {
     title: 'New Compiler',

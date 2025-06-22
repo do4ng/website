@@ -21,23 +21,26 @@ html {
 }
 
 html.dark {
-  --primary-100: #769fd8;
-  --primary-100-dark: #5a88c2;
-  --primary-100-50: #769fd81f;
-  --primary-200: #3f80ff;
-  --primary-200-50: #3f80ff70;
-  --primary-300: #a5c0ff;
-  --accent-100: #87ceeb;
-  --accent-200: #1a6f89;
-  --accent-300: #3e8feb;
-  --text-100: #e7e7e7cc;
-  --text-200: #e0e0e0dc;
-  --text-300: #e0e0e0b7;
-  --text-400: #cacacab7;
-  --bg-100: #22202c;
-  --bg-200: #2b2935;
-  --bg-200-dark: #16151b;
-  --bg-200-light: #272530a9;
-  --bg-300: #363342;
-  --bg-400: #504c66;
+  --primary-100: #5c89d4;
+  --primary-100-dark: #406eb8;
+  --primary-100-50: #5c89d41f;
+  --primary-200: #2f6fd4;
+  --primary-200-50: #2f6fd470;
+  --primary-300: #8db2f0;
+
+  --accent-100: #66b7d1;
+  --accent-200: #145b6e;
+  --accent-300: #3379c9;
+
+  --text-100: #f0f0f0d0;
+  --text-200: #dcdcdcdc;
+  --text-300: #bcbcbcd0;
+  --text-400: #a0a0a0b0;
+
+  --bg-100: #1b1b1b;
+  --bg-200: #1e1e1e;
+  --bg-200-dark: #0d0d0d;
+  --bg-200-light: #2a2a2a80;
+  --bg-300: #2c2c2c;
+  --bg-400: #3a3a3a;
 }

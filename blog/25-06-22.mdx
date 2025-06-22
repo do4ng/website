@@ -1,0 +1,147 @@
+It has been seven months since `4.0.0-next.0` was released.
+This new version brings both **feature updates** and **major internal performance improvements**.
+Here’s a summary of everything that has changed.
+
+## Performance
+
+In line with zely's philosophy, performance has been **dramatically improved**.
+
+Compared to previous versions, the latest update significantly reduces latency and nearly triples throughput (requests/sec and bytes/sec).
+This level of performance leap is not just a minor improvement—it redefines how lightweight servers can operate at scale.
+
+👉 [View Full Benchmark History](https://github.com/zely-js/benchmark-history)
+
+<Box title="Performance">
+
+| Pkg                                                                                             | Latency     | Requests/Sec | Bytes/Sec |
+| ----------------------------------------------------------------------------------------------- | ----------- | ------------ | --------- |
+| [**4.0.0\:serpack-on (latest)**](https://www.npmjs.com/package/zely/v/4.0.0-next.22:serpack-on) | **0.02 ms** | 19.5K        | 2.49 MB   |
+| [**4.0.0\:serpack-off (latest)**](https://www.npmjs.com/package/zely/v/4.0.0-next.22)           | **0.01 ms** | 19.5K        | 2.49 MB   |
+| [**3.0.0**](https://www.npmjs.com/package/zely/v/3.0.0)                                         | 1.06 ms     | 6.5K         | 848.84 KB |
+| [**2.0.0-next.24**](https://www.npmjs.com/package/zely/v/2.0.0-next.24)                         | 0.1 ms      | 12.7K        | 1.63 MB   |
+| [**1.0.0**](https://www.npmjs.com/package/zely/v/1.0.0)                                         | 0.02 ms     | 18.7K        | 2.39 MB   |
+
+---
+
+</Box>
+
+> Even when [serpack](#new-compiler) is enabled, there is **no noticeable performance loss**, proving that the new compiler is lightweight enough for production environments.
+
+## New Compiler
+
+zely now supports a new compiler to allow for more flexibility in future updates.
+Although `esbuild` remains the default loader, zely introduces [serpack](/serpack), a custom loader built on top of `swc`.
+
+```bash
+zely dev --serpack
+```
+
+While serpack is slightly less performant than `esbuild` (but still fast!), it is **tightly optimized for zely**'s internal systems and unlocks powerful features not available with esbuild.
+
+<Box type="warning">
+  Although serpack is mostly stable, undiscovered issues may still occur.
+</Box>
+
+## Server Build
+
+You can now **compile and deploy** your zely-powered server as JavaScript.
+
+The old version of build feature (provided by [@zely/builder](https://zely2.netlify.app/docs/zely-builder#usage)) became incompatible after 3.0 due to internal changes, but the feature is now back in 4.0—completely rebuilt.
+
+While the original builder only copied and transpiled the server, the new build system routes all requests directly through the zely server runtime.
+
+For details, refer to the [build documentation](/apis/build).
+
+## \$store
+
+[`$store`](/docs/server-data) is a server-side cache utility.
+
+It runs the given callback function **only once**, caches the result, and reuses it for 3 minutes.
+
+```ts
+import { GET } from '@zely-js/core';
+import { setTimeout } from 'timers/promises';
+
+async function greeting() {
+  await setTimeout(1000);
+  return 'Hello, Doe!';
+}
+
+export default [
+  GET(async (ctx) => {
+    const { data } = await $store(greeting);
+    ctx.send(data);
+  }),
+];
+```
+
+`$store` is already globally declared, so you **don’t need to import it manually**.
+
+<Box type="warning">
+  Since $store internally depends on features provided by [serpack](/serpack), please
+  activate it using the `--serpack` flag when running your server.
+</Box>
+
+## Frontend Support (Experimental)
+
+> Note: This is an experimental feature for upcoming frontend support.
+
+The new HTML loader compiles the HTML file instead of directly serving it, improving responsiveness and enabling future extensibility.
+[Learn more](/docs/frontend)
+
+Enable the loader with `experimental.useHTML` in `zely.config.ts`:
+
+```ts [title="zely.config.ts"]
+import { defineConfig } from 'zely';
+
+export default defineConfig({
+  experimental: {
+    useHTML: true,
+  },
+});
+```
+
+<Box>
+  Example: [simple
+  counter](https://github.com/zely-js/zely/blob/main/playground/typescript/pages/%5Bparams%5D/index.html)
+</Box>
+
+## CLI Request Tool
+
+No need to write temporary scripts to test your server during development.
+
+```ansi
+$ zely request
+
+▸ baseURL: [1m[32mhttp://localhost:3001[39m[22m
+
+[90m[12:31:35 AM][39m [1m[34minfo[39m[22m [1mchecking server... (requesting /)[22m
+
+[1m[34mGET[39m[22m> /
+[32m200[39m {"msg":"Hello","name":""}
+[1m[34mGET[39m[22m>
+```
+
+You can also use JavaScript to configure method, headers, and body inline:
+
+```ansi
+[1m[34mGET[39m[22m> config1 = { method: "POST", headers: { }, body: { name: "Cat" } }
+[1m[34mGET[39m[22m> set(config1)
+[1m[34mPOST[39m[22m[90m(config1)[39m> /greeting
+[32m200[39m Hello, Cat!
+```
+
+<Box type="tip">
+  Declare variables without using `const` or `let`—just type them directly in the prompt.
+</Box>
+
+## Debugging
+
+Check the [debugging documentation](/docs/debugging) for more details.
+
+## Conclusion
+
+This release makes zely faster, more modular, and ready for future features like frontend rendering and build-time optimizations.
+With the introduction of serpack, a new compiler architecture, and the return of server builds, zely is growing beyond just a micro-framework—it’s evolving into a complete platform for building fast, modern web applications.
+
+Give it a try and let us know what you think.

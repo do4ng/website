@@ -23,14 +23,14 @@ A feature has been added to execute functions that take a long time to compute o
 import { GET } from '@zely-js/core';
 import { setTimeout } from 'timers/promises';
 
-async function $greeting() {
+async function greeting() {
   await setTimeout(1000);
   return 'Hello, Doe!';
 }
 
 export default [
   GET(async (ctx) => {
-    const { data } = await $store($greeting);
+    const { data } = await $store(greeting);
     ctx.send(data);
   }),
 ];

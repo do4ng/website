@@ -10,9 +10,9 @@ export default function Product() {
     <>
       <div className="product-container">
         <div className="title">
-          <Link className="update" href="/blog/24-12-01">
+          <Link className="update" href="/blog/25-06-22">
             <span className="circle"></span>
-            <span className="update-content">4.0 is coming!</span>
+            <span className="update-content">Introducing 4.0</span>
           </Link>
           <h1 dangerouslySetInnerHTML={{ __html: docs.description }}></h1>
 

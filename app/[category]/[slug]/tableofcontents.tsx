@@ -1,10 +1,7 @@
-/* eslint-disable no-use-before-define */
-
 'use client';
 
 import React from 'react';
 
-// https://www.emgoto.com/react-table-of-contents/
 const Headings = ({ headings, activeId }) => (
   <ul>
     {headings.map((heading) => (
@@ -29,8 +26,7 @@ const useHeadingsData = () => {
 
   React.useEffect(() => {
     const headingElements = Array.from(document.querySelectorAll('.content h2'));
-
-    // Created a list of headings, with H3s nested
+    // eslint-disable-next-line no-use-before-define
     const newNestedHeadings = getNestedHeadings(headingElements);
     setNestedHeadings(newNestedHeadings);
   }, []);
@@ -43,65 +39,52 @@ const getNestedHeadings = (headingElements) => {
 
   headingElements.forEach((heading) => {
     const { innerText: title, id } = heading;
-
     if (heading.nodeName === 'H2') {
       nestedHeadings.push({ id, title, items: [] });
-    } else if (heading.nodeName === 'H3' && nestedHeadings.length > 0) {
-      nestedHeadings[nestedHeadings.length - 1].items.push({
-        id,
-        title,
-      });
     }
   });
 
   return nestedHeadings;
 };
-
 const useIntersectionObserver = (setActiveId) => {
-  const headingElementsRef = React.useRef({});
   React.useEffect(() => {
-    const callback = (headings) => {
-      headingElementsRef.current = headings.reduce((map, headingElement) => {
-        map[headingElement.target.id] = headingElement;
-        return map;
-      }, headingElementsRef.current);
+    const headingElements = Array.from(document.querySelectorAll('h2'));
+    const headingElementsRef = {};
 
-      const visibleHeadings = [];
-      Object.keys(headingElementsRef.current).forEach((key) => {
-        const headingElement = headingElementsRef.current[key];
-        if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
-      });
-
-      const getIndexFromId = (id) =>
-        headingElements.findIndex((heading) => heading.id === id);
-
-      if (visibleHeadings.length === 1) {
-        setActiveId(visibleHeadings[0].target.id);
-      } else if (visibleHeadings.length > 1) {
-        const sortedVisibleHeadings = visibleHeadings.sort(
-          // @ts-ignore
-          (a, b) => getIndexFromId(a.target.id) > getIndexFromId(b.target.id),
-        );
-
-        setActiveId(sortedVisibleHeadings[0].target.id);
-      }
-    };
-
-    const observer = new IntersectionObserver(callback, {
-      root: document.querySelector('iframe'),
-      rootMargin: '500px',
+    headingElements.forEach((el) => {
+      headingElementsRef[el.id] = el;
     });
 
-    const headingElements = Array.from(document.querySelectorAll('h2, h3'));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleHeadings = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target);
+
+        if (visibleHeadings.length === 0) return;
+
+        const sorted = visibleHeadings.sort(
+          (a, b) =>
+            headingElements.findIndex((el) => el.id === a.id) -
+            headingElements.findIndex((el) => el.id === b.id),
+        );
+
+        setActiveId(sorted[0].id);
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -70% 0px',
+        threshold: 0.1,
+      },
+    );
 
     headingElements.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
   }, [setActiveId]);
 };
-
 export const TableOfContents = () => {
-  const [activeId, setActiveId] = React.useState();
+  const [activeId, setActiveId] = React.useState(null);
   const { nestedHeadings } = useHeadingsData();
   useIntersectionObserver(setActiveId);
 
