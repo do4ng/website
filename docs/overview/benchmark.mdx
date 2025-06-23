@@ -3,20 +3,18 @@
 - Target Versions
 
 ```ts
-const targets = ['4.0.0-next.22', '3.0.0', '2.0.0-next.24', '1.0.0'];
+const targets = ['4.0.1'];
 ```
-
-> To measure more versions, edit `src/index.ts`
 
 ## Benchmark Result
 
-| Pkg                                                                                                    | Latency     | Requests/Sec | Bytes/Sec |
-| ------------------------------------------------------------------------------------------------------ | ----------- | ------------ | --------- |
-| [**4.0.0-next.22:serpack-on (latest)**](https://www.npmjs.com/package/zely/v/4.0.0-next.22:serpack-on) | **0.02 ms** | 19.5K        | 2.49 MB   |
-| [**4.0.0-next.22:serpack-off (latest)**](https://www.npmjs.com/package/zely/v/4.0.0-next.22)           | **0.01 ms** | 19.5K        | 2.49 MB   |
-| [**3.0.0**](https://www.npmjs.com/package/zely/v/3.0.0)                                                | 1.06 ms     | 6.5K         | 848.84 KB |
-| [**2.0.0-next.24**](https://www.npmjs.com/package/zely/v/2.0.0-next.24)                                | 0.1 ms      | 12.7K        | 1.63 MB   |
-| [**1.0.0**](https://www.npmjs.com/package/zely/v/1.0.0)                                                | 0.02 ms     | 18.7K        | 2.39 MB   |
+| Pkg                                                                           | Latency | Requests/Sec | Bytes/Sec |
+| ----------------------------------------------------------------------------- | ------- | ------------ | --------- |
+| [**4.0.1:serpack-on**](https://www.npmjs.com/package/zely/v/4.0.1:serpack-on) | 0.03 ms | 17.4K        | 2.22 MB   |
+| [**4.0.1**](https://www.npmjs.com/package/zely/v/4.0.1)                       | 0.03 ms | 16.9K        | 2.16 MB   |
+| [**zely build**](/apis/build)                                                 | 0.03 ms | 17.6K        | 2.25 MB   |
+
+> This benchmark sends an initial request to `/` to warm up the server, so the measured performance reflects warm (not cold) response times.
 
 <Box type="info">
   The reason [serpack](/serpack) is `enabled` or `disabled` in the table above is to show
@@ -35,3 +33,11 @@ yarn build --keep # keep builds / benchmark
 ```
 
 After running, check the automatically created `result.md`.
+
+## Version history
+
+| Pkg                                                                     | Latency | Requests/Sec | Bytes/Sec |
+| ----------------------------------------------------------------------- | ------- | ------------ | --------- |
+| [**3.0.0**](https://www.npmjs.com/package/zely/v/3.0.0)                 | 1.06 ms | 6.5K         | 848.84 KB |
+| [**2.0.0-next.24**](https://www.npmjs.com/package/zely/v/2.0.0-next.24) | 0.1 ms  | 12.7K        | 1.63 MB   |
+| [**1.0.0**](https://www.npmjs.com/package/zely/v/1.0.0)                 | 0.02 ms | 18.7K        | 2.39 MB   |
