@@ -1,0 +1,27 @@
+Beginning with **v4.0.3**, Zely introduces a new, custom-built FileSystem. This innovative system combines both a **virtual in-memory filesystem** and a **physical disk filesystem (based on `node:fs`)**. Its primary goal is to achieve significantly faster file loading.
+
+---
+
+## Concept
+
+The Zely Filesystem prioritizes the in-memory filesystem. However, to manage resource usage, it intelligently switches to the disk filesystem once a certain **file count threshold** is exceeded. As of **4.0.3-beta.0**, this threshold is set to **5,000 files**.
+
+For example, let's say `1.txt`, `2.txt`, and `3.txt` are already in the in-memory filesystem, with `1.txt` being the oldest modified file and `3.txt` the most recently modified. If the `max file count` is set to 3, and a new file, `4.txt`, attempts to load into memory, it will exceed the maximum. In this scenario, the oldest file (`1.txt`) will be saved to disk, and `4.txt` will then be loaded into memory.
+
+---
+
+## Performance
+
+Based on measurements from the [benchmark repository](https://github.com/zely-js/benchmark-history), the new FileSystem shows notable improvements:
+
+Latency has improved from **0.14 ms to 0.1 ms**, a **28.57% reduction**.
+Requests per second have increased from **13.7K to 14.7K**, a **7.30% improvement**.
+Bytes per second have risen from **1.66 MB to 1.78 MB**, a **7.23% improvement**.
+
+---
+
+## Limitations
+
+This hybrid filesystem is still experimental, and a comprehensive evaluation of its full advantages and disadvantages is ongoing. While a noticeable speed improvement has been achieved, there are still areas to address, such as potential memory management concerns.
+
+If you prefer to use the traditional disk-based filesystem (`node:fs`), please use **version 4.0.2 or earlier**.

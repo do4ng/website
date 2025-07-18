@@ -1,0 +1,92 @@
+<Box type="warning">
+  This feature is currently being rebuilt. The API may change at any time.
+</Box>
+
+This is a utility designed to support frontend development.
+
+## createFrontendPage()
+
+Compiles all scripts embedded in the HTML provided in JSON format into JavaScript.
+
+```ts
+createFrontendPage({
+  body: {
+    div: { children: 'Hello World' },
+  },
+  scripts: [
+    {
+      target: 'TYPESCRIPT_FILE_PATH',
+      module: true,
+      type: 'link',
+    },
+  ],
+});
+```
+
+Scripts must be provided as an array.
+If the `type` of a script node is `link`, it will be compiled into a `<script src="...">` tag that links to an external JavaScript file.
+If the type is `insert`, the script code will be directly inserted inside a `<script>` tag.
+
+## Types
+
+Zely 4’s Browser feature is no longer maintained and is pending redevelopment for future updates.
+
+Below is the type declaration related to the frontend functionality.
+Use this as a reference when working with the API.
+
+````ts
+import { OutputFile } from 'esbuild';
+import { UserConfig } from 'zely';
+
+export interface FeComponent {
+  children: string;
+  attributes: Record<string, string | boolean>;
+}
+
+export type FeScripts = Array<{
+  target: string;
+  type: 'link' | 'insert';
+  module: boolean;
+  attributes: Record<string, string | boolean>;
+}>;
+
+export interface FePageData {
+  head: Record<string, FeComponent>;
+  body: Record<string, FeComponent>;
+  /**
+   * ```ts
+   * [
+   *   { target: "./src/index.ts", type: "insert" }
+   *   // target: filename to compile and send to browser
+   *   // type: - link: <script src="~">
+   *   //       - insert: <script>~</script>
+   * ]
+   * ```
+   */
+  scripts: FeScripts;
+}
+
+export function compileBrowserCode(
+  scripts: FeScripts,
+  options: UserConfig,
+): Promise<{
+  outputFiles: OutputFile[];
+  out: Record<string, string>;
+}>;
+
+export interface FrontendPageOutput {
+  template: string;
+  $: {
+    head: string;
+    body: string;
+    script: any[];
+  };
+}
+
+export function createFrontendPage(
+  page: FePageData,
+  template?: string,
+  options?: UserConfig,
+  plugins?: any[],
+): Promise<FrontendPageOutput>;
+````

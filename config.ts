@@ -139,10 +139,30 @@ export default [
           { 'virtual-page': 'Virtual Pages' },
         ],
       },
+      {
+        name: '@zely-js/core',
+        posts: [
+          { core: '@zely-js/core' },
+          { store: 'Store' },
+          { browser: 'Browser (deprecated)' },
+          { builddev: 'core.buildDev()' },
+          { controll: 'core.controll()' },
+          { 'create-loader': 'core.createLoader()' },
+          { 'create-virtual-page': 'core.createVirtualPage()' },
+          { 'create-zely-server': 'core.createZelyServer()' },
+          { 'default-sender': 'core.defaultSender()' },
+          { logger: 'core.logger' },
+          { 'page-cache': 'core.PageCache' },
+        ],
+      },
 
       {
         name: 'Structure',
         posts: [{ structure: 'Structure' }, { cache: 'Cache' }],
+      },
+      {
+        name: 'Concept',
+        posts: [{ fs: 'FileSystem' }],
       },
       {
         name: 'Packages',

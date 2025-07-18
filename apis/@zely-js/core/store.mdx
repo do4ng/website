@@ -1,0 +1,27 @@
+Store is a feature that stores frequently used data for 3 minutes and reuses it.
+
+<Box type="tip">
+  To use this feature, refer to the [Server Data Guide](/docs/server-data).
+</Box>
+
+## \$store
+
+`$store` takes a function as its first argument and an array of dependencies as its second argument.
+When `$store` is executed, it generates a unique ID based on the code location and dependencies. If cached data exists for that ID, it uses the cached data; otherwise, it executes the function and stores the result in the cache.
+
+```ts
+const { data, id } = $store(fn, [someDep]);
+```
+
+<Box type="warning">
+  To ensure the compiler can extract the `$store` function properly during compilation, do
+  not import `$store` under a different name. By default, it is globally imported, so
+  there's usually no need to import it manually. However, if you do need to import it, use
+  the original `$store` name.
+</Box>
+
+## \$access
+
+You can access the cached data externally using the `id` returned from `$store`.
+
+> This feature is still under development.
