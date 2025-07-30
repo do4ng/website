@@ -135,7 +135,9 @@ export default async function Page({
             <h1>{Object.values(target as any)[0] as string}</h1>
           </div>
           <div className="content-container">
-            <Content content={compiled}></Content>
+            <main>
+              <Content content={compiled}></Content>
+            </main>
           </div>
           <div className="prenext">
             {previousPage.title ? (

@@ -55,7 +55,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <h1>{target.title}</h1>
             <span>do4ng - {target.date}</span>
           </div>
-          <Content content={compiled}></Content>
+          <main>
+            <Content content={compiled}></Content>
+          </main>
         </div>
       </div>
     </>

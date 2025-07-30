@@ -4,10 +4,17 @@ import Index from '@/components';
 import Link from 'next/link';
 import './style.scss';
 import docs from '@/docs';
+import Head from 'next/head';
 
 export default function Product() {
   return (
     <>
+      <Head>
+        <title>{'zely - fast backend framework'}</title>
+        <meta name="description" content="zely documentation"></meta>
+        <meta name="keywords" content="zely, backend, node"></meta>
+      </Head>
+
       <div className="product-container">
         <div className="title">
           <Link className="update" href="/blog/25-06-22">

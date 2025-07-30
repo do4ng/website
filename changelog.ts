@@ -4,6 +4,7 @@ export interface Change {
 }
 
 export default [
+  { version: '4.0.0', target: ' July 31, 2025' },
   { version: '4.0.0-next.23', target: ' June 16, 2025' },
   {
     version: '4.0.0-next.9',
