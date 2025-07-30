@@ -1,0 +1,45 @@
+Creates a server instance.
+
+```ts
+const { server, cache, applyZelyMiddlewares } = await createZelyServer({});
+```
+
+## Server.server
+
+This is the main server, created using Zely's [custom server library](/apis/senta).
+
+```ts
+server.use((ctx, next) => {
+  next();
+});
+server.server.listen(3000);
+```
+
+## Server.cache
+
+This is the module cache manager. It manages and updates compiled JavaScript/TypeScript modules.
+
+```ts
+cache.getModule('/'); // loads pages/index.{ts,js} file
+```
+
+## Server.applyZelyMiddlewares()
+
+Applies Zely’s core middlewares to the server.
+
+```ts
+import { App } from 'senta';
+
+const app = new App({});
+
+process.env.NODE_ENV = 'development';
+// ...
+applyZelyMiddlewares(app);
+```
+
+<Box type="warning">
+  Based on some experiments, it has been confirmed that backend libraries such as
+  [Koa](https://koajs.com) and [Hono](https://hono.dev) are not compatible. Please
+  consider copying and modifying the code from the [zely base server
+  library](https://github.com/zely-js/senta) to create a custom server.
+</Box>

@@ -68,6 +68,16 @@ $store(fn, [someDep]);
 
 Data is separated and stored based on the registered dependency value.
 
+## TTL
+
+The store's default TTL (Time To Live) is [6 minutes](https://github.com/zely-js/zely/blob/main/packages/zely-js-core/src/runtime/store/index.ts#L43). To modify the TTL, enter the following code:
+
+```ts
+$cache.ttl = 1000 * 60 * 10; // cache ttl: 10m
+```
+
+The `$cache` instance is declared globally. You don't need to import it.
+
 ## Try this feature
 
 This feature works based on [serpack](/serpack).  

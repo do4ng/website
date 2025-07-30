@@ -1,0 +1,18 @@
+Compiles a zely app to generate a production build.
+
+```ts
+const { message, filename } = await buildDev(options);
+```
+
+- `message` is the message to be printed in the console.
+
+- `filename` is the final compiled JavaScript server entry file.
+
+## Options
+
+The argument passed to this function is a [UserConfig](/apis/config) object.
+Build-related options include:
+
+- `build.dist`: Output path
+
+- `build.bundle`: Whether to bundle the files

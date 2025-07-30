@@ -1,3 +1,8 @@
+<Box type="warning">
+  This concept is still under development and highly experimental. It may change or be
+  removed at any time.
+</Box>
+
 Beginning with **v4.0.3**, Zely introduces a new, custom-built FileSystem. This innovative system combines both a **virtual in-memory filesystem** and a **physical disk filesystem (based on `node:fs`)**. Its primary goal is to achieve significantly faster file loading.
 
 ---
@@ -24,4 +29,40 @@ Bytes per second have risen from **1.66 MB to 1.78 MB**, a **7.23% improvement**
 
 This hybrid filesystem is still experimental, and a comprehensive evaluation of its full advantages and disadvantages is ongoing. While a noticeable speed improvement has been achieved, there are still areas to address, such as potential memory management concerns.
 
-If you prefer to use the traditional disk-based filesystem (`node:fs`), please use **version 4.0.2 or earlier**.
+## Enable Hybrid FS
+
+Here is the hybrid fs code:
+
+```ts [title="packages/fs/fs.ts"]
+const fs = new MemoryFileSystem();
+
+export const {
+  writeFileSync,
+  readFileSync,
+  existsSync,
+  unlinkSync,
+  mkdirSync,
+  rmSync,
+  readdirSync,
+} = process.argv.includes('--use-experimental-fs')
+  ? {
+      writeFileSync: fs.writeFileSync.bind(fs),
+      readFileSync: fs.readFileSync.bind(fs),
+      existsSync: fs.existsSync.bind(fs),
+      unlinkSync: fs.unlinkSync.bind(fs),
+      mkdirSync: fs.mkdirSync.bind(fs),
+      rmSync: fs.rmSync.bind(fs),
+      readdirSync: fs.readdirSync.bind(fs),
+    }
+  : {
+      writeFileSync: nativeWrite,
+      readFileSync: nativeRead,
+      existsSync: nativeExists,
+      unlinkSync: nativeUnlink,
+      mkdirSync: nativeMkdir,
+      rmSync: nativeRm,
+      readdirSync: nativeReadDir,
+    };
+```
+
+The default mode is native node:fs, to use this hybrid fs, add `--use-experimental-fs` to the command.

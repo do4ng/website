@@ -1,0 +1,29 @@
+Compiles and loads a TypeScript (or JavaScript) file into a JavaScript module.
+
+```ts
+const loader = await createLoader(options, ctx, useSerpack, noRun, useMemoryFS);
+```
+
+- `options` (\*): [UserConfig](/apis/config)
+
+- `ctx`: [Context](/docs/context)
+
+- `useSerpack`: Whether to use the Serpack loader
+
+- `noRun`: If enabled, compiles the file but does not load it
+
+- `useMemoryFS`: Whether to use the [memory-based filesystem](/apis/fs)
+
+## Using the loader
+
+```ts
+const { module, filename, map, assets } = await loader(filename);
+```
+
+- `module`: The loaded module
+
+- `filename`: The compiled file name
+
+- `map`: Source map
+
+- `assets`: Assets and additional files generated during compilation, required for module execution

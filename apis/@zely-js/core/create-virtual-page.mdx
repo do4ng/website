@@ -1,0 +1,21 @@
+Creates virtual page.
+
+```ts
+createVirtualPage('main.ts', [GET(() => {})]);
+```
+
+```json
+{
+  "filename": "main.ts", // filename
+  "id": -1, // id of page
+  "path": "main", // parsed path
+  "regex": "/^/main/?$/i", // path regexp
+  "params": [], // path params
+  "module": {
+    "__isVirtual__": true,
+    "isLoaded": true,
+    "type": "export-default",
+    "data": "[Array]" // module
+  }
+}
+```
