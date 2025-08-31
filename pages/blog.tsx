@@ -1,7 +1,7 @@
-import blog from '@/blog';
-import Link from 'next/link';
+import blog from "@/blog.config";
+import { Link } from "exta/components";
 
-import './style.scss';
+import "../styles/style.scss";
 
 export default function Blog() {
   return (
@@ -16,11 +16,13 @@ export default function Blog() {
 
         {blog.map((page) => (
           <>
-            <Link href={`/blog/${page.date}`}>
+            <Link href={`/blog/${page.date}`} prefetch={false}>
               <div className="blog-title">
                 <h2>{page.title}</h2>
               </div>
-              <p className="blog-description">do4ng - {page.date.replace(/-/g, '.')}</p>
+              <p className="blog-description">
+                do4ng - {page.date.replace(/-/g, ".")}
+              </p>
             </Link>
           </>
         ))}

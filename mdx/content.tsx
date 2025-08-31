@@ -1,7 +1,5 @@
-'use client';
-
-import { components } from './components';
-import { runMdx } from './run';
+import { components } from "./components";
+import { runMdx } from "./run";
 
 interface Props {
   content: string;

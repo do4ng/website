@@ -1,7 +1,5 @@
-'use client';
-
-import { Content } from '@/mdx/content';
-import { useState } from 'react';
+import { Content } from "@/mdx/content";
+import { useState } from "react";
 
 export function ChangelogPost(props: { content: string; closed: boolean }) {
   const [closed, setClosed] = useState(props.closed);
@@ -10,7 +8,7 @@ export function ChangelogPost(props: { content: string; closed: boolean }) {
     <>
       <div className="post">
         <div className="flex">
-          <div className={`post-container ${closed ? 'closed' : ''}`}>
+          <div className={`post-container ${closed ? "closed" : ""}`}>
             <Content content={props.content}></Content>
           </div>
         </div>

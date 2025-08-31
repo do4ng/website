@@ -1,13 +1,14 @@
-import { compile, CompileOptions } from '@mdx-js/mdx';
-import remarkGfm from 'remark-gfm';
-import rehypePrettyCode from 'rehype-pretty-code';
+import { compile, CompileOptions } from "@mdx-js/mdx";
+import remarkGfm from "remark-gfm";
+import rehypePrettyCode from "rehype-pretty-code";
 
 export const compileMdx = async (content: string): Promise<string> => {
-  if (typeof window !== 'undefined') throw Error('compileMdx should run on server only');
+  if (typeof window !== "undefined")
+    throw Error("compileMdx should run on server only");
 
   const options: CompileOptions = {
-    format: 'mdx',
-    outputFormat: 'function-body',
+    format: "mdx",
+    outputFormat: "function-body",
     remarkPlugins: [remarkGfm],
     development: false,
     rehypePlugins: [
@@ -16,11 +17,11 @@ export const compileMdx = async (content: string): Promise<string> => {
         rehypePrettyCode,
         {
           theme: {
-            dark: 'material-theme-palenight',
-            light: 'github-light',
+            dark: "material-theme-palenight",
+            light: "github-light",
           },
           keepBackground: false,
-        } as import('rehype-pretty-code').Options,
+        } as import("rehype-pretty-code").Options,
       ],
       // raw,
     ],

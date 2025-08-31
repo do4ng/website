@@ -32,13 +32,9 @@ div[data-rehype-pretty-code-title] {
   border-radius: 8px 8px 0 0;
   background-color: #f8f8f8;
   color: #424242;
-  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
-  font-size: 0.875em;
 
-  font-size: 11px;
-  padding: 7px 20px 5px 20px;
-  border-bottom: 1px solid #e4e4e4;
+  font-size: 12px;
+  padding: 12px 20px 12px 20px;
 
   i {
     vertical-align: top;
@@ -55,8 +51,8 @@ div[data-rehype-pretty-code-title] {
     border: none;
     color: #7d7f8f;
     transition: all 0.2s ease 0s;
-    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
-      'Liberation Mono', 'Courier New', monospace;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
 
     i {
       font-size: 1rem;
@@ -70,7 +66,7 @@ div[data-rehype-pretty-code-title] {
 .dark div[data-rehype-pretty-code-title] {
   background-color: var(--bg-200);
   color: #7d7f8f;
-  border-bottom: 1px solid #383d52;
+  border-bottom: 1px solid #313546;
 }
 
 .code-block {
@@ -78,35 +74,17 @@ div[data-rehype-pretty-code-title] {
   border-radius: 0 0 8px 8px;
   display: block;
   overflow-x: auto;
-  line-height: 1.15rem;
 
   pre {
     margin: 0;
     padding: 0.85em 1.05rem;
     overflow: auto;
-    max-height: 524px;
   }
 
   code {
     counter-reset: line;
-    line-height: 1.5;
-  }
-
-  code > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-
-    /* Other styling */
-    display: inline-block;
-    width: 1rem;
-    margin-right: 1.25rem;
-    text-align: right;
-    color: #525d7e;
-  }
-
-  code[data-language='bash'] > [data-line]::before,
-  code[data-language='sh'] > [data-line]::before {
-    content: '$';
+    line-height: 1.75;
+    padding: 0 6px;
   }
 }
 
@@ -133,9 +111,9 @@ div[data-rehype-pretty-code-title] {
 }
 
 code {
-  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
-  font-size: 0.875em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 14px;
   border-radius: 2px;
 }
 
@@ -182,6 +160,23 @@ tbody tr:nth-child(even) {
 
   h3 {
     margin: 1em 0 0.6em;
+  }
+}
+
+.fade-in-left {
+  opacity: 0;
+
+  animation: fadeInLeft 0.2s ease-out forwards;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-3px); /* 좌측에서 1~2px */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -304,14 +299,14 @@ a {
   }
 }
 
-code[data-theme*=' '],
-code[data-theme*=' '] span {
+code[data-theme*=" "],
+code[data-theme*=" "] span {
   color: var(--shiki-light);
 }
 
 .dark {
-  code[data-theme*=' '],
-  code[data-theme*=' '] span {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
     color: var(--shiki-dark);
   }
 }

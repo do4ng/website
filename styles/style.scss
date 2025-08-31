@@ -1,0 +1,142 @@
+.blog {
+  height: calc(100% - 92px);
+  overflow: auto;
+  font-size: 16px;
+
+  .intro {
+    font-size: 18px;
+    padding-bottom: 60px;
+
+    border-bottom: 1px solid var(--bg-400);
+    text-align: center;
+    margin-top: 100px;
+
+    h1 {
+      margin: 5px 0;
+    }
+
+    span {
+      font-size: 14px;
+      color: var(--text-300);
+    }
+  }
+
+  .content-container {
+    margin: 70px auto;
+    width: 60%;
+  }
+}
+
+.blog {
+  h2 {
+    margin: 1.75em 0 0.6em;
+  }
+
+  h3 {
+    margin: 1em 0 0.6em;
+  }
+
+  h2 {
+    margin: 40px 0 16px;
+    letter-spacing: -0.02em;
+    padding-top: 24px;
+    border-top: 1px solid var(--bg-400);
+  }
+
+  a {
+    color: var(--primary-100);
+    transition: all 0.1s ease 0s;
+  }
+  a:hover {
+    text-decoration: underline;
+
+    color: var(--primary-100-dark);
+  }
+}
+.blog-info {
+  margin-bottom: 20px;
+  margin-top: 90px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--bg-400);
+
+  h1 {
+    margin: 0;
+    font-size: 2.45rem;
+  }
+
+  span {
+    color: var(--text-300);
+  }
+
+  .blog-count {
+    color: var(--primary-100);
+    font-weight: bold;
+  }
+}
+
+.blog-container {
+  width: 40%;
+  margin: 50px auto;
+  a {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bg-400);
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--text-100);
+  }
+
+  h2:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    margin-top: 5px;
+    font-size: 0.925rem;
+    color: var(--text-300);
+  }
+}
+.changelog-container {
+  width: 65%;
+  margin: 50px auto;
+
+  .changelog {
+    display: flex;
+
+    .changelog-date {
+      margin-top: 35px;
+      padding-top: 10px;
+
+      font-weight: bold;
+      font-size: 1.05rem;
+      width: 170px;
+      border-right: 2px solid var(--primary-100-50);
+      transition: all 0.4s ease 0s;
+    }
+
+    .post {
+      margin-top: 0 !important;
+      margin-left: 50px;
+      padding-top: 10px;
+
+      h2:target {
+        color: var(--primary-100-dark);
+      }
+    }
+
+    .post-container.closed {
+      text-overflow: ellipsis;
+      max-height: 100px;
+      overflow: hidden;
+    }
+  }
+
+  .changelog:not(:has(.closed)) {
+    .changelog-date {
+      color: var(--primary-100);
+    }
+  }
+}

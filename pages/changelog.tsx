@@ -1,15 +1,12 @@
-import React from 'react';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import React from "react";
+import { readFileSync } from "fs";
+import { join } from "path";
 
-import './style.scss';
-import '../[category]/[slug]/style.scss';
+import config from "@/changelog.config";
+import { compileMdx } from "@/mdx/compile";
+import { ChangelogPost } from "@/components/changelog";
 
-import config from '@/changelog';
-import { compileMdx } from '@/mdx/compile';
-import { ChangelogPost } from './post';
-
-export default async function Page() {
+export async function getStaticProps() {
   let raw: string[] = [];
 
   /*
@@ -26,16 +23,21 @@ export default async function Page() {
   config.forEach((changelog) => {
     raw.push(
       readFileSync(
-        join(process.cwd(), 'changelog', `${changelog.version}.mdx`),
-      ).toString(),
+        join(process.cwd(), "changelog", `${changelog.version}.mdx`)
+      ).toString()
     );
   });
 
-  raw = await Promise.all(raw.map(async (changelog) => await compileMdx(changelog)));
+  raw = await Promise.all(
+    raw.map(async (changelog) => await compileMdx(changelog))
+  );
+  return { raw };
+}
 
+export default function Page({ props: { raw } }: { props: { raw: any } }) {
   return (
     <>
-      <title>{'changelog - zely'}</title>
+      <title>{"changelog - zely"}</title>
 
       <div className="changelog-container">
         {raw.map((changelog, index) => (

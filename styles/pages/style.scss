@@ -1,4 +1,4 @@
-@import './post.scss';
+@use "./post.scss";
 
 @media only screen and (max-width: 1100px) {
   nav {
@@ -21,8 +21,7 @@
   --dot-color: var(--bg-200-light);
   --dot-size: 2px;
   --dot-space: 22px;
-  background:
-    linear-gradient(
+  background: linear-gradient(
         90deg,
         var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
         transparent 1%
@@ -90,6 +89,7 @@
           border-left: 1px solid var(--bg-300);
           transition: all 0.3s ease 0s;
           padding: 2px 7px;
+          color: red;
         }
 
         a {

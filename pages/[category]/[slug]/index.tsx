@@ -1,19 +1,19 @@
 /* eslint-disable import/no-named-default */
 /* eslint-disable no-use-before-define */
 
-import React from 'react';
-import Link from 'next/link';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import React from "react";
+import { Link } from "exta/components";
+import { readFileSync } from "fs";
+import { join } from "path";
 
-import { Category, default as parents } from '@/config';
-import { compileMdx } from '@/mdx/compile';
-import ScrollTop from '@/lib/scrolltotop';
-import { capitalizeFirstLetter } from '@/lib/up';
-import { Content } from '@/mdx/content';
-import { TableOfContents } from './tableofcontents';
+import { Category, default as parents } from "@/config";
+import { compileMdx } from "@/mdx/compile";
+import ScrollTop from "@/lib/scrolltotop";
+import { capitalizeFirstLetter } from "@/lib/up";
+import { Content } from "@/mdx/content";
+import { TableOfContents } from "../../../components/tableofcontents";
 
-export async function generateStaticParams() {
+export async function getStaticParams() {
   const pages = [];
 
   for (const parent of parents) {
@@ -27,18 +27,14 @@ export async function generateStaticParams() {
   return pages;
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { slug: string; category: string };
-}) {
+export async function getStaticProps({ params }) {
   let target = null;
   let targetcategory = null;
   const posts = [];
 
   const config: { category: Category[]; directory: string } = {
     category: [],
-    directory: '',
+    directory: "",
   };
 
   parents.forEach((parent) => {
@@ -63,7 +59,7 @@ export default async function Page({
     return <>Page not found</>;
   }
 
-  let raw: string = '';
+  let raw: string = "";
 
   /*
   const raw = readFileSync(
@@ -80,13 +76,37 @@ export default async function Page({
     join(
       process.cwd(),
       config.directory,
-      (targetcategory || '').toLowerCase(),
-      `${Object.keys(target as any)[0]}.mdx`,
-    ),
+      (targetcategory || "").toLowerCase(),
+      `${Object.keys(target as any)[0]}.mdx`
+    )
   ).toString();
 
   const compiled = await compileMdx(raw);
 
+  return {
+    compiled,
+    raw,
+    posts,
+    target,
+    targetcategory,
+    config,
+  };
+}
+
+export default function Page({
+  params,
+  props: { compiled, raw, posts, target, targetcategory, config },
+}: {
+  params: { slug: string; category: string };
+  props: {
+    compiled: any;
+    raw: string;
+    posts: any[];
+    target: any;
+    targetcategory: any;
+    config;
+  };
+}) {
   const postIndex = posts.findIndex((v) => Object.keys(v)[0] === params.slug);
 
   const previousPage = {
@@ -101,7 +121,7 @@ export default async function Page({
 
   const postName: string = Object.values(target as any)[0] as any;
 
-  const directory = [params.category, (targetcategory || '').toLowerCase()];
+  const directory = [params.category, (targetcategory || "").toLowerCase()];
 
   if (directory[1] !== postName.toLowerCase()) {
     directory.push(postName);
@@ -110,14 +130,16 @@ export default async function Page({
   return (
     <>
       <ScrollTop></ScrollTop>
-      <title>{`${Object.values(target as any)[0]} - zely`}</title>
+      <title>{`${Object.values(target as any)[0]} - exta`}</title>
       <div className="content-flex">
         <div className="post">
           <div className="directory">
             {directory
               .map((dir) => (
                 <>
-                  <div className="directory-path">{capitalizeFirstLetter(dir)}</div>
+                  <div className="directory-path">
+                    {capitalizeFirstLetter(dir)}
+                  </div>
                 </>
               ))
               .reduce(
@@ -128,7 +150,7 @@ export default async function Page({
                       <i className="ri-arrow-right-s-line"></i>
                     </>,
                     curr,
-                  ] as any,
+                  ] as any
               )}
           </div>
           <div className="intro">

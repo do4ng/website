@@ -1,16 +1,14 @@
-'use client';
+"use client";
 
 /* eslint-disable import/no-cycle */
-import { toggleTheme } from '@/app/layout';
-import { useEffect, useState } from 'react';
-import { TextLabel } from './label';
+import { toggleTheme } from "@/pages/_layout";
+import { useEffect, useState } from "react";
+import { TextLabel } from "./label";
 
-export function ThemeSelector() {
-  const [defaultValue, setDefaultValue] = useState('dark');
-
+export function ThemeSelector({ defaultValue, setDefaultValue }) {
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const theme = (localStorage.getItem('theme') as any) || 'dark';
+    if (typeof window !== "undefined") {
+      const theme = (localStorage.getItem("theme") as any) || "dark";
       setDefaultValue(theme);
 
       console.log(`[app] theme selected: ${theme}`);
@@ -22,18 +20,18 @@ export function ThemeSelector() {
       <TextLabel text="Toggle Theme">
         <button
           onClick={() => {
-            if (defaultValue === 'dark') {
-              toggleTheme('white');
-              localStorage.setItem('theme', 'white');
-              setDefaultValue('white');
+            if (defaultValue === "dark") {
+              toggleTheme("white");
+              localStorage.setItem("theme", "white");
+              setDefaultValue("white");
             } else {
-              toggleTheme('dark');
-              localStorage.setItem('theme', 'dark');
-              setDefaultValue('dark');
+              toggleTheme("dark");
+              localStorage.setItem("theme", "dark");
+              setDefaultValue("dark");
             }
           }}
         >
-          {defaultValue === 'dark' ? (
+          {defaultValue === "dark" ? (
             <>
               <i className="ri-moon-line"></i>
             </>

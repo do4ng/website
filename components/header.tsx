@@ -1,33 +1,44 @@
-'use client';
+"use client";
 
 /* eslint-disable import/no-cycle */
 
-import 'remixicon/fonts/remixicon.css';
+import "remixicon/fonts/remixicon.css";
 
-import Link from 'next/link';
-import { Popover } from '@/components/popper';
-import docs from '@/docs';
-import { TextLabel } from '@/components/label';
-import { ThemeSelector } from '@/components/theme-selector';
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { Image, Link } from "exta/components";
+import { Popover } from "@/components/popper";
+import docs from "@/docs.config";
+import { TextLabel } from "@/components/label";
+import { ThemeSelector } from "@/components/theme-selector";
+import { useEffect, useState } from "react";
+import { useLocation as usePathname } from "$exta-router";
 
 export function Header() {
-  const pathname = usePathname().split('/');
+  const pathname = usePathname().split("/");
   const path = pathname[1];
 
   const [isScrolled, setScrolled] = useState(false);
 
+  const [defaultValue, setDefaultValue] = useState("dark");
+
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window !== "undefined") {
+      const theme = (localStorage.getItem("theme") as any) || "dark";
+      setDefaultValue(theme);
+
+      console.log(`[app] theme selected: ${theme}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
     let target = document.body;
 
-    if (path === 'blog' && pathname.length > 2) {
-      target = document?.getElementsByClassName('blog').item(0) as any;
+    if (path === "blog" && pathname.length > 2) {
+      target = document?.getElementsByClassName("blog").item(0) as any;
     }
 
-    target?.addEventListener('scroll', () => {
+    target?.addEventListener("scroll", () => {
       const { scrollTop } = target;
 
       if (scrollTop > 10) {
@@ -42,19 +53,21 @@ export function Header() {
     <>
       <header
         className={`header-container text ${
-          path.trim() !== '' && path.trim() !== 'changelog' && path.trim() !== 'blog'
-            ? ''
-            : 'transparent-header'
-        } ${isScrolled ? 'scrolled' : ''}`}
+          path.trim() !== "" &&
+          path.trim() !== "blog" &&
+          path.trim() !== "changelog"
+            ? ""
+            : "transparent-header"
+        } ${isScrolled ? "scrolled" : ""}`}
       >
         <div className="header">
           <Link className="item-1 logo" href="/">
-            {docs.name} <span className="docs-icon">Docs</span>
+            {docs.name} <span className="docs-icon">4.0</span>
           </Link>
 
           <div className="item-2">
             {docs.header.map((item) => {
-              if (item.type === 'popover') {
+              if (item.type === "popover") {
                 return (
                   <>
                     <Popover text={item.title} key={item.title}>
@@ -93,16 +106,19 @@ export function Header() {
                 </p>
               </Link>
             </TextLabel>
-            <ThemeSelector></ThemeSelector>
+            <ThemeSelector
+              defaultValue={defaultValue}
+              setDefaultValue={setDefaultValue}
+            ></ThemeSelector>
             <TextLabel text="github">
-              <Link
+              <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://github.com/zely-js/zely"
+                href="https://github.com/do4ng/exta"
                 className="big-icon"
               >
                 <i className="ri-github-fill"></i>
-              </Link>
+              </a>
             </TextLabel>
           </div>
         </div>
