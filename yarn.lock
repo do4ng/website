@@ -1304,8 +1304,10 @@ estree-walker@^3.0.0:
   dependencies:
     "@types/estree" "^1.0.0"
 
-exta@../nudo/packages/exta:
-  version "0.0.1-beta.20"
+exta@^0.0.1-beta.21:
+  version "0.0.1-beta.21"
+  resolved "https://registry.yarnpkg.com/exta/-/exta-0.0.1-beta.21.tgz#e3a287999ee52b92be147f5f384f32de22babe44"
+  integrity sha512-d4ixWHpOcGOVAd727/aqc72+oPkDiCTZi9r9mjiY0tgtedWbSpGfpY9Um/RiFQKQxsaqTogVghBdsEQpQ6XZoA==
   dependencies:
     colors "^1.4.0"
     esbuild "^0.25.8"
