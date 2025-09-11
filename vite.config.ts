@@ -14,7 +14,7 @@ export default defineConfig({
       name: "sitemap-and-learning-files",
       apply: "build",
       closeBundle() {
-        const baseUrl = "https://extajs.netlify.app";
+        const baseUrl = "https://zely.vercel.app";
         const sitemap: string[] = [];
         const learningFiles: string[] = [];
 

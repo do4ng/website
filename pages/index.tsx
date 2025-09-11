@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import { Link } from "exta/components";
+import { Head, Link } from "exta/components";
 import docs from "@/docs.config";
 import { compileMdx } from "@/mdx/compile";
 import { Content } from "@/mdx/content";
@@ -25,6 +25,9 @@ export default function Product({
 }) {
   return (
     <>
+      <Head>
+        <title>zely - Build Productive, Convenient, Fast Backend</title>
+      </Head>
       <div className="product-container">
         <div className="title">
           <h1 dangerouslySetInnerHTML={{ __html: docs.description }}></h1>

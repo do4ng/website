@@ -1,11 +1,14 @@
 import blog from "@/blog.config";
-import { Link } from "exta/components";
+import { Head, Link } from "exta/components";
 
 import "../styles/style.scss";
 
 export default function Blog() {
   return (
     <>
+      <Head>
+        <title>blog - zely</title>
+      </Head>
       <div className="blog-container">
         <div className="blog-info">
           <h1>Blog</h1>

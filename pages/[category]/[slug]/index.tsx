@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 
 import React from "react";
-import { Link } from "exta/components";
+import { Head, Link } from "exta/components";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -130,7 +130,10 @@ export default function Page({
   return (
     <>
       <ScrollTop></ScrollTop>
-      <title>{`${Object.values(target as any)[0]} - exta`}</title>
+      <Head>
+        <title>{`${Object.values(target as any)[0]} - zely`}</title>
+      </Head>
+
       <div className="content-flex">
         <div className="post">
           <div className="directory">

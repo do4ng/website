@@ -1304,10 +1304,10 @@ estree-walker@^3.0.0:
   dependencies:
     "@types/estree" "^1.0.0"
 
-exta@^0.0.1-beta.21:
-  version "0.0.1-beta.21"
-  resolved "https://registry.yarnpkg.com/exta/-/exta-0.0.1-beta.21.tgz#e3a287999ee52b92be147f5f384f32de22babe44"
-  integrity sha512-d4ixWHpOcGOVAd727/aqc72+oPkDiCTZi9r9mjiY0tgtedWbSpGfpY9Um/RiFQKQxsaqTogVghBdsEQpQ6XZoA==
+exta@^0.0.1-beta.23:
+  version "0.0.1-beta.23"
+  resolved "https://registry.yarnpkg.com/exta/-/exta-0.0.1-beta.23.tgz#701d9d78244922d9a271dd8ebf3013c33c6f6863"
+  integrity sha512-N4y1LHDDwi65kehVWrjngG5tkopxw5KfGKRwMovlWxVlUrr93h0CU9GRKAX4v0snSBXaNQUETDhL5hc2XzH0pg==
   dependencies:
     colors "^1.4.0"
     esbuild "^0.25.8"
@@ -2899,7 +2899,7 @@ sass-embedded@^1.90.0:
     sass-embedded-win32-arm64 "1.90.0"
     sass-embedded-win32-x64 "1.90.0"
 
-sass@1.90.0, sass@^1.90.0:
+sass@1.90.0:
   version "1.90.0"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.90.0.tgz#d6fc2be49c7c086ce86ea0b231a35bf9e33cb84b"
   integrity sha512-9GUyuksjw70uNpb1MTYWsH9MQHOHY6kwfnkafC24+7aOMZn9+rVMBxRbLvw756mrBFbIsFg6Xw9IkR2Fnn3k+Q==

@@ -62,7 +62,7 @@ export function Header() {
       >
         <div className="header">
           <Link className="item-1 logo" href="/">
-            {docs.name} <span className="docs-icon">4.0</span>
+            {docs.name} <span className="docs-icon">docs</span>
           </Link>
 
           <div className="item-2">
@@ -114,7 +114,7 @@ export function Header() {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://github.com/do4ng/exta"
+                href="https://github.com/zely-js/zely"
                 className="big-icon"
               >
                 <i className="ri-github-fill"></i>
