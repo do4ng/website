@@ -1,0 +1,58 @@
+Zely has adopted file-based routing. The reasons are as follows:
+
+### 1. Simplicity and Intuitiveness
+
+Zely aims to be a simple yet powerful server framework. The straightforward rule of "file structure = routing structure" aligns perfectly with Zely's goals.
+
+### 2. Automated Route Registration
+
+There is no need to manually register each route, which reduces code duplication and improves productivity.
+
+### 3. Compatibility with Zely's Unique Features (Most Important)
+
+Features such as [\$store](/docs/server-data) are prepared by manipulating the AST from the compilation stage. This is something that is not possible with traditional backend libraries (or frameworks) where users directly execute JavaScript files that contain the server logic.
+
+In other words, by moving away from the traditional approach of running plain JavaScript files and instead letting the framework manipulate and compile the code, Zely can easily provide features that were previously impossible (or very inconvenient to implement).
+
+Let's take `$store` as an example.
+
+If you were using a traditional server, you would need to implement `$store` like this:
+
+```ts
+const uniqueID = "abcd-1234";
+$store(someFn, uniqueID);
+```
+
+> Assume that the `$store` function has already been implemented.
+
+With Zely, AST manipulation reduces this to a single line:
+
+```ts
+$store(someFn);
+```
+
+Now, let's consider a special case where `params` are involved.
+
+On a traditional server:
+
+```ts
+const uniqueID = `abcd-1234-${ctx.params.user}-${ctx.params.item}`;
+$store(someFn, uniqueID);
+```
+
+In Zely:
+
+```ts
+$store(someFn, [ctx.params.user, ctx.params.item]);
+```
+
+<Box type="info" title="Trivia">
+  The ultimate goal of `$store` is to reduce all of the above code into just
+  `$store(someFn)`.
+</Box>{" "}
+
+As you can see, it becomes much more concise. Moreover, if the $store ID has to be different for each page, it becomes very cumbersome.
+
+## Conclusion
+
+The reason Zely adopted file-based routing is not only for simplicity, but primarily to enable its unique internal feature implementations.

@@ -18,7 +18,7 @@ You can access the current page parameters by `ctx.params`.
 
 ```ts
 // pages/user/[id].ts
-import type { Context } from 'zely';
+import type { Context } from "zely";
 
 export function get(ctx: Context) {
   ctx.send({ id: ctx.params.id });
@@ -31,13 +31,17 @@ export function get(ctx: Context) {
 
 ```ts
 // pages/list/[...id].ts
-import type { Context } from 'zely';
+import type { Context } from "zely";
 
 export function get(ctx: Context) {
   // ctx.params["*"] === "a/b/c"
-  ctx.send({ path: ctx.params['*'].split('/') });
+  ctx.send({ path: ctx.params["*"].split("/") });
 }
 ```
 
 </TabItem>
 </Tabs>
+
+## Why file-based routing?
+
+Refer to [the blog](/blog/25-09-15).

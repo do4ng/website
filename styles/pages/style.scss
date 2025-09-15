@@ -34,6 +34,14 @@
       center / var(--dot-space) var(--dot-space),
     var(--dot-color);
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+  }
+
   .menu {
     width: 260px;
     height: 100%;
