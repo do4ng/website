@@ -43,13 +43,8 @@ $store(someFn, uniqueID);
 In Zely:
 
 ```ts
-$store(someFn, [ctx.params.user, ctx.params.item]);
+$store(someFn);
 ```
-
-<Box type="info" title="Trivia">
-  The ultimate goal of `$store` is to reduce all of the above code into just
-  `$store(someFn)`.
-</Box>{" "}
 
 As you can see, it becomes much more concise. Moreover, if the $store ID has to be different for each page, it becomes very cumbersome.
 

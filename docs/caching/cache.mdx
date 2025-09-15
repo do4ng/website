@@ -1,0 +1,45 @@
+## $access
+
+The safest way to access cache data that has already been declared externally is by using `$access`.
+
+You can access the data using the unique ID returned by `$store`.
+
+```ts
+const { id } = await $store(fn);
+const cache = $access(id);
+
+console.log(cache.value);
+
+cache.set("Edited"); // The updated value will take effect from the next call.
+cache.refresh(); // Resets the time-to-live.
+```
+
+<Box type="tip">
+  The `$cache` and `$access` are declared globally. You don't need to import
+  them.
+</Box>
+
+## $cache
+
+You can directly access the cache instance through `$cache`.
+
+Since `$cache` is declared globally, you don't need to import it.
+
+<Box type="error" title="Security Warning">
+  You can access all cache values declared in the app through `$cache`. Be
+  careful not to expose the cache instance.
+</Box>
+
+```ts
+$cache.clearExpired(); // Forcefully deletes expired cache entries. (By default, expired values are removed when setting or retrieving cache)
+$cache.get(id); // Retrieves a cached value. The `id` is provided as the return value of $store.
+$cache.set(id, value); // Redefines a cached value.
+```
+
+## TTL
+
+The store's default TTL (Time To Live) is [6 minutes](https://github.com/zely-js/zely/blob/main/packages/zely-js-core/src/runtime/store/index.ts#L43). To modify the TTL, enter the following code:
+
+```ts
+$cache.ttl = 1000 * 60 * 10; // cache ttl: 10m
+```

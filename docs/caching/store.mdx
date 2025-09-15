@@ -1,0 +1,59 @@
+`$store` is a function that stores the return value of another function.
+
+The first argument accepts the function you want to store, and the second argument accepts a `dependencies` value used to specify a unique ID.
+
+The compiler, [serpack](/serpack/introduction), automatically assigns a unique ID to each `$store` function, allowing it to work seamlessly.
+
+## $store
+
+```ts {11}
+import { GET } from "@zely-js/core";
+import { setTimeout } from "timers/promises";
+
+async function slowGreeting() {
+  await setTimeout(1000);
+  return "Hello, Doe!";
+}
+
+export default [
+  GET(async (ctx) => {
+    const { data } = await $store(slowGreeting);
+    ctx.send(data);
+  }),
+];
+```
+
+<Box type="tip">
+  You don't need to import any other modules. Just use the `$store` function
+  directly.
+</Box>
+
+After the first request, the `$greeting` function will no longer be executed (during ttl).
+
+## Dependencies
+
+To handle dynamically changing dependencies, you can register dependencies with the store.
+
+> `ctx.params` is automatically included in the unique ID. So you don't have to register params.
+
+```ts
+$store(fn, [someDep]);
+```
+
+Data is separated and stored based on the registered dependency value.
+
+<Box type="warning">Each item in dependencies must be of type string.</Box>
+
+## Parent Function Requirements
+
+Since the `$store` function needs to access the arguments of its parent function,
+the parent function must be either an `async` function or a traditional `function () {}`.  
+In other words, using a non-async arrow function is not recommended (SWC transforms async arrow functions into generator functions).
+
+If, in a special case, the `arguments` are not passed to the callback function, pass them manually:
+
+```ts
+await $store(fn, deps, "unique-id", arguments[0]);
+```
+
+> Ignore any type errors.

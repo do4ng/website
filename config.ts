@@ -60,12 +60,20 @@ export default [
         ],
       },
       {
+        name: "Caching",
+        posts: [
+          { caching: "Caching" },
+          { store: "Data Caching" },
+          { cache: "Data Access" },
+        ],
+      },
+      {
         name: "Advanced",
         posts: [
-          { "server-data": "Server Data" },
           { serpack: "Serpack" },
           { asset: "Asset" },
           { debugging: "Debugging" },
+          { "server-data": "Server Data" },
         ],
       },
 
