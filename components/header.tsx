@@ -31,6 +31,15 @@ export function Header() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    const target = document.querySelector("html");
+
+    target.style = `color-scheme: ${
+      defaultValue === "dark" ? "dark" : "light"
+    };`;
+  }, [defaultValue]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
     let target = document.body;
 

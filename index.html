@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      function toggleTheme(to) {
+        document.querySelector("html").setAttribute("class", to);
+      }
+      toggleTheme(localStorage.getItem("theme") || "white");
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/.exta/client.js" type="module"></script>
-    <script src="/theme.ts" type="module"></script>
   </head>
   <body>
     %body%

@@ -37,8 +37,9 @@ export default defineConfig({
               sitemap.push(`  </url>`);
 
               const docsPath = path.resolve(
-                `./${title}/${cat.name}/${slug}.mdx`
+                `./${title}/${cat.name}/${slug}.mdx`.toLowerCase()
               );
+              console.log(docsPath);
               if (existsSync(docsPath)) {
                 const content = readFileSync(docsPath, "utf-8");
                 learningFiles.push(
