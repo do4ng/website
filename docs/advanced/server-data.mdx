@@ -20,12 +20,12 @@ A feature has been added to execute functions that take a long time to compute o
 </Tabs>
 
 ```ts
-import { GET } from '@zely-js/core';
-import { setTimeout } from 'timers/promises';
+import { GET } from "@zely-js/core";
+import { setTimeout } from "timers/promises";
 
 async function greeting() {
   await setTimeout(1000);
-  return 'Hello, Doe!';
+  return "Hello, Doe!";
 }
 
 export default [
@@ -37,7 +37,8 @@ export default [
 ```
 
 <Box type="tip">
-  You don't need to import any other modules. Just use the `$store` function directly.
+  You don't need to import any other modules. Just use the `$store` function
+  directly.
 </Box>
 
 After the first request, the `$greeting` function will no longer be executed.
@@ -68,7 +69,26 @@ $store(fn, [someDep]);
 
 Data is separated and stored based on the registered dependency value.
 
-## TTL
+## Cache Instance
+
+You can directly access the cache instance through `$cache`.
+
+Since `$cache` is declared globally, you don't need to import it.
+
+<Box type="error" title="Security Warning">
+  You can access all cache values declared in the app through `$cache`. Be
+  careful not to expose the cache instance.
+</Box>
+
+### Instance
+
+```ts
+$cache.clearExpired(); // Forcefully deletes expired cache entries. (By default, expired values are removed when setting or retrieving cache)
+$cache.get(id); // Retrieves a cached value. The `id` is provided as the return value of $store.
+$cache.set(id, value); // Redefines a cached value.
+```
+
+### TTL
 
 The store's default TTL (Time To Live) is [6 minutes](https://github.com/zely-js/zely/blob/main/packages/zely-js-core/src/runtime/store/index.ts#L43). To modify the TTL, enter the following code:
 
