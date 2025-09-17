@@ -34,26 +34,25 @@ After the first request, the `$greeting` function will no longer be executed (du
 
 To handle dynamically changing dependencies, you can register dependencies with the store.
 
-> `ctx.params` is automatically included in the unique ID. So you don't have to register params.
-
 ```ts
 $store(fn, [someDep]);
 ```
 
 Data is separated and stored based on the registered dependency value.
 
-<Box type="warning">Each item in dependencies must be of type string.</Box>
+<Box type="warning">
+  Each item in dependencies must be of type string or Context.
+</Box>
 
-## Parent Function Requirements
+## Context as Dependencies
 
-Since the `$store` function needs to access the arguments of its parent function,
-the parent function must be either an `async` function or a traditional `function () {}`.  
-In other words, using a non-async arrow function is not recommended (SWC transforms async arrow functions into generator functions).
-
-If, in a special case, the `arguments` are not passed to the callback function, pass them manually:
+If the context is provided as `dependencies`, `$store` will automatically analyze the `params` and generate a unique ID.
 
 ```ts
-await $store(fn, deps, "unique-id", arguments[0]);
+export default [
+  GET(async (ctx) => {
+    await $store(fn, ctx);
+    // ...
+  }),
+];
 ```
-
-> Ignore any type errors.
