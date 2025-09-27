@@ -12,6 +12,7 @@ import ScrollTop from "@/lib/scrolltotop";
 import { capitalizeFirstLetter } from "@/lib/up";
 import { Content } from "@/mdx/content";
 import { TableOfContents } from "../../../components/tableofcontents";
+import { router } from "$exta-router";
 
 export async function getStaticParams() {
   const pages = [];
@@ -30,7 +31,9 @@ export async function getStaticParams() {
 export async function getStaticProps({ params }) {
   let target = null;
   let targetcategory = null;
+  let targetcategoryobject = null;
   const posts = [];
+  const categoryPosts = [];
 
   const config: { category: Category[]; directory: string } = {
     category: [],
@@ -51,6 +54,7 @@ export async function getStaticProps({ params }) {
       if (Object.keys(post)[0] === params.slug) {
         target = post;
         targetcategory = category.name;
+        targetcategoryobject = category;
       }
     });
   });
@@ -85,25 +89,33 @@ export async function getStaticProps({ params }) {
 
   return {
     compiled,
-    raw,
     posts,
     target,
     targetcategory,
     config,
+
+    targetcategoryobject,
   };
 }
 
 export default function Page({
   params,
-  props: { compiled, raw, posts, target, targetcategory, config },
+  props: {
+    compiled,
+    posts,
+    target,
+    targetcategory,
+    config,
+    targetcategoryobject,
+  },
 }: {
   params: { slug: string; category: string };
   props: {
     compiled: any;
-    raw: string;
     posts: any[];
     target: any;
     targetcategory: any;
+    targetcategoryobject: { posts?: Record<string, string>[] };
     config;
   };
 }) {
@@ -125,6 +137,14 @@ export default function Page({
 
   if (directory[1] !== postName.toLowerCase()) {
     directory.push(postName);
+  }
+
+  if (targetcategoryobject?.posts) {
+    for (const preloadPost of targetcategoryobject.posts) {
+      router.prefetch(
+        `/${config.directory}/${Object.keys(preloadPost)[0]}`.toLowerCase()
+      );
+    }
   }
 
   return (
@@ -167,7 +187,6 @@ export default function Page({
           <div className="prenext">
             {previousPage.title ? (
               <Link
-                scroll={true}
                 className="no-a"
                 href={`/${config.directory}/${previousPage.url}`}
               >
@@ -180,7 +199,6 @@ export default function Page({
             )}
             {nextPage.title ? (
               <Link
-                scroll={true}
                 className="no-a"
                 href={`/${config.directory}/${nextPage.url}`}
               >

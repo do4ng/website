@@ -77,6 +77,7 @@ export function CategoryMenu({
                 className={`btn ${
                   params?.slug === Object.keys(post)[0] ? "active" : ""
                 }`}
+                prefetch={false}
               >
                 {Object.values(post)[0]}
               </Link>
