@@ -10,7 +10,7 @@ import docs from "@/docs.config";
 import { TextLabel } from "@/components/label";
 import { ThemeSelector } from "@/components/theme-selector";
 import { useEffect, useState } from "react";
-import { useLocation as usePathname } from "$exta-router";
+import { usePathname } from "$exta-router";
 
 export function Header() {
   const pathname = usePathname().split("/");

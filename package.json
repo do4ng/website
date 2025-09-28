@@ -10,7 +10,8 @@
   "dependencies": {
     "@mdx-js/mdx": "^3.0.0",
     "@popperjs/core": "^2.11.8",
-    "exta": "^0.0.1-beta.24",
+    "cross-env": "^10.0.0",
+    "exta": "^0.0.1-beta.26",
     "mdast": "^3.0.0",
     "mdast-util-to-string": "2.0.0",
     "mdx": "^0.3.1",

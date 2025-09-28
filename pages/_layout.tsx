@@ -7,6 +7,7 @@ import { Link } from "exta/components";
 
 import "../styles/global.scss";
 import "../styles/style.scss";
+import ScrollTop from "@/lib/scrolltotop";
 
 import config from "@/config";
 import { capitalizeFirstLetter } from "@/lib/up";
