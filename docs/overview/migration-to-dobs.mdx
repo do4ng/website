@@ -1,0 +1,138 @@
+Zely is no longer under active maintenance.
+Please use **Dobs**, a lightweight and actively updated version of Zely.
+
+If you’re starting a new project, use the `create-dobs` tool to create a Dobs project.
+If you’re already using Zely, refer to the migration guide to move to Dobs.
+
+## Installation
+
+First, uninstall Zely and then install the Dobs package.
+
+```bash
+yarn uninstall zely
+yarn add dobs
+```
+
+## Configuration File
+
+Rename `zely.config.{js|ts}` to `dobs.config.{js|ts|json}`.
+
+```js
+import { defineConfig } from "zely"; // [!code --]
+import { defineConfig } from "dobs"; // [!code ++]
+export default defineConfig({
+  // [!code --]
+  server: {
+    port: 3000, // [!code --]
+  }, // [!code --]
+  port: 3000, // [!code ++]
+});
+```
+
+The currently supported Dobs config options (as of v0.0.1-alpha.6) are:
+
+- port
+- middlewares
+- createServer
+- cwd
+- mode
+- temp (=dist)
+- build
+
+## Routes
+
+Rename the `/pages/` directory to `/app/`.
+
+Route files (file-based routing) are compatible with Zely.
+
+## Router
+
+<Tabs>
+  <TabItem id="TypeScript"> 
+  
+```ts
+import { defineRoutes } from "dobs"; // [!code ++]
+
+export default [ALL((ctx) => {})]; // [!code --]
+export default defineRoutes((req, res) => {}); // [!code ++]
+```
+
+  </TabItem>
+  <TabItem id="JavaScript">
+
+```ts
+module.exports = (req, res) => {};
+```
+
+  </TabItem>
+</Tabs>
+
+Change Zely’s array-style router to use `defineRoutes()` (or an object form).
+
+<Tabs>
+  <TabItem id="TypeScript">
+
+```ts
+import { defineRoutes } from "dobs";
+
+export default defineRoutes({
+  ALL(req, res) {
+    res.send("Hello Dobs");
+  },
+});
+```
+
+  </TabItem>
+  <TabItem id="JavaScript">
+
+```ts
+module.exports = {
+  ALL(req, res) {
+    res.send("Hello Dobs");
+  },
+};
+```
+
+  </TabItem>
+</Tabs>
+
+## Data Caching
+
+Dobs uses a completely different approach to data caching compared to Zely.
+
+<Tabs>
+  <TabItem id="TypeScript">
+
+```ts
+import { defineRoutes } from "dobs";
+import { useCache } from "dobs/experimental";
+
+export default defineRoutes(
+  (req, res) => {
+    res.send("Hello World!");
+  },
+  [useCache()] // [!code ++]
+);
+```
+
+  </TabItem>
+  <TabItem id="JavaScript">
+
+```ts
+const { defineRoutes } = require("dobs");
+const { useCache } = require("dobs/experimental");
+
+// [!code ++]
+module.exports = useCache()((req, res) => {
+  res.send("Hello World!");
+});
+```
+
+  </TabItem>
+</Tabs>
+
+Add the `useCache` instance as the second argument (wrapper) to the `defineRoutes()` function.
+
+## Conclusion
+
+For more details, visit [Github](https://github.com/zely-js/dobs).

@@ -27,9 +27,9 @@ export default [
           { "why-zely": "Why Zely" },
           { "getting-started": "Getting Started" },
           { config: "Config References" },
-          { typescript: "TypeScript" },
           { benchmark: "Performance" },
           { troubleshooting: "Troubleshooting" },
+          { "migration-to-dobs": "Migration to dobs" },
         ],
       },
       {

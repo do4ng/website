@@ -1,0 +1,46 @@
+Introducing a New Framework
+
+## Background
+
+To understand why this new framework was created, it’s important to first understand the reason behind the creation of **zely**.  
+zely was originally developed during a personal side project when I only had frontend experience and needed an easy-to-use backend framework.
+However, the most popular option—Express—is a library, not a framework, which meant that using it with TypeScript required an additional compiler. Although this wasn’t particularly difficult, its structure was completely different from major frontend frameworks, leaving me unsatisfied.
+That led me to wonder: _what if I built a framework that followed the structure of major web frameworks optimized for TypeScript—wouldn’t backend development become much faster?_
+That question marked the beginning of zely.
+
+## Problems
+
+Through zely’s development, I indeed found that it significantly sped up backend development for personal side projects.
+(Although, of course, the time spent fixing bugs and adding features in zely itself increased.)
+However, zely was never intended to gain wide adoption. In reality, its monthly downloads were typically under 100 (occasionally exceeding 500), so the user base was extremely small.
+As I experimented with highly experimental features—most notably [$store](/docs/store)—I began to feel that I had strayed from zely’s original goal of being a _fast backend framework_.
+
+I believe that a truly fast framework must also have a simple structure.
+However, when I developed the [$store](/docs/store) feature, I created [serpack](/serpack/introduction) to overcome certain technical limitations. In the end, serpack failed to achieve its goals and only made the overall structure more complex.
+Rolling back to the pre-serpack state is nearly impossible now, as many core systems (build, caching, etc.) have been redesigned around it.
+
+## Solution
+
+Instead of rewriting zely from scratch, I decided to build a new framework—drawing from the lessons learned while developing zely.
+
+The new framework is called **dobs**. You can find the source code on [GitHub](https://github.com/zely-js/dobs/).
+It’s not yet ready for practical use, but it already implements zely’s most essential features—**file-based routing** and **TypeScript support**—in just 200 lines of bundled code (about one-tenth the size of zely).
+
+## Plans
+
+The goal of **dobs** is to rebuild and improve zely with the simplest possible structure and codebase.
+
+Planned features include:
+
+- **Build system**
+- **Data caching**
+- **Plugin support**
+
+## Migration
+
+<Box type="info">[see Migration guide](/docs/migration-to-dobs)</Box>
+
+## The Future of zely and dobs
+
+Updates will now be focused around dobs rather than the zely and @zely-js/\* packages.
+However, since dobs aims to reimplement zely in a simpler, more efficient way, it can be seen as the natural continuation of zely’s development.

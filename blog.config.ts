@@ -5,6 +5,10 @@ export interface Post {
 
 export default [
   {
+    title: "Introduce new framework",
+    date: "25-10-30",
+  },
+  {
     title: "Why file-based routing?",
     date: "25-09-15",
   },

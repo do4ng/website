@@ -1,6 +1,7 @@
 import { compile, CompileOptions } from "@mdx-js/mdx";
 import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
+import { transformerNotationDiff } from "@shikijs/transformers";
 
 export const compileMdx = async (content: string): Promise<string> => {
   if (typeof window !== "undefined")
@@ -21,6 +22,7 @@ export const compileMdx = async (content: string): Promise<string> => {
             light: "github-light",
           },
           keepBackground: false,
+          transformers: [transformerNotationDiff()],
         } as import("rehype-pretty-code").Options,
       ],
       // raw,

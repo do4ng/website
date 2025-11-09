@@ -84,7 +84,7 @@ div[data-rehype-pretty-code-title] {
   code {
     counter-reset: line;
     line-height: 1.75;
-    padding: 0 6px;
+    padding: 0;
   }
 }
 
@@ -93,10 +93,42 @@ div[data-rehype-pretty-code-title] {
     background-color: var(--bg-200);
   }
 
+  pre.has-diff {
+    span[data-line] {
+      &::before {
+        content: "=";
+        color: #ffffff00;
+        padding-right: 5px;
+      }
+    }
+  }
+
   code {
     span[data-highlighted-line] {
       background-color: var(--bg-100);
     }
+
+    span[data-line] {
+      padding-left: 5px;
+    }
+  }
+
+  .diff.add {
+    &::before {
+      content: "+" !important;
+      color: #07af02 !important;
+    }
+    background-color: #08af0218;
+  }
+  .diff.remove {
+    &::before {
+      content: "-" !important;
+      color: #af0202 !important;
+    }
+    background-color: #af020218;
+  }
+  .diff {
+    border-radius: 2px;
   }
 }
 
