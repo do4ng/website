@@ -19,6 +19,7 @@ export function Header() {
   const [isScrolled, setScrolled] = useState(false);
 
   const [defaultValue, setDefaultValue] = useState("dark");
+  const [hideAlert, setAlert] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -69,6 +70,24 @@ export function Header() {
             : "transparent-header"
         } ${isScrolled ? "scrolled" : ""}`}
       >
+        <div
+          className="deprecated text-inter"
+          style={{ display: hideAlert ? "none" : "block" }}
+        >
+          <div className="deprecated-inner">
+            <span>
+              This project has been deprecated. -{" "}
+              <Link href="/blog/25-10-30">Read Blog</Link>
+            </span>
+            <button
+              onClick={() => {
+                setAlert(true);
+              }}
+            >
+              x
+            </button>
+          </div>
+        </div>
         <div className="header">
           <Link className="item-1 logo" href="/">
             {docs.name} <span className="docs-icon">docs</span>
