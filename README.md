@@ -1,9 +1,7 @@
-# Sendary Documentation
+# Zely Documentation
 
-[Sendary](https://github.com/zely-js/sendary) Documentation Codebase.
+[Zely](https://github.com/zely-js/zely) Documentation Codebase.
 
-- 🚀 **MDX Support**
-- 🛠️ **Customizable Style**
-- 💻 **Desktop/Mobile View**
+- [Documentation Template](https://github.com/do4ng/sendary-docs)
 
 > built with [sendary](https://sendary.vercel.app), [vitejs](https://vite.dev/), [scss](https://sass-lang.com/), etc...
