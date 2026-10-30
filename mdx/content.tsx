@@ -1,12 +1,16 @@
+"use client";
+
+import type { ReactElement } from "react";
+
 import { components } from "./components";
 import { runMdx } from "./run";
 
-interface Props {
+interface ContentProps {
   content: string;
 }
 
-export const Content = (props: Props): JSX.Element => {
-  const { content } = props;
-  const MDX: any = runMdx(content);
+export function Content({ content }: ContentProps): ReactElement {
+  const MDX = runMdx(content);
+
   return <MDX components={components} />;
-};
+}

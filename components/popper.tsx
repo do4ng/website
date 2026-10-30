@@ -1,47 +1,35 @@
-'use client';
+"use client";
 
-import { usePopper } from 'react-popper';
-import { useEffect, useState } from 'react';
+import { usePopover } from "@/lib/use-popover";
 
-export function Popover({ children, text }: { children: React.ReactNode; text: string }) {
-  const [referenceEl, setReferenceEl] = useState<HTMLElement | null>(null);
-  const [popperEl, setPopperEl] = useState<HTMLElement | null>(null);
-  const [popperContainer, setPopperContainer] = useState<HTMLElement | null>(null);
-  const { styles, attributes } = usePopper(referenceEl, popperEl, {
-    placement: 'bottom-start',
-  });
-
-  const showPopover = () => {
-    // @ts-ignore
-    popperEl?.setAttribute('data-show', true);
-  };
-
-  useEffect(() => {
-    const hidePopover = () => {
-      popperEl?.removeAttribute('data-show');
-    };
-
-    popperContainer?.addEventListener('mouseleave', hidePopover);
-
-    return () => {
-      popperContainer?.removeEventListener('mouseleave', hidePopover);
-    };
-  }, [popperEl, referenceEl, popperContainer]);
+export function Popover({
+  children,
+  text,
+}: {
+  children: React.ReactNode;
+  text: string;
+}) {
+  const {
+    setReferenceElement,
+    setPopperElement,
+    styles,
+    attributes,
+    show,
+    hide,
+  } = usePopover("bottom-start");
 
   return (
     <div
-      ref={setPopperContainer}
-      onMouseEnter={() => {
-        showPopover();
-      }}
       className="popper-container"
+      onMouseEnter={show}
+      onMouseLeave={hide}
     >
-      <button className="popover btn text" ref={setReferenceEl}>
+      <button className="popover btn text" ref={setReferenceElement}>
         {text} <i className="ri-arrow-down-s-line"></i>
       </button>
       <div
         className="popover-menu"
-        ref={setPopperEl}
+        ref={setPopperElement}
         style={styles.popper}
         {...attributes.popper}
       >

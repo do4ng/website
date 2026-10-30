@@ -1,11 +1,11 @@
-/* eslint-disable function-paren-newline */
-/* eslint-disable no-confusing-arrow */
-/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
 
-import { Link } from "exta/components";
-import { useState, useRef } from "react";
+import { Link } from "sendary/components";
+import { useRef, useState, type ReactNode } from "react";
 
-const langsIcons = {
+import { slugifyHeading } from "@/lib/format";
+
+const languageIcons: Record<string, string> = {
   ts: "javascript-line",
   js: "javascript-line",
   tsx: "reactjs-line",
@@ -19,7 +19,7 @@ const langsIcons = {
   json: "braces-line",
 };
 
-const langs = {
+const languageNames: Record<string, string> = {
   ts: "Typescript",
   js: "Javascript",
   tsx: "React",
@@ -33,13 +33,79 @@ const langs = {
   md: "Markdown",
   json: "JSON",
 };
-function extractText(children: any): string {
+
+function extractText(children: unknown): string {
   if (typeof children === "string") return children;
-  if (Array.isArray(children)) return children.map(extractText).join("");
-  if (typeof children === "object" && children?.props?.children) {
-    return extractText(children.props.children);
+
+  if (Array.isArray(children)) {
+    return children.map(extractText).join("");
   }
+
+  if (typeof children === "object" && children !== null) {
+    const nested = (children as { props?: { children?: unknown } }).props
+      ?.children;
+
+    if (nested) return extractText(nested);
+  }
+
   return "";
+}
+
+function AnchorHeading({
+  level,
+  children,
+}: {
+  level: 2 | 3;
+  children: any;
+}) {
+  const id = slugifyHeading(extractText(children));
+  const Tag = level === 2 ? "h2" : "h3";
+
+  return (
+    <Tag id={id} {...children?.props}>
+      <a href={`#${id}`}>#</a>
+      {children}
+    </Tag>
+  );
+}
+
+function CodeTitle({
+  lang,
+  label,
+  containerProps,
+}: {
+  lang?: string;
+  label: ReactNode;
+  containerProps?: Record<string, any>;
+}) {
+  const [copy, setCopy] = useState("copy");
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const copyCode = () => {
+    const container = buttonRef.current?.parentNode?.parentNode
+      ?.parentNode as HTMLElement | null;
+    const code = container?.querySelector("code")?.innerText ?? "";
+
+    window.navigator.clipboard.writeText(code).then(() => {
+      setCopy("copied!");
+
+      setTimeout(() => {
+        setCopy("copy");
+      }, 2000);
+    });
+  };
+
+  return (
+    <div {...containerProps} data-rehype-pretty-code-title="">
+      <div className="code-lang">
+        <i className={`ri-${languageIcons[lang] || languageIcons.txt}`}></i>
+        <span>{label}</span>
+        <button ref={buttonRef} className="copy-code" onClick={copyCode}>
+          {copy}
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export const components = {
@@ -51,32 +117,12 @@ export const components = {
 
     return <Link {...props} prefetch={false}></Link>;
   },
-  h2: (props: any) => {
-    const text = extractText(props.children);
-    const id = text
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w\-]/g, "");
-    return (
-      <h2 id={id} {...props.children.props}>
-        <a href={`#${id}`}>#</a>
-        {props.children}
-      </h2>
-    );
-  },
-  h3: (props: any) => {
-    const text = extractText(props.children);
-    const id = text
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w\-]/g, "");
-    return (
-      <h3 id={id} {...props.children.props}>
-        <a href={`#${id}`}>#</a>
-        {props.children}
-      </h3>
-    );
-  },
+  h2: (props: any) => (
+    <AnchorHeading level={2}>{props.children}</AnchorHeading>
+  ),
+  h3: (props: any) => (
+    <AnchorHeading level={3}>{props.children}</AnchorHeading>
+  ),
   h4: (props: any) => <h4 {...props}></h4>,
   h5: (props: any) => <h5 {...props}></h5>,
   h6: (props: any) => <h6 {...props}></h6>,
@@ -85,91 +131,44 @@ export const components = {
     if (props["data-rehype-pretty-code-figure"] === "") {
       if (props.children[0]?.props["data-rehype-pretty-code-title"] !== "") {
         const lang = props.children.props["data-language"];
-        const [copy, setCopy] = useState("copy");
-        const ref = useRef<HTMLButtonElement>();
+
         return (
           <div data-rehype-pretty-code-fragment="">
-            <div {...props.children.props} data-rehype-pretty-code-title="">
-              <div className="code-lang">
-                {/* @ts-ignore */}
-                <i className={`ri-${langsIcons[lang] || langsIcons.txt}`}></i>
-                {/* @ts-ignore */}
-                <span>{langs[lang] || langs.txt}</span>
-                <button
-                  ref={ref as any}
-                  className="copy-code"
-                  onClick={() => {
-                    const code =
-                      // @ts-ignore
-                      ref.current.parentNode.parentNode.parentNode.querySelector(
-                        "code"
-                      ).innerText;
-
-                    window.navigator.clipboard.writeText(code).then(() => {
-                      setCopy("copied!");
-                      setTimeout(() => {
-                        setCopy("copy");
-                      }, 2000);
-                    });
-                  }}
-                >
-                  {copy}
-                </button>
-              </div>
-            </div>
+            <CodeTitle
+              lang={lang}
+              label={languageNames[lang] || languageNames.txt}
+              containerProps={{
+                ...props.children.props,
+                "data-rehype-pretty-code-title": "",
+              }}
+            />
             {props.children}
           </div>
         );
       }
     }
+
     return <div {...props}></div>;
   },
 
   figcaption: (props: any) => {
     if (props["data-rehype-pretty-code-title"] === "") {
-      const lang = props["data-language"];
-      const [copy, setCopy] = useState("copy");
-      const ref = useRef<HTMLButtonElement>();
-      const title = props.children;
-
       return (
-        <div {...props}>
-          <div className="code-lang">
-            {/* @ts-ignore */}
-            <i className={`ri-${langsIcons[lang] || langsIcons.txt}`}></i>
-            <span>{title}</span>
-            <button
-              ref={ref as any}
-              className="copy-code"
-              onClick={() => {
-                const code =
-                  // @ts-ignore
-                  ref.current.parentNode.parentNode.parentNode.querySelector(
-                    "code"
-                  ).innerText;
-
-                window.navigator.clipboard.writeText(code).then(() => {
-                  setCopy("copied!");
-                  setTimeout(() => {
-                    setCopy("copy");
-                  }, 2000);
-                });
-              }}
-            >
-              {copy}
-            </button>
-          </div>
-        </div>
+        <CodeTitle
+          lang={props["data-language"]}
+          label={props.children}
+          containerProps={props}
+        />
       );
     }
+
     return <div {...props}></div>;
   },
+
   pre: (props: any) => (
-    <>
-      <div className="code-block" style={props.style}>
-        <pre {...props}></pre>
-      </div>
-    </>
+    <div className="code-block" style={props.style}>
+      <pre {...props}></pre>
+    </div>
   ),
 
   // custom components
@@ -191,39 +190,32 @@ export const components = {
   ),
 
   Tabs: (props: any) => {
-    props = { ...props };
-    const tabs = props.children?.map((child) => child?.props?.id);
-
+    const tabs = props.children?.map((child: any) => child?.props?.id) ?? [];
     const [active, setActive] = useState(tabs[0]);
 
     return (
-      <>
-        <div className="tabs">
-          <div className="tab-id">
-            {tabs?.map((tab) => (
-              <button
-                key={tab}
-                className={`tab-item text-inter ${
-                  active === tab ? "active" : ""
-                }`}
-                onClick={() => setActive(tab)}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-          <div className="tab-contents">
-            {props.children?.map((child) =>
-              child?.props?.id === active ? child.props?.children : null
-            )}
-          </div>
+      <div className="tabs">
+        <div className="tab-id">
+          {tabs.map((tab: string) => (
+            <button
+              key={tab}
+              className={`tab-item text-inter ${
+                active === tab ? "active" : ""
+              }`}
+              onClick={() => setActive(tab)}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
-      </>
+        <div className="tab-contents">
+          {props.children?.map((child: any) =>
+            child?.props?.id === active ? child.props?.children : null,
+          )}
+        </div>
+      </div>
     );
   },
-  TabItem: (props: any) => (
-    <>
-      <div className="tab-content" {...props}></div>
-    </>
-  ),
+
+  TabItem: (props: any) => <div className="tab-content" {...props}></div>,
 };

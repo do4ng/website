@@ -1,11 +1,11 @@
-import { compile, CompileOptions } from "@mdx-js/mdx";
+import { compile, type CompileOptions } from "@mdx-js/mdx";
 import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
-import { transformerNotationDiff } from "@shikijs/transformers";
 
-export const compileMdx = async (content: string): Promise<string> => {
-  if (typeof window !== "undefined")
-    throw Error("compileMdx should run on server only");
+export async function compileMdx(content: string): Promise<string> {
+  if (typeof window !== "undefined") {
+    throw new Error("compileMdx should run on server only");
+  }
 
   const options: CompileOptions = {
     format: "mdx",
@@ -22,16 +22,12 @@ export const compileMdx = async (content: string): Promise<string> => {
             light: "github-light",
           },
           keepBackground: false,
-          transformers: [transformerNotationDiff()],
         } as import("rehype-pretty-code").Options,
       ],
-      // raw,
     ],
   };
 
   const code = await compile(content, options);
 
-  const text = String(code);
-
-  return text;
-};
+  return String(code);
+}

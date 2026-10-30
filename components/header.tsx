@@ -1,156 +1,280 @@
 "use client";
 
-/* eslint-disable import/no-cycle */
-
 import "remixicon/fonts/remixicon.css";
 
-import { Image, Link } from "exta/components";
+import { Link } from "sendary/components";
+import { usePathname } from "$sendary-router";
+import { useEffect, useState } from "react";
+
 import { Popover } from "@/components/popper";
-import docs from "@/docs.config";
 import { TextLabel } from "@/components/label";
 import { ThemeSelector } from "@/components/theme-selector";
-import { useEffect, useState } from "react";
-import { usePathname } from "$exta-router";
+import docs from "@/docs";
+import site from "@/site.config";
+import { dispatchSendaryEvent, SENDARY_EVENTS } from "@/lib/events";
+import { useBodyScrollLock } from "@/lib/use-body-scroll-lock";
+import { useTheme } from "@/lib/use-theme";
 
-export function Header() {
-  const pathname = usePathname().split("/");
-  const path = pathname[1];
+function isActiveHref(href: string, path: string): boolean {
+  return href.split("/")[1]?.toLowerCase() === path.toLowerCase();
+}
 
+function useHeaderScrolled(path: string, route: string): boolean {
   const [isScrolled, setScrolled] = useState(false);
 
-  const [defaultValue, setDefaultValue] = useState("dark");
-  const [hideAlert, setAlert] = useState(false);
-
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const theme = (localStorage.getItem("theme") as any) || "dark";
-      setDefaultValue(theme);
+    if (typeof window === "undefined") return;
 
-      console.log(`[app] theme selected: ${theme}`);
+    // Documentation pages always render the header with its scrolled style.
+    if (!["", "blog"].includes(path.trim())) {
+      setScrolled(true);
+      return;
     }
+
+    const handleScroll = () => {
+      const windowScroll =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+
+      const content = document.querySelector<HTMLElement>(".content");
+      const contentScroll = content?.scrollTop ?? 0;
+
+      setScrolled(windowScroll > 8 || contentScroll > 8);
+    };
+
+    const content = document.querySelector<HTMLElement>(".content");
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    content?.addEventListener("scroll", handleScroll, { passive: true });
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      content?.removeEventListener("scroll", handleScroll);
+    };
+  }, [path, route]);
+
+  return isScrolled;
+}
+
+export function Header() {
+  const fullPathname = usePathname();
+  const path = fullPathname.split("/")[1] ?? "";
+
+  const { theme, toggle } = useTheme();
+  const isScrolled = useHeaderScrolled(path, fullPathname);
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  useBodyScrollLock(mobileMenuOpen);
+
+  // Close the mobile drawer whenever the route changes.
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [fullPathname]);
+
+  // Search and other overlays request the drawer to close before opening.
+  useEffect(() => {
+    const closeDrawer = () => setMobileMenuOpen(false);
+
+    window.addEventListener(SENDARY_EVENTS.closeSidebar, closeDrawer);
+    return () =>
+      window.removeEventListener(SENDARY_EVENTS.closeSidebar, closeDrawer);
   }, []);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const target = document.querySelector("html");
-
-    target.style = `color-scheme: ${
-      defaultValue === "dark" ? "dark" : "light"
-    };`;
-  }, [defaultValue]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    let target = document.body;
-
-    if (path === "blog" && pathname.length > 2) {
-      target = document?.getElementsByClassName("blog").item(0) as any;
-    }
-
-    target?.addEventListener("scroll", () => {
-      const { scrollTop } = target;
-
-      if (scrollTop > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    });
-  }, [pathname, path]);
+  const toggleMobileMenu = () => setMobileMenuOpen((open) => !open);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
-    <>
-      <header
-        className={`header-container text ${
-          path.trim() !== "" &&
-          path.trim() !== "blog" &&
-          path.trim() !== "changelog"
-            ? ""
-            : "transparent-header"
-        } ${isScrolled ? "scrolled" : ""}`}
-      >
-        <div
-          className="deprecated text-inter"
-          style={{ display: hideAlert ? "none" : "block" }}
-        >
-          <div className="deprecated-inner">
-            <span>
-              This project has been deprecated. -{" "}
-              <Link href="/blog/25-10-30">Read Blog</Link>
-            </span>
-            <button
-              onClick={() => {
-                setAlert(true);
-              }}
-            >
-              x
-            </button>
-          </div>
-        </div>
-        <div className="header">
+    <header className={`header-container text ${isScrolled ? "scrolled" : ""}`}>
+      <div className="header">
+        <div className="header-left">
           <Link className="item-1 logo" href="/">
-            {docs.name} <span className="docs-icon">docs</span>
+            {site.name}
+            {site.badge && <span className="docs-icon">{site.badge}</span>}
           </Link>
 
-          <div className="item-2">
+          <nav className="item-2 desktop-nav" aria-label="Main navigation">
             {docs.header.map((item) => {
               if (item.type === "popover") {
                 return (
-                  <>
-                    <Popover text={item.title} key={item.title}>
-                      {item.children.map((child) => (
-                        <>
-                          <div className="menu-item text-inter">
-                            <Link href={child.href} className="menu-container">
-                              <div className="menu-icon">
-                                <i className={child.icon}></i>
-                              </div>
-                              <div className="menu-content">
-                                <h4>{child.title}</h4>
-                                {child.description}
-                              </div>
-                            </Link>
+                  <Popover text={item.title} key={item.title}>
+                    {item.children.map((child) => (
+                      <div className="menu-item text-inter" key={child.title}>
+                        <Link href={child.href} className="menu-container">
+                          <div className="menu-icon">
+                            <i className={child.icon}></i>
                           </div>
-                        </>
-                      ))}
-                    </Popover>
-                  </>
+                          <div className="menu-content">
+                            <h4>{child.title}</h4>
+                            {child.description}
+                          </div>
+                        </Link>
+                      </div>
+                    ))}
+                  </Popover>
                 );
               }
+
               return (
-                <Link href={item.href} className="btn focuser" key={item.title}>
+                <Link
+                  href={item.href}
+                  className={`btn focuser ${
+                    isActiveHref(item.href, path) ? "active-link" : ""
+                  }`}
+                  key={item.title}
+                >
                   {item.title}
                 </Link>
               );
             })}
+          </nav>
+        </div>
+
+        <div className="item-3">
+          <button
+            className="docs-search-box"
+            onClick={() => dispatchSendaryEvent(SENDARY_EVENTS.openSearch)}
+            aria-label="Search documentation"
+            aria-keyshortcuts="Control+K Meta+K"
+          >
+            <i className="ri-search-line" aria-hidden="true"></i>
+            <span>Search docs...</span>
+            <kbd>Ctrl K</kbd>
+          </button>
+          <div className="desktop-actions">
+            {site.changelog && (
+              <TextLabel text={site.changelog.label}>
+                <Link href={site.changelog.href} aria-label={site.changelog.label}>
+                  <p className="news-bell">
+                    <i className="ri-receipt-line"></i>
+                  </p>
+                </Link>
+              </TextLabel>
+            )}
+
+            <ThemeSelector theme={theme} onToggle={toggle} />
+
+            {site.github && (
+              <TextLabel text="GitHub">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={site.github}
+                  className="big-icon"
+                  aria-label="GitHub repository"
+                >
+                  <i className="ri-github-fill"></i>
+                </a>
+              </TextLabel>
+            )}
           </div>
 
-          <div className="item-3">
-            <TextLabel text="What's new?">
-              <Link href="/changelog">
-                <p>
-                  <i className="ri-receipt-line"></i>
-                </p>
-              </Link>
-            </TextLabel>
-            <ThemeSelector
-              defaultValue={defaultValue}
-              setDefaultValue={setDefaultValue}
-            ></ThemeSelector>
-            <TextLabel text="github">
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://github.com/zely-js/zely"
-                className="big-icon"
-              >
-                <i className="ri-github-fill"></i>
-              </a>
-            </TextLabel>
+          <div className="mobile-actions">
+            <button
+              className="no-btn docs-search-trigger"
+              onClick={() => dispatchSendaryEvent(SENDARY_EVENTS.openSearch)}
+              aria-label="Search documentation"
+            >
+              <i className="ri-search-line"></i>
+            </button>
+
+            <ThemeSelector theme={theme} onToggle={toggle} />
+
+            <button
+              className="no-btn mobile-hamburger-btn"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <i
+                className={mobileMenuOpen ? "ri-close-line" : "ri-menu-line"}
+              ></i>
+            </button>
           </div>
         </div>
-      </header>
-    </>
+      </div>
+
+      {/* Mobile Navigation Drawer */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-overlay" onClick={closeMobileMenu}>
+          <div
+            className="mobile-menu-drawer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mobile-menu-links">
+              {docs.header.map((item) => {
+                if (item.type === "popover") {
+                  return item.children.map((child) => (
+                    <Link
+                      key={child.title}
+                      href={child.href}
+                      className="mobile-menu-item"
+                      onClick={closeMobileMenu}
+                    >
+                      <i className={child.icon}></i>
+                      <span>{child.title}</span>
+                    </Link>
+                  ));
+                }
+
+                return (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className={`mobile-menu-item ${
+                      isActiveHref(item.href, path) ? "active" : ""
+                    }`}
+                    onClick={closeMobileMenu}
+                  >
+                    <i
+                      className={
+                        item.title.toLowerCase() === "docs"
+                          ? "ri-book-open-line"
+                          : "ri-file-list-line"
+                      }
+                    ></i>
+                    <span>{item.title}</span>
+                  </Link>
+                );
+              })}
+
+              {site.changelog && (
+                <Link
+                  href={site.changelog.href}
+                  className="mobile-menu-item"
+                  onClick={closeMobileMenu}
+                >
+                  <i className="ri-receipt-line"></i>
+                  <span>{site.changelog.label}</span>
+                </Link>
+              )}
+
+              {site.github && (
+                <a
+                  href={site.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mobile-menu-item"
+                  onClick={closeMobileMenu}
+                >
+                  <i className="ri-github-fill"></i>
+                  <span>GitHub Repository</span>
+                </a>
+              )}
+            </div>
+
+            <div className="mobile-menu-footer">
+              <div className="mobile-theme-switch">
+                <span>Appearance</span>
+                <ThemeSelector theme={theme} onToggle={toggle} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }

@@ -1,9 +1,9 @@
-import { runSync } from '@mdx-js/mdx';
-import * as runtime from 'react/jsx-runtime';
-import { MDXContent } from 'mdx/types';
+import { runSync } from "@mdx-js/mdx";
+import * as runtime from "react/jsx-runtime";
+import type { MDXContent } from "mdx/types";
 
-export const runMdx = (code: any): MDXContent => {
-  const mdx = runSync(code, runtime as any);
-  const { default: Content } = mdx;
+export function runMdx(code: string): MDXContent {
+  const { default: Content } = runSync(code, runtime as any);
+
   return Content;
-};
+}

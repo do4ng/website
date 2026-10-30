@@ -1,30 +1,9 @@
-# Zely documentation
+# Sendary Documentation
 
-Development documentation based on [exta](https://extajs.netlify.app/)
+[Sendary](https://github.com/zely-js/sendary) Documentation Codebase.
 
-## Running the website locally
+- 🚀 **MDX Support**
+- 🛠️ **Customizable Style**
+- 💻 **Desktop/Mobile View**
 
-### Prerequisite
-
-- node
-- yarn (recommended)
-
-### Installation
-
-```bash
-git clone https://github.com/do4ng/website.git
-cd website
-yarn
-```
-
-### Development
-
-```bash
-yarn dev
-```
-
-### Build
-
-```bash
-yarn vite build
-```
+> built with [sendary](https://sendary.vercel.app), [vitejs](https://vite.dev/), [scss](https://sass-lang.com/), etc...

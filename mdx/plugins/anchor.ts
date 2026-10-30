@@ -3,14 +3,12 @@ import type * as mdast from "mdast";
 import type * as unified from "unified";
 import toString from "mdast-util-to-string";
 
+import { slugifyHeading } from "@/lib/format";
+
 export const plugin: unified.Plugin<[], mdast.Root> = () => (tree) => {
   visit(tree as any, "heading", (node) => {
     const text = toString(node);
-
-    const id = text
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w\-]/g, "");
+    const id = slugifyHeading(text);
 
     (node as any).type = "html";
     (node as any).children = undefined;

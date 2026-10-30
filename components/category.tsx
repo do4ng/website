@@ -1,89 +1,106 @@
-import { useRouter, router as ModuleRouter, useParams } from "$exta-router";
-
-import { Link } from "exta/components";
+import { router as ModuleRouter, useParams, useRouter } from "$sendary-router";
+import { Link } from "sendary/components";
 import { useEffect, useState } from "react";
-import config, { Category } from "@/config";
 
-export function CategoryMenu({
-  category,
-  hidden,
-  key,
-}: {
+import type { Category } from "@/config";
+import {
+  findPostInSection,
+  findSectionByPath,
+  getPostSlug,
+  getPostTitle,
+  normalizeCategoryName,
+} from "@/lib/docs";
+import { dispatchSendaryEvent, SENDARY_EVENTS } from "@/lib/events";
+
+interface CategoryMenuProps {
   category: Category;
   hidden: boolean;
-  key: Category;
-}) {
-  // eslint-disable-next-line no-unused-vars
-  let targetcategory: string | null = null;
+}
+
+export function CategoryMenu({ category, hidden }: CategoryMenuProps) {
   const params = useParams();
+  const router = useRouter();
 
-  const target = config.find(({ title }) => title === params.category);
-
-  target?.category?.forEach((category) => {
-    category.posts.forEach((post) => {
-      if (Object.keys(post)[0] === params?.slug) {
-        targetcategory = category.name;
-      }
-    });
-  });
+  const section = findSectionByPath(params?.category ?? "");
+  const { category: activeCategory } = section
+    ? findPostInSection(section, params?.slug ?? "")
+    : { category: undefined };
 
   const [hide, setHide] = useState(hidden);
 
-  const CategoryName = category.name.toLowerCase().replace(/ /g, "-");
-  const router = useRouter();
+  useEffect(() => {
+    if (activeCategory?.name === category.name) {
+      setHide(false);
+    }
+  }, [activeCategory?.name, category.name]);
+
+  const categorySlug = normalizeCategoryName(category.name);
+
+  const hasCategoryPage = category.posts.some(
+    (post) => getPostSlug(post).toLowerCase() === categorySlug,
+  );
+
+  const closeSidebar = () => {
+    dispatchSendaryEvent(SENDARY_EVENTS.closeSidebar);
+  };
+
+  const handleCategoryClick = async () => {
+    if (!hasCategoryPage) {
+      setHide((current) => !current);
+      return;
+    }
+
+    setHide(false);
+    closeSidebar();
+
+    const href = `/${params.category}/${categorySlug}`;
+    await ModuleRouter.goto(href);
+    router.push(href);
+  };
 
   return (
-    <div className={`category ${hide ? "hide" : ""}`} key={category.name}>
+    <div className={`category ${hide ? "hide" : ""}`}>
       <h4>
         <button
-          onClick={async () => {
-            if (
-              category.posts.filter(
-                (post) => CategoryName === Object.keys(post)[0].toLowerCase()
-              ).length !== 0
-            ) {
-              setHide(false);
-              const href = `/${params.category}/${CategoryName}`;
-              await ModuleRouter.goto(href);
-              router.push(href);
-            } else {
-              setHide(!hide);
-            }
-          }}
+          onClick={handleCategoryClick}
           className={`no-btn text-inter ${
-            params?.slug === CategoryName ? "active" : ""
+            params?.slug === categorySlug ? "active" : ""
           }`}
         >
           {category.name}
         </button>
+
         <button
           className="no-btn"
-          onClick={() => {
-            setHide(!hide);
-          }}
+          aria-label="Toggle category"
+          onClick={() => setHide((current) => !current)}
         >
           <i className="ri-arrow-down-s-line"></i>
         </button>
       </h4>
 
       <div className="posts">
-        {category.posts.map((post) => (
-          <div key={Object.keys(post)[0]}>
-            {Object.keys(post)[0].toLowerCase() === CategoryName ? (
-              <></>
-            ) : (
-              <Link
-                href={`/${params.category}/${Object.keys(post)[0]}`}
-                className={`btn ${
-                  params?.slug === Object.keys(post)[0] ? "active" : ""
-                }`}
-                prefetch={false}
-              >
-                {Object.values(post)[0]}
-              </Link>
-            )}
-          </div>
-        ))}
+        {category.posts.map((post) => {
+          const slug = getPostSlug(post);
+
+          return (
+            <div key={slug}>
+              {slug.toLowerCase() === categorySlug ? (
+                <></>
+              ) : (
+                <Link
+                  href={`/${params.category}/${slug}`}
+                  onClick={closeSidebar}
+                  className={`btn ${
+                    params?.slug === slug ? "active" : ""
+                  }`}
+                >
+                  {getPostTitle(post)}
+                </Link>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,20 +1,23 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
 
-'use client';
+import { useEffect } from "react";
 
-import { useEffect } from 'react';
-import { scrollTop } from './scrolltop';
+import { scrollTop } from "./scrolltop";
 
-export default function scrollToTop() {
+export default function ScrollToTop() {
   useEffect(() => {
-    if (window.location.hash !== '') {
-      document
-        .querySelector('.content')
-        .querySelector(`[id="${window.location.hash.slice(1)}"]`)
-        ?.scrollIntoView();
-    } else {
+    const { hash } = window.location;
+
+    if (!hash) {
       scrollTop();
+      return;
     }
+
+    document
+      .querySelector(".content")
+      ?.querySelector<HTMLElement>(`[id="${hash.slice(1)}"]`)
+      ?.scrollIntoView();
   }, []);
+
   return null;
 }

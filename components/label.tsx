@@ -1,7 +1,6 @@
-'use client';
+"use client";
 
-import { usePopper } from 'react-popper';
-import { useEffect, useState } from 'react';
+import { usePopover } from "@/lib/use-popover";
 
 export function TextLabel({
   children,
@@ -10,43 +9,28 @@ export function TextLabel({
   children: React.ReactNode;
   text: string;
 }) {
-  const [referenceEl, setReferenceEl] = useState<HTMLElement | null>(null);
-  const [popperEl, setPopperEl] = useState<HTMLElement | null>(null);
-  const { styles, attributes } = usePopper(referenceEl, popperEl, {
-    placement: 'bottom',
-  });
-
-  const showPopover = () => {
-    // @ts-ignore
-    popperEl?.setAttribute('data-show', true);
-  };
-
-  useEffect(() => {
-    const hidePopover = () => {
-      popperEl?.removeAttribute('data-show');
-    };
-
-    referenceEl?.addEventListener('mouseleave', hidePopover);
-
-    return () => {
-      referenceEl?.removeEventListener('mouseleave', hidePopover);
-    };
-  }, [popperEl, referenceEl]);
+  const {
+    setReferenceElement,
+    setPopperElement,
+    styles,
+    attributes,
+    show,
+    hide,
+  } = usePopover("bottom");
 
   return (
     <div>
       <div
         className="popover text text-label"
-        onMouseEnter={() => {
-          showPopover();
-        }}
-        ref={setReferenceEl}
+        onMouseEnter={show}
+        onMouseLeave={hide}
+        ref={setReferenceElement}
       >
         {children}
       </div>
       <div
         className="text-label-menu"
-        ref={setPopperEl}
+        ref={setPopperElement}
         style={styles.popper}
         {...attributes.popper}
       >

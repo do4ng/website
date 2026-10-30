@@ -1,8 +1,9 @@
 {
   "devDependencies": {
-    "@shikijs/transformers": "^3.15.0",
     "@types/node": "^24.2.0",
+    "@types/react": "^19.1.15",
     "@vitejs/plugin-react": "^4.7.0",
+    "cross-env": "^10.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "sass-embedded": "^1.90.0",
@@ -11,8 +12,6 @@
   "dependencies": {
     "@mdx-js/mdx": "^3.0.0",
     "@popperjs/core": "^2.11.8",
-    "cross-env": "^10.0.0",
-    "exta": "npm:exta2@latest",
     "mdast": "^3.0.0",
     "mdast-util-to-string": "2.0.0",
     "mdx": "^0.3.1",
@@ -22,11 +21,14 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "remixicon": "^4.0.0",
+    "sass": "^1.90.0",
+    "sendary": "^1.0.0",
     "shiki": "^1.2.2",
     "unified": "^11.0.4",
     "unist-util-visit": "2"
   },
   "scripts": {
-    "dev": "vite dev"
+    "dev": "vite dev",
+    "build": "cross-env BUILD_SUMMARY=true vite build"
   }
 }
